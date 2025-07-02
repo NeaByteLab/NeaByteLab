@@ -1,44 +1,35 @@
 # 🤖 NeaByteLab 🚀
 
-**Automation & Full-Stack Development Studio**
-
-*Building bots, web apps, and scalable solutions with cutting-edge tech.*
+NeaByteLab empowers startups and enterprises to automate, accelerate, and scale — from custom bots and trading tools to robust full-stack cloud applications. We leverage the latest in web, DevOps, and automation technology to drive innovation and growth.
 
 ---
 
-## 🛠 **Tech Stack**
-[![Tech Stack](https://skillicons.dev/icons?i=nodejs,js,html,bootstrap,vite,webpack,electron,express,react,mongodb,git,regex,redis,redux,mysql,netlify,workers,wordpress,cloudflare,vercel,nginx,gcp,firebase,vue,vscode,linux,vim,jquery,devto,selenium,sequelize,tailwind,kubernetes,laravel,figma,py,opencv,postgres,ps,php,postman,prometheus,raspberrypi&theme=light&perline=15)](https://skillicons.dev)
-- **Backend**: Node.js, Express, Laravel, PHP, Python
-- **Frontend**: React, Vue, HTML, Bootstrap, Tailwind, jQuery
-- **DevOps**: Kubernetes, GCP, Firebase, Cloudflare, Nginx, Prometheus
-- **Databases**: MongoDB, MySQL, PostgreSQL, Redis
-- **Automation**: Selenium, Electron, Puppeteer
-- **Tools**: Git, VSCode, Vim, Figma, Postman, Raspberry Pi
-- **Other**: Pine Script (TradingView)
+## 🛠️ Capabilities
 
-## ✨ **Services**
-1. **🤖 Automation Bots**
-   - Custom Chatbots (WhatsApp/Telegram/Discord)
-   - Web Scraping & RPA (Selenium, Puppeteer)
-2. **📈 TradingView Solutions**
-   - Custom Indicators & Strategies
-   - Price Alerts & Automation
-3. **🌐 Web Development**
-   - Full-stack Apps (MERN, LEMP, Jamstack)
-   - WordPress / Headless CMS Solutions
-4. **📱 Cross-Platform Apps**
-   - Mobile (PWA/React Native)
-   - Desktop (Electron)
-5. **⚡ Cloud & DevOps**
-   - Deployment (Vercel/Netlify/Cloudflare Workers)
-   - CI/CD & Monitoring (Prometheus)
-
-## 📬 **Get Started**
-Let’s turn your idea into reality!
-
-- 📧 **Email**: 209737579+NeaByteLab@users.noreply.github.com
-- 🌍 **Website**: [https://neabyte.com](https://neabyte.com)
+* Automation Bots (WhatsApp, Telegram, Discord)
+* Full-Stack Apps (Node.js, React, Vite, Laravel)
+* Fintech & Trading Tools (TradingView, Alerts)
+* Cloud Architecture, DevOps, CI/CD
+* Advanced Web Scraping & RPA
 
 ---
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+## 💼 Expertise
+**Primary Stack :**  
+
+[![Skill Icons](https://skillicons.dev/icons?i=nodejs,react,express,laravel,php,py,electron,vite,nextjs,tailwind,bootstrap,js,ts,html,css,postgres,mongodb,mysql,redis,docker,kubernetes,cloudflare,gcp,vercel,netlify,selenium,regex,git,linux,figma,postman,webpack,tensorflow,npm,yarn&perline=12)](https://skillicons.dev)
+
+**Also Experienced With :**  
+
+- **Frontend:** Vue, Nuxt, Svelte, Angular
+- **Backend:** NestJS, AdonisJS, Fastify, Flask, Django
+- **Database:** MariaDB, SQLite, Oracle, Supabase
+- **DevOps & Cloud:** AWS, Azure, DigitalOcean, NGINX, GitHub Actions
+- **Automation & Tools:** Playwright, Puppeteer, GraphQL, Prisma, Android Studio, Raspberry Pi
+
+---
+
+## 📫 Contact
+
+* Email: [209737579+NeaByteLab@users.noreply.github.com](mailto:209737579+NeaByteLab@users.noreply.github.com)
+* Website: [neabyte.com](https://neabyte.com)
