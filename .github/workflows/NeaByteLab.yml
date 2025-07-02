@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-
   schedule:
     - cron: "0 */6 * * *"
 
@@ -12,20 +11,25 @@ jobs:
   auto-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2      
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
+
+      - name: Set Git user for commits
+        run: |
+          git config user.email "209737579+NeaByteLab@users.noreply.github.com"
+          git config user.name "NeaByteLab"
 
       - name: Run Bot Task
         run: |
           chmod +x ./script.sh
           ./script.sh
 
-      - name: GitHub Push
-        uses: ad-m/github-push-action@v0.6.0
+      - name: Commit and Push changes
+        uses: ad-m/github-push-action@v0.9.1
         with:
           force: true
           directory: "."
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          branch: main
