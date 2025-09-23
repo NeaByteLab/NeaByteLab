@@ -9,7 +9,7 @@ class Me {
 
 # About This Space 💻
 
-Architecture, principles, time tracking, and the occasional "why did I think `any` was a good idea?" moment. 🤦‍♂️
+Architecture, principles, dev journey, and the occasional "why did I think `any` was a good idea?" moment. 🤦‍
 
 ## ⚔️ My [Architecture](./ARCHITECTURE/README.md) Notes
 
