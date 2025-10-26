@@ -21,15 +21,19 @@ So I started tracking my screen time. You know, to be accountable to myself. See
 
 | Week | Hours | Oof Level                              |
 | ---- | ----- | -------------------------------------- |
-| 1    | 110h  | Oof                                    |
+| 1    | 121h  | Oof                                    |
 | 2    | 132h  | Hmm, that's more than a full work week |
 | 3    | 121h  | Still high                             |
+| 4    | 107h  | Getting better                         |
+| 5    | 47h   | Just 3 days... week not over yet! 😅   |
 
 I'm looking at this data and thinking: "Wow, I must be really productive! Look at all those hours!"
 
-![Week 1 - Screen Time](assets/2025-08-31.png)
-![Week 2 - Screen Time](assets/2025-09-14.png)
-![Week 3 - Screen Time](assets/2025-09-21.png)
+![Week 1 - Aug 24](assets/2025-08-24.png)
+![Week 2 - Aug 31](assets/2025-08-31.png)
+![Week 3 - Sep 07](assets/2025-09-07.png)
+![Week 4 - Sep 14](assets/2025-09-14.png)
+![Week 5 - Sep 21](assets/2025-09-21.png)
 
 But here's the thing: I'm not an experienced developer. Not really.
 
