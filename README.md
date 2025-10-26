@@ -23,3 +23,7 @@ Architecture, principles, dev journey, and the occasional "why did I think `any`
 ## 💀 Personal [Tech](./PERSONAL/README.md) Experience
 
 - [Dev Stories](./PERSONAL/STORIES.md) - Tales from the keyboard trenches
+
+---
+
+> _"The fuller the rice stalk, the more it bends down 🌾"_ — My father, since I was 5 years old
