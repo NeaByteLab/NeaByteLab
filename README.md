@@ -14,6 +14,7 @@ Architecture, principles, dev journey, and the occasional "why did I think `any`
 ## ⚔️ My [Architecture](./ARCHITECTURE/README.md) Notes
 
 - [Code Organization](./ARCHITECTURE/CODE-ORGANIZATION.md) - Where everything lives and why
+- [Decision Tree](./ARCHITECTURE/DECISION-TREE.md) - Because "it depends" needs a structure
 
 ## 📋 Coding [Principle](./PRINCIPLES/README.md) Rules
 
