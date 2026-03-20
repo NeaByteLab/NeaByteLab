@@ -6,6 +6,7 @@ _Structured learning notes: one topic per file, frontmatter and structured body.
 
 | Series              | Description                                                                | Link                                   |
 | ------------------- | -------------------------------------------------------------------------- | -------------------------------------- |
+| **REST API**        | REST API foundations, HTTP semantics, URI design, status and validation.   | [Rest-API/](./Rest-API/)               |
 | **Time Complexity** | Big O: O(1) → O(n!). Definition, analogy, when it shows up, code examples. | [Time-Complexity/](./Time-Complexity/) |
 
 ---
