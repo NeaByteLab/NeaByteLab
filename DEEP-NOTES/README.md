@@ -6,6 +6,7 @@ _Structured learning notes: one topic per file, frontmatter and structured body.
 
 | Series              | Description                                                                | Link                                   |
 | ------------------- | -------------------------------------------------------------------------- | -------------------------------------- |
+| **Class Types**     | TypeScript class types, patterns, singleton vs static vs abstract usage.   | [Class-Types/](./Class-Types/)         |
 | **Google Auth**     | Google sign-in, token roles, and when auth differs from API access.        | [Google-Auth/](./Google-Auth/)         |
 | **Job Management**  | Background processing patterns, infinite loops vs scheduled jobs.          | [Job-Management/](./Job-Management/)   |
 | **REST API**        | REST API foundations, HTTP semantics, URI design, status and validation.   | [Rest-API/](./Rest-API/)               |

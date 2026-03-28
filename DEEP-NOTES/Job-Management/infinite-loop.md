@@ -42,6 +42,7 @@ This note covers **infinite loops**: processes that run continuously, typically 
 **Good: WebSocket server**
 
 ```typescript
+// WebSocket server: Continuous loop for real-time message handling
 // NOTE: WebSocket needs immediate response to incoming messages.
 // Continuous loop makes sense for real-time communication.
 function startWebSocketServer() {
@@ -56,6 +57,7 @@ function startWebSocketServer() {
 **Good: Message queue consumer**
 
 ```typescript
+// Queue consumer: Infinite loop for immediate message processing
 // NOTE: Consumer must process messages as soon as they arrive.
 // No delay acceptable for queue processing.
 function startQueueConsumer() {
@@ -69,6 +71,7 @@ function startQueueConsumer() {
 **Bad: Batch data processing**
 
 ```typescript
+// Anti-pattern: Infinite loop for non-real-time batch processing
 // NOTE: Wastes CPU checking for work every second.
 // Better to run on schedule when data is ready.
 while (true) {

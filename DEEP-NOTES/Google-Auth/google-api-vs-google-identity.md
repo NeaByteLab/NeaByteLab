@@ -58,6 +58,8 @@ This distinction appears when:
 
 **Good Snippet (Separate Concerns):**
 
+Flow: Separate sign-in from API permissions to reduce complexity
+
 ```mermaid
 flowchart TD
     A["User signs in with Google"] --> B["App creates local session"]
@@ -67,6 +69,8 @@ flowchart TD
 ```
 
 **Bad Snippet (Everything at Once):**
+
+Flow: Requesting all permissions upfront creates unnecessary friction
 
 ```mermaid
 flowchart TD

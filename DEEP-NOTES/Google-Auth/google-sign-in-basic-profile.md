@@ -60,6 +60,8 @@ This pattern fits when:
 
 **Good Snippet (Minimal Backend Flow):**
 
+Flow: Basic Google sign-in with backend verification and local user creation
+
 ```mermaid
 flowchart TD
     A["User clicks Continue with Google"] --> B["Frontend receives ID token"]

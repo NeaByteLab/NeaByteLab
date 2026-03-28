@@ -61,6 +61,8 @@ You see this split when:
 
 **Good Snippet (Basic Sign-In):**
 
+Flow: ID token verification for identity-only authentication
+
 ```mermaid
 flowchart TD
     A["Frontend gets ID token"] --> B["Backend verifies ID token"]
@@ -69,6 +71,8 @@ flowchart TD
 ```
 
 **Good Snippet (Google API Access):**
+
+Flow: Access token usage for Google API authorization
 
 ```mermaid
 flowchart TD

@@ -43,6 +43,7 @@ This note covers **scheduled jobs**: tasks that execute at specific times or int
 **Good: Daily data sync**
 
 ```typescript
+// Daily sync: Scheduled job for batch data processing
 // NOTE: Market data sync runs once daily at 2 AM.
 // No need for continuous polling.
 const dailySync = new CronJob('0 2 * * *', async () => {
@@ -55,6 +56,7 @@ const dailySync = new CronJob('0 2 * * *', async () => {
 **Good: Weekly cleanup**
 
 ```typescript
+// Weekly cleanup: Scheduled maintenance for resource management
 // NOTE: Cleanup old logs weekly on Sunday at 3 AM.
 // Resource-intensive but not time-sensitive.
 const cleanupJob = new CronJob('0 3 * * 0', async () => {
@@ -67,6 +69,7 @@ const cleanupJob = new CronJob('0 3 * * 0', async () => {
 **Good: Hourly API polling**
 
 ```typescript
+// Hourly polling: Scheduled job for external data synchronization
 // NOTE: External API updates hourly.
 // Predictable interval, no need for continuous polling.
 const apiPolling = new CronJob('0 * * * *', async () => {
@@ -78,6 +81,7 @@ const apiPolling = new CronJob('0 * * * *', async () => {
 **Bad: Real-time message processing**
 
 ```typescript
+// Anti-pattern: Using scheduled jobs for real-time requirements
 // NOTE: Delay unacceptable for real-time chat.
 // Messages would wait up to 1 minute.
 const messageProcessing = new CronJob('* * * * *', processMessages)

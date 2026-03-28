@@ -57,6 +57,8 @@ You usually want GIS when:
 
 **Good Snippet (Identity-Focused Thinking):**
 
+Flow: Use GIS for identity-only sign-in, no API permissions needed
+
 ```mermaid
 flowchart TD
     A["Goal: know who the user is"] --> B["Use Google Identity Services"]
@@ -67,6 +69,8 @@ flowchart TD
 ```
 
 **Bad Snippet (Mixed Responsibilities):**
+
+Flow: Using full OAuth for identity adds unnecessary complexity
 
 ```mermaid
 flowchart TD
