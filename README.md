@@ -11,4 +11,4 @@ NeaByteLab is a digital portfolio identity belonging to Nea (pseudonym), not a c
 
 NeaByteLab emphasizes the principle of focusing on work quality, reputation from delivery, and minimal distractions.
 
-> _"The fuller the rice stalk, the more it bends down 🌾"_, my father, since I was 5 years old
+> _"The fuller the rice stalk, the more it bends down 🌾"_ - my father, since I was 5 years old
