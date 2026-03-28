@@ -72,6 +72,7 @@ Critical response mapping areas:
 
 ```ts
 if (!token) {
+  // Return 401 with structured error envelope
   return res.status(401).json({
     code: 'auth_missing',
     message: 'Authentication required',
@@ -84,6 +85,7 @@ if (!token) {
 
 ```ts
 if (!token) {
+  // Wrong: 200 status hides the actual error condition
   return res.status(200).json({
     error: true,
     message: 'Unauthorized'
@@ -107,6 +109,7 @@ if (!token) {
 - Include `requestId` for tracing support tickets
 
 ```json
+// Structured error response with all required fields
 {
   "code": "validation_failed",
   "message": "Payload validation failed",

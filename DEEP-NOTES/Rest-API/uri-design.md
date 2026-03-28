@@ -60,12 +60,14 @@ You apply URI design on:
 **Good snippet (resource-first):**
 
 ```http
+// Resource-first URI with query parameters for filtering
 GET /v1/users/42/sessions?limit=20&offset=0
 ```
 
 **Bad snippet (action-first):**
 
 ```http
+// Action-first URI violates REST principles
 POST /v1/getUserSessionListById
 ```
 

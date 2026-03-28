@@ -67,11 +67,13 @@ Common API design decisions:
 **Good snippet (Express style):**
 
 ```ts
+// PUT endpoint - replace entire user resource
 app.put('/v1/users/:id', async (req, res) => {
   const user = await replaceUser(req.params.id, req.body)
   return res.status(200).json(user)
 })
 
+// PATCH endpoint - partial user update
 app.patch('/v1/users/:id', async (req, res) => {
   const user = await updateUserPartial(req.params.id, req.body)
   return res.status(200).json(user)
@@ -81,8 +83,9 @@ app.patch('/v1/users/:id', async (req, res) => {
 **Bad snippet (semantic mismatch):**
 
 ```ts
+// Wrong: GET request that mutates server state
 app.get('/v1/logout', async (_req, res) => {
-  await revokeSession()
+  await revokeSession() // Mutation in GET violates HTTP semantics
   return res.status(200).json({ ok: true })
 })
 ```

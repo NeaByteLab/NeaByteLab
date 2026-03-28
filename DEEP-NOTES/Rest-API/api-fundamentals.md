@@ -66,6 +66,7 @@ You are usually in REST territory when:
 **Good snippet (uniform contract):**
 
 ```http
+# RESTful endpoints using proper HTTP methods
 GET /v1/prompts
 POST /v1/prompts
 PATCH /v1/prompts/{id}
@@ -75,6 +76,7 @@ DELETE /v1/prompts/{id}
 **Bad snippet (action endpoints):**
 
 ```http
+# Action-based endpoints violate REST principles
 POST /v1/getPromptsList
 POST /v1/removePromptById
 POST /v1/updatePromptById
