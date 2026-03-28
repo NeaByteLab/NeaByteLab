@@ -1,6 +1,7 @@
 ```diff
 class Me {
   fixProblems(): string {
+-   return "Ah, I've encountered countless linting errors"
 +   return "Any type should work, right?"
   }
 }
