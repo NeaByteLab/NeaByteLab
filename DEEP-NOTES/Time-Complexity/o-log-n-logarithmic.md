@@ -14,13 +14,13 @@ tags:
 
 ## Overview
 
-This note covers **O(log n) logarithmic time**: the complexity class where each step cuts the problem size by a constant factor (often half). The number of steps grows very slowly as _n_ increases; doubling _n_ adds roughly one more step (e.g. n = 1,000,000 → about 20 steps). Binary search is the canonical example; it's why "look up in a sorted list" can be so much cheaper than scanning. **Goal:** when data is sorted or tree-shaped, search without reading every element.
+This note covers **O(log n) logarithmic time**: the complexity class where each step cuts the problem size by a constant factor (often half). The number of steps grows very slowly as _n_ increases, doubling _n_ adds roughly one more step (for example n = 1,000,000, about 20 steps). Binary search is the canonical example, it's why "look up in a sorted list" can be so much cheaper than scanning. **Goal:** when data is sorted or tree-shaped, search without reading every element.
 
 ## Definition
 
 **O(log n)** means the number of operations grows proportionally to the logarithm of the input size. Usually we mean log₂(n) in algorithm analysis (base 2), but Big O ignores the base: log₂(n), log₁₀(n), and ln(n) differ only by a constant factor.
 
-- Each step typically reduces the "active" size by a constant factor (e.g. half).
+- Each step typically reduces the "active" size by a constant factor (for example half).
 - So: "How many times can you divide _n_ by 2 until you get down to 1?" Answer: about log₂(n).
 
 ## The Analogy
@@ -93,7 +93,7 @@ function bstLookup(node: BSTNode | null, key: number): BSTNode | null {
 **Bad:** linear search on a sorted array (O(n)). Same input as binary search, but we scan one by one instead of halving.
 
 ```typescript
-// NOTE: Scans every element until found — O(n).
+// NOTE: Scans every element until found - O(n).
 // Use binary search when sorted.
 function linearSearchSorted(arr: number[], target: number): number {
   for (let i = 0; i < arr.length; i++) {
@@ -114,8 +114,8 @@ function linearSearchSorted(arr: number[], target: number): number {
 
 ## Summary
 
-- **O(log n)**: steps proportional to log(n); each step often halves the problem.
+- **O(log n)**: steps proportional to log(n), each step often halves the problem.
 - **Analogy**: dictionary lookup. Repeatedly open to the middle and throw away half the pages.
-- **Classic use**: binary search on sorted array, lookup in balanced BST; requires ordered or tree structure.
+- **Classic use**: binary search on sorted array, lookup in balanced BST, requires ordered or tree structure.
 
 _You're not doing one thing per element. You're cutting the problem in half each time. That's why it scales so well._

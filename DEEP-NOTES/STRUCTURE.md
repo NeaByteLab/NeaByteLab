@@ -3,7 +3,7 @@
 > Reference: [kyong0612 learning-notes](https://github.com/kyong0612/learning-notes/tree/main/articles) (example: [Claude Code CLAUDE.md](https://github.com/kyong0612/learning-notes/blob/main/articles/Claude%20Code%20%E3%81%AE%20CLAUDE.md%E3%81%AF%E8%A8%AD%E5%AE%9A%E3%81%97%E3%81%9F%E6%96%B9%E3%81%8C%E3%81%84%E3%81%84/note.md))
 
 - One file = one topic or one source
-- Frontmatter + structured body; body starts with H1 = note title
+- Frontmatter + structured body, body starts with H1 = note title
 
 ---
 
@@ -27,7 +27,7 @@ tags: ['tag1', 'tag2']
 
 ## 2. Body Structure
 
-**First line of body:** `# Note Title` (H1, same or close to `title` in frontmatter). Kyong always uses this; we follow.
+**First line of body:** `# Note Title` (H1, same or close to `title` in frontmatter). Kyong always uses this, we follow.
 
 Two patterns:
 
@@ -38,19 +38,19 @@ Follow the source flow. Not rigid Definition/Analogy/Examples.
 - **## はじめに** (or **## Overview** / intro): context, why this topic, what changed for the author.
 - **## [Topic 1]**, **## [Topic 2]**, …: sections follow the article/talk structure. Use **###** for subsections.
 - Lists, code blocks (```), **bold** for important terms.
-- **## まとめ** (or **## Summary**): summary; end with **結論:** or one takeaway sentence (italic allowed).
+- **## まとめ** (or **## Summary**): summary, end with **結論:** or one takeaway sentence (italic allowed).
 
-Real flow example: [note Claude Code CLAUDE.md](https://github.com/kyong0612/learning-notes/blob/main/articles/Claude%20Code%20%E3%81%AE%20CLAUDE.md%E3%81%AF%E8%A8%AD%E5%AE%9A%E3%81%97%E3%81%9F%E6%96%B9%E3%81%8C%E3%81%84%E3%81%84/note.md) — はじめに → CLAUDE.mdとは → ワークフロー → TDD → ツール → … → まとめ + 結論.
+Real flow example: [note Claude Code CLAUDE.md](https://github.com/kyong0612/learning-notes/blob/main/articles/Claude%20Code%20%E3%81%AE%20CLAUDE.md%E3%81%AF%E8%A8%AD%E5%AE%9A%E3%81%97%E3%81%9F%E6%96%B9%E3%81%8C%E3%81%84%E3%81%84/note.md) - はじめに → CLAUDE.mdとは → ワークフロー → TDD → ツール → … → まとめ + 結論.
 
 ### Pattern B: Concept Note
 
-One concept per file; fixed sections. Optional extra sections (e.g. a deeper dive) are allowed.
+One concept per file, fixed sections. Optional extra sections (for example a deeper dive) are allowed.
 
 - **## Overview**: one or two paragraphs, what this note is about and the main point.
 - **## Definition** (if needed): formal definition or term boundaries.
 - **## The Analogy**: real-world analogy.
 - **## When You See It**: when this pattern appears (code, algorithm, context).
-- **## Examples**: concrete examples; label **Good:** / **Bad:** (or **Better:** / **Good to know:** as needed).
+- **## Examples**: concrete examples, label **Good:** / **Bad:** (or **Better:** / **Good to know:** as needed).
 - **## Important Points**: key points (bullets).
 - **## Summary**: summary (bullets) + one closing italic sentence (NeaByte style).
 
@@ -58,12 +58,12 @@ One concept per file; fixed sections. Optional extra sections (e.g. a deeper div
 
 ## 3. Writing Style
 
-| Aspect          | Rule                                                      |
-| --------------- | --------------------------------------------------------- |
-| **Density**     | Short sentences, one idea per sentence. Avoid filler.     |
-| **Punctuation** | Use periods, commas, colons. Avoid excessive em dash (—). |
-| **Examples**    | **Good:** / **Bad:** (text only, no emoji).               |
-| **Closing**     | One italic sentence; direct and humble.                   |
+| Aspect          | Rule                                                                      |
+| --------------- | ------------------------------------------------------------------------- |
+| **Density**     | Short sentences, one idea per sentence. Avoid filler.                     |
+| **Punctuation** | Use periods, commas, colons. Avoid excessive em dash, use commas instead. |
+| **Examples**    | **Good:** / **Bad:** (text only, no emoji).                               |
+| **Closing**     | One italic sentence, direct and humble.                                   |
 
 ---
 

@@ -26,14 +26,14 @@ This isn't about decision trees in machine learning. It's about mapping technica
 
 ### Quick Takeaways
 
-1. **One root question first** — Then branch from there
-2. **Written criteria** — So branches stay consistent, not just feeling-based
-3. **Leaf = action or decision** — Not "maybe" or "we'll see"
-4. **Depth of 3–4 levels** — Deeper is hard to maintain
-5. **Write the "why"** — One sentence per branch so context doesn't get lost
-6. **Trees go stale** — Requirements change; treat them as living docs
-7. **Check what already exists** — ADR or existing tree before creating a new one
-8. **Simple > complete** — Something that gets used beats something perfect that nobody opens
+1. **One root question first**, then branch from there
+2. **Written criteria**, so branches stay consistent, not just feeling-based
+3. **Leaf = action or decision**, not "maybe" or "we'll see"
+4. **Depth of 3–4 levels**, deeper is hard to maintain
+5. **Write the "why"**, one sentence per branch so context doesn't get lost
+6. **Trees go stale**, requirements change, treat them as living docs
+7. **Check what already exists**, ADR or existing tree before creating a new one
+8. **Simple > complete**, something that gets used beats something perfect that nobody opens
 
 ---
 
@@ -41,11 +41,11 @@ This isn't about decision trees in machine learning. It's about mapping technica
 
 Here, a decision tree is a branching decision structure. One question or condition at the top, its answers lead to the next branches, until you reach a single concrete decision or action.
 
-- **Root** — The top-level question or condition (level 0)
-- **Branch** — Each answer or criterion forms a branch
-- **Leaf** — End of a branch: a decision or action you can actually take
+- **Root**, the top-level question or condition (level 0)
+- **Branch**, each answer or criterion forms a branch
+- **Leaf**, end of a branch: a decision or action you can actually take
 
-Short example: "Need per-service scale within 12 months?" → Yes → consider microservices / modular monolith; No → start with a simple monolith. It doesn't have to be formal; what matters is that the flow is readable and reusable.
+Short example: "Need per-service scale within 12 months?" → Yes → consider microservices / modular monolith. No → start with a simple monolith. It doesn't have to be formal, what matters is that the flow is readable and reusable.
 
 ---
 
@@ -61,7 +61,7 @@ Less fit when:
 
 - Criteria are still vague or change a lot
 - The decision heavily depends on context you can't spell out
-- One or two questions are enough; no need to map a full tree
+- One or two questions are enough, no need to map a full tree
 
 ---
 
@@ -71,7 +71,7 @@ Start with **one root question** whose answers drive all branches below. Don't s
 
 **❌ No clear root:**
 
-Jump straight to: "REST or GraphQL? SQL or NoSQL? Monolith or microservices?" — everything floats, no logical order.
+Jump straight to: "REST or GraphQL? SQL or NoSQL? Monolith or microservices?" - everything floats, no logical order.
 
 **✅ Root question first:**
 
@@ -90,7 +90,7 @@ Write down criteria (and weights if needed) so branches don't rely on feeling al
 
 **❌ Gut feel only:**
 
-"Let's just use X." — Six months later nobody remembers why.
+"Let's just use X." - Six months later nobody remembers why.
 
 **✅ Written criteria:**
 
@@ -113,8 +113,8 @@ Every leaf (end of a branch) should be **one clear decision or action**, not "ma
 
 **✅ Clear leaves:**
 
-- "Use modular monolith; separate domains by folder, deploy as one unit"
-- "Use GraphQL for public API; REST for internal"
+- "Use modular monolith, separate domains by folder, deploy as one unit"
+- "Use GraphQL for public API, REST for internal"
 
 If the end is still "it depends," add one more level: write the question or criterion that splits that "depends" until you get a decision you can act on.
 
@@ -138,8 +138,8 @@ On each branch (or at least at each leaf), write **one sentence for "why"**: why
 
 Examples:
 
-- "Choose monolith because team is small and MVP in 3 months; refactor to microservices only if we see real bottleneck evidence."
-- "GraphQL for public because mobile clients need query flexibility; REST for internal because it's simpler and tooling already exists."
+- "Choose monolith because team is small and MVP in 3 months, refactor to microservices only if we see real bottleneck evidence."
+- "GraphQL for public because mobile clients need query flexibility, REST for internal because it's simpler and tooling already exists."
 
 This helps when context changes: you can reassess whether that "why" still holds or the tree needs an update.
 

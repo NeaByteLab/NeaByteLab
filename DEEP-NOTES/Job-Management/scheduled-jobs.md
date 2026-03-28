@@ -90,8 +90,8 @@ const messageProcessing = new CronJob('* * * * *', processMessages)
 ## Important Points
 
 - **Resource efficiency**: Excellent - resources used only during execution.
-- **Monitoring**: Clear success/failure metrics per execution; easy to track.
-- **Scalability**: Multiple instances can run safely; scheduler handles coordination.
+- **Monitoring**: Clear success/failure metrics per execution, easy to track.
+- **Scalability**: Multiple instances can run safely, scheduler handles coordination.
 - **Error isolation**: Failed execution doesn't affect next scheduled run.
 - **Testing**: Can be triggered manually for testing and debugging.
 - **Reliability**: Built-in retry mechanisms and failure notifications.

@@ -93,7 +93,7 @@ function hasDuplicateQuadratic(arr: number[]): boolean {
 
 ## Summary
 
-- **O(n)**: work proportional to input size; typical pattern is one (or a few) passes over _n_ items.
+- **O(n)**: work proportional to input size, typical pattern is one (or a few) passes over _n_ items.
 - **Analogy**: reading a book from start to end. Every page once, so work scales with page count.
 - **Use it for**: aggregates (sum, max), single-pass transforms, or any problem where you must look at each element at least once.
 

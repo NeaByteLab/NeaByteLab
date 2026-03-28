@@ -19,7 +19,7 @@ This note covers **infinite loops**: processes that run continuously, typically 
 
 **Infinite Loop**: A process that runs continuously without termination, using `while (true)` or similar constructs, often with periodic sleep or wait conditions.
 
-- The process never exits naturally; it must be killed externally.
+- The process never exits naturally, it must be killed externally.
 - Resource consumption is continuous (CPU, memory, connections).
 - Response time is immediate when work arrives.
 
@@ -84,11 +84,11 @@ while (true) {
 
 ## Important Points
 
-- **Resource efficiency**: Poor for non-real-time workloads; consumes resources 24/7.
+- **Resource efficiency**: Poor for non-real-time workloads, consumes resources 24/7.
 - **Monitoring**: Harder to distinguish between idle and active states.
 - **Scalability**: Multiple instances need coordination to avoid duplicate work.
-- **Error handling**: Unhandled exceptions can crash the entire process; need robust recovery.
-- **Memory leaks**: Dangerous in long-running processes; accumulate over time.
+- **Error handling**: Unhandled exceptions can crash the entire process, need robust recovery.
+- **Memory leaks**: Dangerous in long-running processes, accumulate over time.
 - **Deployment**: Requires process managers (systemd, PM2) for restart capability.
 
 ## Summary

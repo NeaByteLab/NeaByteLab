@@ -315,4 +315,4 @@ Code organization depends on each developer's style, team preferences, and proje
 - Choose an approach that works for **your team**
 - Refactor when it stops serving you
 
-**Remember:** The best organization is one that your team can understand and maintain. There's no "one size fits all" solution—just principles and patterns you adapt to your situation.
+**Remember:** The best organization is one that your team can understand and maintain. There's no "one size fits all" solution, just principles and patterns you adapt to your situation.

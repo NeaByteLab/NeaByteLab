@@ -75,7 +75,7 @@ POST /v1/getUserSessionListById
 
 - Prefer plural nouns for collections (`/users`, `/prompts`)
 - Use path params for identity, query params for filtering
-- Keep depth reasonable; avoid path chains longer than needed
+- Keep depth reasonable, avoid path chains longer than needed
 - Use lowercase kebab-case when possible for readability
 
 ## Query Parameter Rules

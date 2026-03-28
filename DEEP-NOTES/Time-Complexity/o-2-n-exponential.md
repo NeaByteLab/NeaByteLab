@@ -13,29 +13,29 @@ tags:
 
 ## Overview
 
-This note covers **O(2ⁿ) exponential time**: the complexity class where the number of operations grows exponentially with _n_, e.g. doubling each time _n_ increases by 1. Typical pattern: exploring **all subsets** of _n_ elements (each item: in or out → 2ⁿ outcomes). Unlike O(n!): 2ⁿ = all subsets; n! = all orderings. Exponential algorithms become impractical very quickly; even for moderate _n_ (e.g. 30–50), 2ⁿ is huge. **Goal:** avoid enumerating all subsets or binary combinations unless _n_ is very small; recognize the "two choices per step, n steps" pattern and consider pruning, memoization, or DP.
+This note covers **O(2ⁿ) exponential time**: the complexity class where the number of operations grows exponentially with _n_, for example doubling each time _n_ increases by 1. Typical pattern: exploring **all subsets** of _n_ elements (each item: in or out → 2ⁿ outcomes). Unlike O(n!): 2ⁿ = all subsets; n! = all orderings. Exponential algorithms become impractical very quickly; even for moderate _n_ (e.g. 30–50), 2ⁿ is huge. **Goal:** avoid enumerating all subsets or binary combinations unless _n_ is very small; recognize the "two choices per step, n steps" pattern and consider pruning, memoization, or DP.
 
 ## Definition
 
-**O(2ⁿ)** means the running time is bounded by a constant times 2ⁿ (or more generally, cⁿ for some constant c > 1). So each time you add one to _n_, the worst-case work multiplies by a fixed factor (e.g. 2).
+**O(2ⁿ)** means the running time is bounded by a constant times 2ⁿ (or more generally, cⁿ for some constant c > 1). So each time you add one to _n_, the worst-case work multiplies by a fixed factor (for example 2).
 
-- 2^10 ≈ 1,000; 2^20 ≈ 1 million; 2^30 ≈ 1 billion. So "exponential" is not something you want for large _n_.
-- Big O allows any exponential base (2ⁿ, 3ⁿ, etc.); we write 2ⁿ as the standard example for "exponential in n."
+- 2^10 ≈ 1,000, 2^20 ≈ 1 million, 2^30 ≈ 1 billion. So "exponential" is not something you want for large _n_.
+- Big O allows any exponential base (2ⁿ, 3ⁿ, and so on), we write 2ⁿ as the standard example for "exponential in n."
 
 ## The Analogy
 
-**A decision tree that doubles at each step.** At each of _n_ steps you have two choices (e.g. yes/no, include/exclude). So you have 2×2×…×2 = 2ⁿ possible paths. Exploring all of them means 2ⁿ leaves. The tree "fans out" very fast. That's exponential growth. No way to avoid the explosion unless you prune or don't enumerate everything.
+**A decision tree that doubles at each step.** At each of _n_ steps you have two choices (for example yes or no, include or exclude). So you have 2×2×…×2 = 2ⁿ possible paths. Exploring all of them means 2ⁿ leaves. The tree "fans out" very fast. That's exponential growth. No way to avoid the explosion unless you prune or don't enumerate everything.
 
 ## When You See It
 
 Exponential time typically appears when:
 
-- **Enumerating all subsets**: e.g. "try every subset of items" (2ⁿ subsets). Each element is either in or out, so 2 choices per element, so 2ⁿ.
-- **Recursion with two (or more) branches per call**: e.g. Fibonacci done naively (each call branches into two), or recursive backtracking that tries two options at each step without memoization or pruning.
-- **Some exact algorithms for NP-hard problems**: e.g. brute-force SAT (try all 2ⁿ truth assignments), or subset-sum by trying all subsets. Often the best _exact_ algorithm we have is exponential; we then rely on heuristics, approximation, or small _n_.
+- **Enumerating all subsets**: for example "try every subset of items" (2ⁿ subsets). Each element is either in or out, so 2 choices per element, so 2ⁿ.
+- **Recursion with two (or more) branches per call**: for example Fibonacci done naively (each call branches into two), or recursive backtracking that tries two options at each step without memoization or pruning.
+- **Some exact algorithms for NP-hard problems**: for example brute-force SAT (try all 2ⁿ truth assignments), or subset-sum by trying all subsets. Often the best _exact_ algorithm we have is exponential, we then rely on heuristics, approximation, or small _n_.
 - **Backtracking / exhaustive search**: when the search space is "all combinations of n binary choices."
 
-You do **not** get O(2ⁿ) from a single loop (O(n)) or from nested loops with a fixed depth (e.g. O(n²), O(n³)). The key is "number of steps or choices grows with n, and we're doing work proportional to the number of outcomes."
+You do **not** get O(2ⁿ) from a single loop (O(n)) or from nested loops with a fixed depth (for example O(n²), O(n³)). The key is "number of steps or choices grows with n, and we're doing work proportional to the number of outcomes."
 
 ## Examples
 
@@ -96,7 +96,7 @@ function sumArray(arr: number[]): number {
 
 ## Summary
 
-- **O(2ⁿ)**: work proportional to 2ⁿ (or cⁿ); typical pattern is exploring all subsets or all n-step binary choices.
+- **O(2ⁿ)**: work proportional to 2ⁿ (or cⁿ), typical pattern is exploring all subsets or all n-step binary choices.
 - **Analogy:** a decision tree that doubles at each step. That's 2ⁿ leaves.
 - **Watch for:** subset enumeration, naive recursion with two branches per level, brute-force exact algorithms. Use only for small n or when no better option exists.
 

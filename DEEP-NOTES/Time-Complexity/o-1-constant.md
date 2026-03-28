@@ -42,7 +42,7 @@ Not O(1): scanning the whole array to find something (that's at least O(n)), or 
 **Good: constant-time access by index**
 
 ```typescript
-// NOTE: Single array index access — same cost whether arr has 10 or 10M elements.
+// NOTE: Single array index access - same cost whether arr has 10 or 10M elements.
 // O(1).
 function getFirst<T>(arr: T[]): T | undefined {
   return arr[0] // one access, regardless of arr.length
@@ -72,13 +72,13 @@ function getFirstByScan<T>(arr: T[], predicate: (x: T) => boolean): T | undefine
 
 - **O(1) = no growth with _n_.** Same cost for 10 or 10,000,000 elements (within the constant).
 - Prefer O(1) for operations on the critical path: lookups, peeking at a known position, updating a single record by key.
-- Hash tables and arrays (by index) are your main tools for O(1) access; use them when the problem allows.
+- Hash tables and arrays (by index) are your main tools for O(1) access, use them when the problem allows.
 - "Constant" doesn't mean "instant." It means the cost doesn't scale with input size.
 
 ## Summary
 
-- **O(1)**: runtime bounded by a constant; independent of input size.
+- **O(1)**: runtime bounded by a constant, independent of input size.
 - **Analogy**: checking a wall clock. One look, same effort any time.
-- **Use it for**: index access, hash lookups, reading a fixed field; aim for it on hot paths when possible.
+- **Use it for**: index access, hash lookups, reading a fixed field, aim for it on hot paths when possible.
 
 _Constant time doesn't mean fast in absolute terms. It means your cost doesn't grow when the data does._

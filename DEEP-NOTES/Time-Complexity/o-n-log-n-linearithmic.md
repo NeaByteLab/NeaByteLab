@@ -15,7 +15,7 @@ tags:
 
 ## Overview
 
-This note covers **O(n log n) linearithmic time**: the complexity class that shows up in efficient comparison-based sorting and many divide-and-conquer algorithms. "Linearithmic" = linear × logarithmic: you do about "n times log n" work (e.g. log n levels, each level touching all n elements). Merge sort is the standard example: split, sort halves recursively, then merge. It's the bar for "good" general-purpose sorting. **Goal:** recognize this as the right complexity for sorting or divide-and-conquer with linear-time merge; if your sort is worse than this, there's usually a better algorithm.
+This note covers **O(n log n) linearithmic time**: the complexity class that shows up in efficient comparison-based sorting and many divide-and-conquer algorithms. "Linearithmic" = linear × logarithmic: you do about "n times log n" work (for example log n levels, each level touching all n elements). Merge sort is the standard example: split, sort halves recursively, then merge. It's the bar for "good" general-purpose sorting. **Goal:** recognize this as the right complexity for sorting or divide-and-conquer with linear-time merge; if your sort is worse than this, there's usually a better algorithm.
 
 ## Definition
 
@@ -103,14 +103,14 @@ function bubbleSort(arr: number[]): void {
 ## Important Points
 
 - **O(n log n)** = "n times log n": often from divide-and-conquer with O(n) work per level and O(log n) levels.
-- **Sorting**: comparison-based sorts can't do better than Ω(n log n) in the general case; merge sort and heapsort achieve it.
-- When you need to sort and _n_ is large, O(n log n) is the target; avoid O(n²) sorts unless _n_ is tiny.
+- **Sorting**: comparison-based sorts can't do better than Ω(n log n) in the general case, merge sort and heapsort achieve it.
+- When you need to sort and _n_ is large, O(n log n) is the target, avoid O(n²) sorts unless _n_ is tiny.
 - The "merge" step (combining two sorted pieces in linear time) is what keeps the per-level cost at O(n).
 
 ## Summary
 
-- **O(n log n)**: work proportional to n·log(n); typical of efficient sorting and divide-and-conquer with linear combine.
-- **Analogy**: merge sort on a deck. Split, sort halves, merge; log n levels, n work per level.
+- **O(n log n)**: work proportional to n·log(n), typical of efficient sorting and divide-and-conquer with linear combine.
+- **Analogy**: merge sort on a deck. Split, sort halves, merge, log n levels, n work per level.
 - **Use it for**: general-purpose sorting (merge sort, heapsort, quicksort average), and algorithms with the same recurrence.
 
 _Efficient sorting lives here. If you're doing worse than O(n log n) for a comparison-based sort, there's usually a better algorithm._
