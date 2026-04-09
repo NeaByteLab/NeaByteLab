@@ -42,8 +42,12 @@ You do **not** get O(2ⁿ) from a single loop (O(n)) or from nested loops with a
 **Good example: subset enumeration (2ⁿ subsets)**
 
 ```typescript
-// NOTE: Each element: include or exclude → 2 choices per element.
-// → 2ⁿ leaves in recursion tree.
+/**
+ * Generate power set of array.
+ * @description Each element has 2 choices, yielding 2ⁿ subsets.
+ * @param arr - Source array for power set
+ * @returns Array of all subsets
+ */
 function powerSet<T>(arr: T[]): T[][] {
   const result: T[][] = []
   function go(i: number, path: T[]) {
@@ -51,8 +55,8 @@ function powerSet<T>(arr: T[]): T[][] {
       result.push([...path])
       return
     }
-    go(i + 1, path) // exclude
-    go(i + 1, path.concat(arr[i])) // include
+    go(i + 1, path)
+    go(i + 1, path.concat(arr[i]))
   }
   go(0, [])
   return result
@@ -62,8 +66,12 @@ function powerSet<T>(arr: T[]): T[][] {
 **Good example: naive recursive Fibonacci (exponential calls)**
 
 ```typescript
-// NOTE: Two branches per call, depth n → call tree has ~2ⁿ nodes → O(2ⁿ).
-// Use DP or memo for O(n).
+/**
+ * Calculate Fibonacci number.
+ * @description Two branches per call creates ~2ⁿ nodes.
+ * @param n - Fibonacci index to compute
+ * @returns Fibonacci value at index n
+ */
 function fib(n: number): number {
   if (n <= 1) {
     return n
@@ -75,8 +83,12 @@ function fib(n: number): number {
 **Bad (not exponential):** one loop over n is O(n), not 2ⁿ.
 
 ```typescript
-// NOTE: Single pass over n elements → O(n).
-// Exponential needs "2 choices per step, n steps."
+/**
+ * Sum all elements in array.
+ * @description Single pass over n elements, linear time.
+ * @param arr - Array of numbers to sum
+ * @returns Total sum of all elements
+ */
 function sumArray(arr: number[]): number {
   let sum = 0
   for (const x of arr) {

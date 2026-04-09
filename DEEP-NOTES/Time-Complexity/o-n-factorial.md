@@ -43,8 +43,12 @@ You do **not** get O(n!) from subset enumeration (that's O(2ⁿ)) or from a fixe
 **Good example: generate all permutations (n!)**
 
 ```typescript
-// NOTE: Builds every ordering of n elements → n! permutations → O(n!).
-// TSP brute-force uses this idea.
+/**
+ * Generate all permutations of array.
+ * @description Builds every ordering, n! permutations total.
+ * @param arr - Source array to permute
+ * @returns Array of all permutations
+ */
 function permutations<T>(arr: T[]): T[][] {
   const result: T[][] = []
   function go(rest: T[], path: T[]) {
@@ -67,8 +71,12 @@ function permutations<T>(arr: T[]): T[][] {
 **Bad (not factorial):** all subsets are 2ⁿ (each element in or out), not n! orderings.
 
 ```typescript
-// NOTE: Subsets = each element in or out → 2ⁿ, not n! orderings.
-// Factorial = every permutation.
+/**
+ * Generate power set of array.
+ * @description Each element in or out, 2ⁿ subsets.
+ * @param arr - Source array for power set
+ * @returns Array of all subsets
+ */
 function powerSet<T>(arr: T[]): T[][] {
   const result: T[][] = []
   function go(i: number, path: T[]) {

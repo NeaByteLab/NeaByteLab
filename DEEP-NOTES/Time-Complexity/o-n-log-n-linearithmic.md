@@ -55,8 +55,13 @@ Same idea applies to heapsort and to the average case of quicksort (with a prope
 **Good: merge sort (merge step O(n), log n levels)**
 
 ```typescript
-// NOTE: merge() does one pass over left+right → O(n).
-// mergeSort has ~log n levels → O(n log n).
+/**
+ * Merge two sorted arrays.
+ * @description One pass over left plus right, O(n) work.
+ * @param left - Left sorted array
+ * @param right - Right sorted array
+ * @returns Merged sorted array
+ */
 function merge(left: number[], right: number[]): number[] {
   const out: number[] = []
   let i = 0
@@ -71,8 +76,12 @@ function merge(left: number[], right: number[]): number[] {
   return out.concat(left.slice(i), right.slice(j))
 }
 
-// NOTE: Split in half each time (log n levels).
-// Merge at each level is O(n).
+/**
+ * Sort array using merge sort.
+ * @description Split in half each time, log n levels.
+ * @param arr - Array to sort
+ * @returns Sorted array
+ */
 function mergeSort(arr: number[]): number[] {
   if (arr.length <= 1) {
     return arr
@@ -87,8 +96,11 @@ function mergeSort(arr: number[]): number[] {
 **Bad: bubble sort (O(n²))**
 
 ```typescript
-// NOTE: Nested loops over n; up to n²/2 swaps in worst case.
-// → O(n²).
+/**
+ * Sort array using bubble sort.
+ * @description Nested loops over n, up to n²/2 swaps.
+ * @param arr - Array to sort in place
+ */
 function bubbleSort(arr: number[]): void {
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr.length - 1 - i; j++) {

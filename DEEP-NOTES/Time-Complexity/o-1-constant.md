@@ -42,29 +42,37 @@ Not O(1): scanning the whole array to find something (that's at least O(n)), or 
 **Good: constant-time access by index**
 
 ```typescript
-// NOTE: Single array index access - same cost whether arr has 10 or 10M elements.
-// O(1).
+/**
+ * Get first array element.
+ * @description Single index access regardless of array size.
+ * @param arr - Source array to access
+ * @returns First element or undefined
+ */
 function getFirst<T>(arr: T[]): T | undefined {
-  return arr[0] // one access, regardless of arr.length
+  return arr[0]
 }
 ```
 
 **Good: hash lookup (average case)**
 
 ```typescript
-// NOTE: Map.get() is O(1) average with good hash.
-// No scan over keys.
+/** User lookup by ID. */
 const userById = new Map<string, User>()
-const user = userById.get(id) // O(1) average
+const user = userById.get(id)
 ```
 
 **Bad:** getting first element by scanning (O(n), not O(1))
 
 ```typescript
-// NOTE: find() may scan up to n elements.
-// Linear, not constant.
+/**
+ * Find element by scanning array.
+ * @description Scans up to n elements - linear time.
+ * @param arr - Source array to search
+ * @param predicate - Matching function
+ * @returns First matching element or undefined
+ */
 function getFirstByScan<T>(arr: T[], predicate: (x: T) => boolean): T | undefined {
-  return arr.find(predicate) // touches up to n elements
+  return arr.find(predicate)
 }
 ```
 

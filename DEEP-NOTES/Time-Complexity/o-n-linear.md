@@ -41,8 +41,12 @@ Nested loops over the same _n_ (e.g. for each i, for each j in the same array up
 **Good: single loop, constant work per element**
 
 ```typescript
-// NOTE: One pass over n elements, O(1) work per element.
-// → O(n).
+/**
+ * Sum all array elements.
+ * @description One pass over n elements, linear time.
+ * @param arr - Array of numbers to sum
+ * @returns Total sum of elements
+ */
 function sum(arr: number[]): number {
   let total = 0
   for (const x of arr) {
@@ -55,8 +59,13 @@ function sum(arr: number[]): number {
 **Good: find index (worst case)**
 
 ```typescript
-// NOTE: Worst case touches all n elements (target at end or missing).
-// Still one pass → O(n).
+/**
+ * Find index of target value.
+ * @description Worst case touches all n elements.
+ * @param arr - Array to search
+ * @param target - Value to find
+ * @returns Index of target or -1
+ */
 function indexOf<T>(arr: T[], target: T): number {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] === target) {
@@ -70,8 +79,12 @@ function indexOf<T>(arr: T[], target: T): number {
 **Bad:** two nested loops over the same array (typically O(n²))
 
 ```typescript
-// NOTE: Nested loops over same n → n×(n−1)/2 comparisons.
-// O(n²), not O(n).
+/**
+ * Check for duplicates using nested loops.
+ * @description Nested loops yield n×(n−1)/2 comparisons.
+ * @param arr - Array to check for duplicates
+ * @returns True if duplicate exists
+ */
 function hasDuplicateQuadratic(arr: number[]): boolean {
   for (let i = 0; i < arr.length; i++) {
     for (let j = i + 1; j < arr.length; j++) {

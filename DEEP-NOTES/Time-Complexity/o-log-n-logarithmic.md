@@ -54,8 +54,13 @@ Example: for n = 1,000,000, log₂(n) ≈ 20. So about 20 comparisons instead of
 **Good: binary search (sorted array)**
 
 ```typescript
-// NOTE: Each step halves the range; at most ~log₂(n) iterations.
-// → O(log n).
+/**
+ * Binary search on sorted array.
+ * @description Halves range each step, at most log₂(n) iterations.
+ * @param arr - Sorted array to search
+ * @param target - Value to find
+ * @returns Index of target or -1
+ */
 function binarySearch(arr: number[], target: number): number {
   let left = 0
   let right = arr.length - 1
@@ -77,8 +82,13 @@ function binarySearch(arr: number[], target: number): number {
 **Good: balanced BST lookup.** Same idea: each step goes left or right, so you follow one path of length O(log n).
 
 ```typescript
-// NOTE: One path from root to leaf; tree height O(log n) when balanced.
-// → O(log n).
+/**
+ * Lookup key in balanced BST.
+ * @description One path from root to leaf, height is O(log n).
+ * @param node - Root node of BST
+ * @param key - Key to search for
+ * @returns Matching node or null
+ */
 function bstLookup(node: BSTNode | null, key: number): BSTNode | null {
   if (node === null || node.key === key) {
     return node
@@ -93,8 +103,13 @@ function bstLookup(node: BSTNode | null, key: number): BSTNode | null {
 **Bad:** linear search on a sorted array (O(n)). Same input as binary search, but we scan one by one instead of halving.
 
 ```typescript
-// NOTE: Scans every element until found - O(n).
-// Use binary search when sorted.
+/**
+ * Linear search on sorted array.
+ * @description Scans every element until found, O(n) time.
+ * @param arr - Array to search (should be sorted)
+ * @param target - Value to find
+ * @returns Index of target or -1
+ */
 function linearSearchSorted(arr: number[], target: number): number {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] === target) {

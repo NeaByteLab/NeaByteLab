@@ -42,8 +42,13 @@ If you have three nested loops all ranging over _n_, you're in O(n³) territory 
 **Good example: naive matrix multiply (two n×n matrices)**
 
 ```typescript
-// NOTE: Three nested loops over n → n³ multiplications/adds → O(n³).
-// Strassen does better.
+/**
+ * Multiply two n×n matrices.
+ * @description Three nested loops over n, n³ operations.
+ * @param A - First matrix operand
+ * @param B - Second matrix operand
+ * @returns Result matrix product
+ */
 function matrixMultiply(A: number[][], B: number[][]): number[][] {
   const n = A.length
   const C: number[][] = Array(n)
@@ -63,8 +68,11 @@ function matrixMultiply(A: number[][], B: number[][]): number[][] {
 **Good example: Floyd–Warshall (all-pairs shortest paths).** Three nested loops over vertices, O(n³).
 
 ```typescript
-// NOTE: k, i, j each 0..n−1 → O(n³).
-// Standard for all-pairs shortest paths on dense graphs.
+/**
+ * Floyd-Warshall all-pairs shortest paths.
+ * @description k, i, j each iterate 0..n−1, O(n³).
+ * @param dist - Distance matrix to update in place
+ */
 function floydWarshall(dist: number[][]): void {
   const n = dist.length
   for (let k = 0; k < n; k++) {
@@ -80,8 +88,13 @@ function floydWarshall(dist: number[][]): void {
 **Bad (not cubic):** two nested loops over n → O(n²), not O(n³).
 
 ```typescript
-// NOTE: Only two loops over n → O(n²).
-// Cubic needs three nested loops.
+/**
+ * Compute pair-wise product sum.
+ * @description Only two loops over n, O(n²) time.
+ * @param A - First matrix operand
+ * @param B - Second matrix operand
+ * @returns Sum of element-wise products
+ */
 function pairsOnly(A: number[][], B: number[][]): number {
   const n = A.length
   let total = 0

@@ -42,8 +42,12 @@ If you have two nested loops and both ranges depend on _n_, ask: is this really 
 **Bad: naive duplicate check, O(n²)**
 
 ```typescript
-// NOTE: All pairs (i,j) with j > i → n(n−1)/2 comparisons.
-// → O(n²).
+/**
+ * Check for duplicate values.
+ * @description All pairs with j > i, n(n−1)/2 comparisons.
+ * @param arr - Array to check for duplicates
+ * @returns True if duplicate found
+ */
 function hasDuplicate(arr: number[]): boolean {
   for (let i = 0; i < arr.length; i++) {
     for (let j = i + 1; j < arr.length; j++) {
@@ -61,8 +65,12 @@ function hasDuplicate(arr: number[]): boolean {
 **Better: one pass with a Set (O(n))**
 
 ```typescript
-// NOTE: Single pass; Set.has/add are O(1) average.
-// → O(n) total.
+/**
+ * Check for duplicates using Set.
+ * @description Single pass with O(1) Set operations.
+ * @param arr - Array to check for duplicates
+ * @returns True if duplicate found
+ */
 function hasDuplicateLinear(arr: number[]): boolean {
   const seen = new Set<number>()
   for (const x of arr) {
