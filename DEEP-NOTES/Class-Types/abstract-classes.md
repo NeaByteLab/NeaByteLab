@@ -48,30 +48,43 @@ Common scenarios:
 **Good: Abstract animal base class**
 
 ```typescript
-// Abstract Animal class - base class for all animal types
+/**
+ * Base class for all animal types.
+ * @description Defines common animal behavior.
+ */
 abstract class Animal {
   constructor(
+    /** Animal display name */
     public name: string,
+    /** Animal age in years */
     public age: number
   ) {}
 
-  // Concrete method - shared movement behavior for all animals
+  /** Move the animal */
   move(): void {
     console.log(`${this.name} is moving`)
   }
 
-  // Concrete method - shared eating behavior for all animals
+  /**
+   * Feed the animal.
+   * @description Logs eating action to console.
+   * @param food - Type of food to eat
+   */
   eat(food: string): void {
     console.log(`${this.name} is eating ${food}`)
   }
 
-  // Abstract method - each animal type must implement its own sound
+  /** Make animal-specific sound */
   abstract makeSound(): void
 
-  // Abstract method with parameters - each animal defines its own sleep pattern
+  /**
+   * Sleep for specified hours.
+   * @description Abstract method for sleep behavior.
+   * @param hours - Hours to sleep
+   */
   abstract sleep(hours: number): void
 
-  // Concrete method using abstract methods - defines daily routine structure
+  /** Execute daily routine */
   performDailyRoutine(): void {
     this.makeSound()
     this.eat('food')
@@ -80,80 +93,108 @@ abstract class Animal {
   }
 }
 
-// Dog class - concrete implementation of Animal
+/**
+ * Concrete dog implementation.
+ * @description Implements Animal with dog behavior.
+ */
 class Dog extends Animal {
   constructor(
     name: string,
     age: number,
+    /** Dog breed type */
     public breed: string
   ) {
     super(name, age)
   }
 
-  // Implement abstract method - dog sound
+  /** Bark like dog */
   makeSound(): void {
     console.log('Woof! Woof!')
   }
 
-  // Implement abstract method - dog sleep pattern
+  /**
+   * Sleep for specified hours.
+   * @description Dog sleeps for given hours.
+   * @param hours - Hours to sleep
+   */
   sleep(hours: number): void {
     console.log(`${this.name} the ${this.breed} is sleeping for ${hours} hours`)
   }
 
-  // Dog-specific method - unique to Dog class
+  /** Wag the tail */
   wagTail(): void {
     console.log(`${this.name} is wagging tail`)
   }
 }
 
-// Cat class - concrete implementation of Animal
+/**
+ * Concrete cat implementation.
+ * @description Implements Animal with cat behavior.
+ */
 class Cat extends Animal {
   constructor(
     name: string,
     age: number,
+    /** Number of remaining lives */
     public lives: number = 9
   ) {
     super(name, age)
   }
 
-  // Implement abstract method - cat sound
+  /** Meow like cat */
   makeSound(): void {
     console.log('Meow!')
   }
 
-  // Implement abstract method - cat sleep pattern
+  /**
+   * Sleep while purring.
+   * @description Cat sleeps while purring.
+   * @param hours - Hours to sleep
+   */
   sleep(hours: number): void {
     console.log(`${this.name} is purring and sleeping for ${hours} hours`)
   }
 
-  // Cat-specific method - unique to Cat class
+  /** Scratch furniture */
   scratch(): void {
     console.log(`${this.name} is scratching furniture`)
   }
 }
 
-// Create instances of concrete classes
+/**
+ * Create instances of concrete classes.
+ * @description Demonstrates concrete class instantiation.
+ */
 const dog = new Dog('Buddy', 3, 'Golden Retriever')
 const cat = new Cat('Whiskers', 2)
-
-dog.performDailyRoutine() // Uses concrete and abstract methods
+dog.performDailyRoutine()
 cat.performDailyRoutine()
 ```
 
 **Good: Abstract controller base class**
 
 ```typescript
-// Abstract Controller - base class for all controllers
+/**
+ * Base class for all controllers.
+ * @description Provides template method for HTTP handling.
+ */
 abstract class Controller {
+  /** HTTP request object */
   protected request: any
+  /** HTTP response object */
   protected response: any
 
+  /**
+   * Initialize with request and response.
+   * @param request - Incoming HTTP request
+   * @param response - Outgoing HTTP response
+   */
   constructor(request: any, response: any) {
     this.request = request
     this.response = response
   }
 
-  // Template method - defines request handling algorithm
+  /** Handle incoming request */
   public handle(): void {
     if (this.validate()) {
       const result = this.process()
@@ -163,43 +204,67 @@ abstract class Controller {
     }
   }
 
-  // Concrete method - shared validation logic for all controllers
+  /**
+   * Validate request data.
+   * @description Checks if request body exists.
+   */
   protected validate(): boolean {
     return this.request.body !== null
   }
 
-  // Abstract method - each controller implements its own processing logic
+  /**
+   * Process the validated request.
+   * @description Each controller implements its own logic.
+   */
   abstract process(): any
 
-  // Concrete method - shared success response logic
+  /** Send success response */
   protected sendResponse(data: any): void {
     this.response.json({ success: true, data })
   }
 
-  // Concrete method - shared error response logic
+  /**
+   * Send error response.
+   * @description Sends JSON error response with status.
+   * @param message - Error message to display
+   */
   protected sendError(message: string): void {
     this.response.status(400).json({ success: false, error: message })
   }
 }
 
-// UserController - concrete implementation for user operations
+/**
+ * Controller for user operations.
+ * @description Handles user creation and data processing.
+ */
 class UserController extends Controller {
-  // Implement abstract method - process user data
+  /**
+   * Process user creation request.
+   * @description Creates user from request body data.
+   */
   process(): any {
     const { name, email } = this.request.body
     return { id: 1, name, email, createdAt: new Date() }
   }
 }
 
-// ProductController - concrete implementation for product operations
+/**
+ * Controller for product operations.
+ * @description Handles product creation with price validation.
+ */
 class ProductController extends Controller {
-  // Override concrete method - extend validation for products
+  /**
+   * Validate product request data.
+   * @description Checks body exists and price positive.
+   */
   protected validate(): boolean {
-    // Extend validation logic
     return super.validate() && this.request.body.price > 0
   }
 
-  // Implement abstract method - process product data
+  /**
+   * Process product creation request.
+   * @description Creates product from request body data.
+   */
   process(): any {
     const { name, price } = this.request.body
     return { id: 1, name, price, inStock: true }
@@ -210,147 +275,192 @@ class ProductController extends Controller {
 **Good: Abstract shape base class**
 
 ```typescript
-// Abstract Shape - base class for all geometric shapes
+/**
+ * Base class for geometric shapes.
+ * @description Defines shape contract with area.
+ */
 abstract class Shape {
-  constructor(public color: string) {}
+  constructor(
+    /** Shape color */
+    public color: string
+  ) {}
 
-  // Abstract methods - each shape must implement these
+  /**
+   * Calculate shape area.
+   * @description Each shape implements its own area formula.
+   */
   abstract getArea(): number
+
+  /**
+   * Calculate shape perimeter.
+   * @description Each shape implements its own perimeter formula.
+   */
   abstract getPerimeter(): number
 
-  // Concrete method - uses abstract methods to calculate ratio
+  /** Get area to perimeter ratio */
   getAreaToPerimeterRatio(): number {
     return this.getArea() / this.getPerimeter()
   }
 
-  // Concrete method - shared description behavior
+  /**
+   * Get shape description string.
+   * @description Returns formatted description with color and area.
+   */
   describe(): string {
     return `This ${this.constructor.name} is ${this.color} and has area ${this.getArea()}`
   }
 }
 
-// Circle class - concrete implementation of Shape
+/**
+ * Circle shape implementation.
+ * @description Implements Shape with circle calculations.
+ */
 class Circle extends Shape {
   constructor(
     color: string,
+    /** Circle radius length */
     public radius: number
   ) {
     super(color)
   }
 
-  // Implement abstract method - calculate circle area
+  /**
+   * Calculate circle area using PI.
+   * @description Calculates area from radius.
+   */
   getArea(): number {
     return Math.PI * this.radius * this.radius
   }
 
-  // Implement abstract method - calculate circle perimeter
+  /**
+   * Calculate circle perimeter using PI.
+   * @description Calculates perimeter from radius.
+   */
   getPerimeter(): number {
     return 2 * Math.PI * this.radius
   }
 }
 
-// Rectangle class - concrete implementation of Shape
+/**
+ * Rectangle shape implementation.
+ * @description Implements Shape with rectangle calculations.
+ */
 class Rectangle extends Shape {
   constructor(
     color: string,
+    /** Rectangle width */
     public width: number,
+    /** Rectangle height */
     public height: number
   ) {
     super(color)
   }
 
-  // Implement abstract method - calculate rectangle area
+  /**
+   * Calculate rectangle area.
+   * @description Multiplies width by height.
+   */
   getArea(): number {
     return this.width * this.height
   }
 
-  // Implement abstract method - calculate rectangle perimeter
+  /**
+   * Calculate rectangle perimeter.
+   * @description Sums all sides doubled.
+   */
   getPerimeter(): number {
     return 2 * (this.width + this.height)
   }
 }
 
-// Create instances and test abstract class functionality
+/**
+ * Create instances and test abstract class functionality.
+ * @description Demonstrates concrete shape instantiation.
+ */
 const circle = new Circle('red', 5)
 const rectangle = new Rectangle('blue', 4, 6)
-
 console.log(circle.describe())
 console.log(rectangle.describe())
-```
 
-**Bad: Abstract class with all concrete methods**
-
-```typescript
-// Wrong: If all methods are concrete, use regular class
+/**
+ * Calculator with only concrete methods.
+ * @description Should be regular class, not abstract.
+ */
 abstract class Calculator {
+  /**
+   * Add two numbers.
+   * @param a - First operand
+   * @param b - Second operand
+   */
   add(a: number, b: number): number {
     return a + b
   }
 
+  /**
+   * Subtract two numbers.
+   * @param a - First operand
+   * @param b - Second operand
+   */
   subtract(a: number, b: number): number {
     return a - b
   }
 
+  /**
+   * Multiply two numbers.
+   * @param a - First operand
+   * @param b - Second operand
+   */
   multiply(a: number, b: number): number {
     return a * b
   }
 }
 
-// Should be a regular class, not abstract
-```
-
-**Bad: Abstract class that could be an interface**
-
-```typescript
-// Wrong: If no implementation, use interface
+/**
+ * Drawable with only abstract methods.
+ * @description Should be interface, not abstract class.
+ */
 abstract class Drawable {
+  /** Draw the object */
   abstract draw(): void
+  /** Get bounding coordinates */
   abstract getBounds(): { x: number; y: number; width: number; height: number }
 }
 
-// Better as interface since no shared implementation
-interface Drawable {
-  draw(): void
-  getBounds(): { x: number; y: number; width: number; height: number }
-}
-```
-
-## Important Points
-
-- **Cannot be instantiated** directly with `new`
-- **Can contain both** abstract and concrete methods
-- **Abstract methods** must be implemented by derived classes
-- **Concrete methods** provide shared implementation
-- **Can have properties** (both abstract and concrete)
-- **Support inheritance chains** (abstract extending abstract)
-- **Constructors** are called when derived classes are instantiated
-
-### Abstract vs Interface Decision
-
-```typescript
-// Use interface when:
-// - No implementation details
-// - Multiple inheritance needed
-// - Public API contract only
+/**
+ * Logger interface for logging operations.
+ * @description Pure contract with no implementation details.
+ */
 interface Logger {
+  /** Log at info level */
   log(message: string): void
+  /** Log at error level */
   error(message: string): void
 }
 
-// Use abstract class when:
-// - Shared implementation needed
-// - Protected members required
-// - Non-public contract needed
+/**
+ * Base logger with shared implementation.
+ * @description Provides log history and shared log storage.
+ */
 abstract class BaseLogger {
+  /** Internal log storage */
   protected logs: string[] = []
-
+  /** Log at info level */
   abstract log(message: string): void
+  /** Log at error level */
   abstract error(message: string): void
 
+  /**
+   * Add timestamped log entry.
+   * @param message - Log message content
+   */
   protected addLog(message: string): void {
     this.logs.push(`${new Date().toISOString()}: ${message}`)
   }
 
+  /**
+   * Get copy of log history.
+   * @description Returns copy of log entries
+   */
   getHistory(): string[] {
     return [...this.logs]
   }
@@ -360,13 +470,22 @@ abstract class BaseLogger {
 ### Abstract Properties
 
 ```typescript
+/**
+ * Abstract database connection handler.
+ * @description Defines database connection contract.
+ */
 abstract class Database {
+  /** Database connection */
   abstract connection: any
-
+  /** Establish connection */
   abstract connect(): Promise<void>
+  /** Close connection */
   abstract disconnect(): Promise<void>
 
-  // Concrete method using abstract property
+  /**
+   * Test database connectivity
+   * @description Connects and verifies connection is valid.
+   */
   async testConnection(): Promise<boolean> {
     try {
       await this.connect()
@@ -379,16 +498,20 @@ abstract class Database {
   }
 }
 
-// MySQL implementation of Database abstract class
+/**
+ * MySQL database implementation.
+ * @description Implements Database for MySQL connections.
+ */
 class MySQL extends Database {
+  /** MySQL connection instance */
   connection: any = null
 
-  // Implement abstract method - connect to MySQL database
+  /** Connect to MySQL */
   async connect(): Promise<void> {
     this.connection = { connected: true, type: 'mysql' }
   }
 
-  // Implement abstract method - disconnect from MySQL database
+  /** Disconnect from MySQL */
   async disconnect(): Promise<void> {
     this.connection = null
   }
@@ -398,21 +521,46 @@ class MySQL extends Database {
 ### Abstract Method Signatures
 
 ```typescript
-// Processor abstract class - demonstrates various abstract method signatures
+/**
+ * Data processor with various method signatures.
+ * @description Demonstrates different abstract method patterns.
+ */
 abstract class Processor {
-  // Simple abstract method
+  /**
+   * Process input string.
+   * @description Transforms input to output string.
+   * @param input - Input string to process
+   */
   abstract process(input: string): string
 
-  // Abstract method with generic type parameter
+  /**
+   * Transform array items using mapper.
+   * @description Maps items to strings with function.
+   * @param data - Array of items to transform
+   * @param mapper - Function to map items to strings
+   */
   abstract transform<T>(data: T[], mapper: (item: T) => string): string[]
 
-  // Abstract method with optional parameters
+  /**
+   * Validate data with optional strict mode.
+   * @description Checks data validity with strict option.
+   * @param data - Data to validate
+   * @param strict - Enable strict validation
+   */
   abstract validate(data: any, strict?: boolean): boolean
 
-  // Abstract method with union return type
+  /**
+   * Parse input string to object.
+   * @description Parses string to object or null.
+   * @param input - Input string to parse
+   */
   abstract parse(input: string): object | null
 
-  // Abstract async method
+  /**
+   * Fetch data from URL.
+   * @description Fetches data from given URL.
+   * @param url - URL to fetch from
+   */
   abstract fetch(url: string): Promise<Response>
 }
 ```

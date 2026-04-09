@@ -47,18 +47,32 @@ Common scenarios:
 **Good: Math utilities**
 
 ```typescript
-// MathUtils class - collection of mathematical utility functions
+/**
+ * Mathematical utility functions.
+ * @description Collection of math operations and constants.
+ */
 class MathUtils {
-  // Mathematical constants
+  /** PI constant for circle calculations */
   static readonly PI = 3.14159
+  /** Euler number constant */
   static readonly E = 2.71828
 
-  // Calculate area of a circle using PI constant
+  /**
+   * Calculate circle area from radius.
+   * @description Calculates circle area.
+   * @param radius - Circle radius length
+   * @returns Area of the circle
+   */
   static calculateCircleArea(radius: number): number {
     return MathUtils.PI * radius * radius
   }
 
-  // Calculate factorial recursively
+  /**
+   * Calculate factorial recursively.
+   * @description Calculates factorial recursively.
+   * @param n - Number to calculate factorial
+   * @returns Factorial of n
+   */
   static factorial(n: number): number {
     if (n <= 1) {
       return 1
@@ -66,32 +80,55 @@ class MathUtils {
     return n * MathUtils.factorial(n - 1)
   }
 
-  // Clamp value between min and max bounds
+  /**
+   * Clamp value between min and max.
+   * @description Clamps value between range.
+   * @param value - Number to clamp
+   * @param min - Minimum allowed value
+   * @param max - Maximum allowed value
+   * @returns Clamped value within range
+   */
   static clamp(value: number, min: number, max: number): number {
     return Math.min(Math.max(value, min), max)
   }
 }
-
-// Usage: MathUtils.calculateCircleArea(5)
-// No instantiation needed - call methods directly on class
 ```
 
 **Good: String manipulation utilities**
 
 ```typescript
-// StringUtils class - collection of string manipulation utilities
+/**
+ * String manipulation utilities.
+ * @description Collection of helper functions for string operations.
+ */
 class StringUtils {
-  // Capitalize first letter of a string
+  /**
+   * Capitalize first letter of string.
+   * @description Capitalizes first letter.
+   * @param text - Input string to capitalize
+   * @returns Capitalized string
+   */
   static capitalize(text: string): string {
     return text.charAt(0).toUpperCase() + text.slice(1)
   }
 
-  // Reverse a string character by character
+  /**
+   * Reverse string character order.
+   * @description Reverses string order.
+   * @param text - Input string to reverse
+   * @returns Reversed string
+   */
   static reverse(text: string): string {
     return text.split('').reverse().join('')
   }
 
-  // Truncate string to maximum length with ellipsis
+  /**
+   * Truncate string with ellipsis.
+   * @description Truncates string with ellipsis.
+   * @param text - Input string to truncate
+   * @param maxLength - Maximum string length allowed
+   * @returns Truncated string with ellipsis
+   */
   static truncate(text: string, maxLength: number): string {
     if (text.length > maxLength) {
       return text.slice(0, maxLength) + '...'
@@ -99,7 +136,12 @@ class StringUtils {
     return text
   }
 
-  // Check if string is a palindrome
+  /**
+   * Check if string is palindrome.
+   * @description Checks if palindrome.
+   * @param text - Input string to check
+   * @returns True if palindrome
+   */
   static isPalindrome(text: string): boolean {
     const clean = text.toLowerCase().replace(/[^a-z0-9]/g, '')
     return clean === clean.split('').reverse().join('')
@@ -110,17 +152,27 @@ class StringUtils {
 **Good: API endpoints configuration**
 
 ```typescript
-// ApiEndpoints class - centralized API endpoint configuration
+/**
+ * Centralized API endpoint configuration.
+ * @description Defines API URLs and URL building utilities.
+ */
 class ApiEndpoints {
-  // Base API URL
+  /** Base API server URL */
   static readonly BASE_URL = 'https://api.example.com'
-
-  // Specific endpoint URLs
+  /** Users API endpoint URL */
   static readonly USERS = `${ApiEndpoints.BASE_URL}/users`
+  /** Products API endpoint URL */
   static readonly PRODUCTS = `${ApiEndpoints.BASE_URL}/products`
+  /** Orders API endpoint URL */
   static readonly ORDERS = `${ApiEndpoints.BASE_URL}/orders`
 
-  // Build URL with query parameters
+  /**
+   * Build URL with query parameters.
+   * @description Builds URL with query.
+   * @param endpoint - Base endpoint URL
+   * @param params - Query parameters object
+   * @returns URL with query string
+   */
   static buildUrl(endpoint: string, params: Record<string, string>): string {
     const url = new URL(endpoint)
     Object.entries(params).forEach(([key, value]) => {
@@ -134,34 +186,50 @@ class ApiEndpoints {
 **Bad: Static class with mutable state**
 
 ```typescript
-// Wrong: Static class shouldn't maintain instance-like state
+/**
+ * Static counter with global state.
+ * @description Warning: Static classes should not maintain mutable state.
+ */
 class Counter {
+  /** Current counter value */
   static count = 0
 
+  /** Increment counter value */
   static increment(): void {
-    Counter.count++ // Global state is dangerous
+    Counter.count++
   }
 
+  /** Reset counter to zero */
   static reset(): void {
     Counter.count = 0
   }
 }
 
-// Better: Use regular class or singleton for stateful behavior
+/**
+ * Better: Use regular class or singleton for stateful behavior.
+ * @description Recommendation for stateful behavior patterns.
 ```
 
 **Bad: Static class that needs instance data**
 
 ```typescript
-// Wrong: Static methods can't access instance data
+/**
+ * Static user profile updater.
+ * @description Warning: Static methods cannot access instance data.
+ */
 class UserProfile {
+  /**
+   * Update profile for given name.
+   * @param name - User name to update
+   */
   static updateProfile(name: string): void {
-    // Can't access 'this.name' - no instance exists
     console.log(`Updating profile for ${name}`)
   }
 }
 
-// Better: Use regular class for user-specific behavior
+/**
+ * Better: Use regular class for user-specific behavior.
+ * @description Recommendation for user-specific operations.
 ```
 
 ## Important Points
@@ -176,22 +244,26 @@ class UserProfile {
 ### Static Property Patterns
 
 ```typescript
-// Config class - static properties for application configuration
+/**
+ * Application configuration constants.
+ * @description Static configuration values and cache management.
+ */
 class Config {
-  // Immutable configuration constants
+  /** Debug mode enabled flag */
   static readonly DEBUG = process.env.NODE_ENV === 'development'
+  /** API version string */
   static readonly API_VERSION = 'v1'
+  /** Maximum retry attempts */
   static readonly MAX_RETRIES = 3
-
-  // Private static cache with public getter
+  /** Private static cache storage */
   private static _cache: Map<string, any> = new Map()
 
-  // Public getter for cache (read-only access)
+  /** Public getter for cache map */
   static get cache(): Map<string, any> {
     return Config._cache
   }
 
-  // Static method to clear cache
+  /** Clear all cached entries */
   static clearCache(): void {
     Config._cache.clear()
   }
@@ -201,30 +273,49 @@ class Config {
 ### Static Factory Methods
 
 ```typescript
-// User class with static factory methods for object creation
+/**
+ * User with static factory methods.
+ * @description Creates users via factory methods and validation.
+ */
 class User {
   constructor(
+    /** User display name */
     public name: string,
+    /** User email address */
     public email: string
   ) {}
 
-  // Factory method for guest users
+  /**
+   * Create guest user instance.
+   * @returns New guest user with defaults
+   */
   static createGuest(): User {
     return new User('Guest User', 'guest@example.com')
   }
 
-  // Factory method to create user from JSON
+  /**
+   * Create user from JSON object.
+   * @param json - Object with name and email
+   * @returns New user from JSON data
+   */
   static fromJson(json: { name: string; email: string }): User {
     return new User(json.name, json.email)
   }
 
-  // Static utility method for email validation
+  /**
+   * Validate email format.
+   * @param email - Email string to validate
+   * @returns True if email format is valid
+   */
   static validateEmail(email: string): boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   }
 }
 
-// Usage - create users using factory methods
+/**
+ * Usage - create users using factory methods.
+ * @description Demonstrates factory method usage pattern.
+ */
 const guest = User.createGuest()
 const user = User.fromJson({ name: 'Alice', email: 'alice@example.com' })
 ```
@@ -232,11 +323,20 @@ const user = User.fromJson({ name: 'Alice', email: 'alice@example.com' })
 ### Static vs Instance Decision Tree
 
 ```typescript
-// Decision tree for choosing class type:
-// 1. Do I need multiple instances with different data? → Regular class
-// 2. Do I need shared state across the application? → Singleton
-// 3. Do I need stateless utility functions? → Static class
-// 4. Do I need a contract with partial implementation? → Abstract class
+/**
+ * Decision tree for choosing class type.
+ * @description Guide for selecting appropriate class pattern.
+ * @returns Never returns - documentation only
+ */
+function classTypeDecisionTree(): never {
+  /**
+   * 1. Multiple instances with different data? → Regular class
+   * 2. Shared state across application? → Singleton
+   * 3. Stateless utility functions? → Static class
+   * 4. Contract with partial implementation? → Abstract class
+   */
+  throw new Error('Documentation function')
+}
 ```
 
 ## Summary

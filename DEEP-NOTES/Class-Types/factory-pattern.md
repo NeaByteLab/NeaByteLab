@@ -48,48 +48,77 @@ Common scenarios:
 **Good: Simple factory method**
 
 ```typescript
-// Animal interface - defines contract for all animal types
+/**
+ * Animal interface for all types.
+ * @description Defines sound and movement contracts.
+ */
 interface Animal {
+  /** Make animal-specific sound */
   makeSound(): void
+  /** Execute movement behavior */
   move(): void
 }
 
-// Concrete Dog implementation
+/**
+ * Dog implementation.
+ * @description Concrete dog with bark and run.
+ */
 class Dog implements Animal {
+  /** Output dog barking sound */
   makeSound(): void {
     console.log('Woof! Woof!')
   }
 
+  /** Output dog running movement */
   move(): void {
     console.log('Dog is running')
   }
 }
 
-// Concrete Cat implementation
+/**
+ * Cat implementation.
+ * @description Concrete cat with meow and sneak.
+ */
 class Cat implements Animal {
+  /** Output cat meowing sound */
   makeSound(): void {
     console.log('Meow!')
   }
 
+  /** Output cat sneaking movement */
   move(): void {
     console.log('Cat is sneaking')
   }
 }
 
-// Concrete Bird implementation
+/**
+ * Bird implementation.
+ * @description Concrete bird with tweet and fly.
+ */
 class Bird implements Animal {
+  /** Output bird tweeting sound */
   makeSound(): void {
     console.log('Tweet!')
   }
 
+  /** Output bird flying movement */
   move(): void {
     console.log('Bird is flying')
   }
 }
 
-// AnimalFactory - creates animals based on type parameter
+/**
+ * Factory for creating animals.
+ * @description Creates animals based on type parameter.
+ */
 class AnimalFactory {
-  // Factory method - creates appropriate animal instance
+  /**
+   * Create animal instance.
+   * @description Creates animal by type parameter.
+   * @param type - Animal type to create
+   * @returns New animal instance
+   * @throws Error for unknown animal type
+   */
   static createAnimal(type: 'dog' | 'cat' | 'bird'): Animal {
     switch (type) {
       case 'dog':
@@ -104,187 +133,387 @@ class AnimalFactory {
   }
 }
 
-// Usage - create different animals using factory
+/**
+ * Usage demonstration.
+ * @description Creates different animals using factory.
+ */
 const dog = AnimalFactory.createAnimal('dog')
 const cat = AnimalFactory.createAnimal('cat')
 const bird = AnimalFactory.createAnimal('bird')
-
-dog.makeSound() // Woof! Woof!
-cat.makeSound() // Meow!
-bird.makeSound() // Tweet!
+dog.makeSound()
+cat.makeSound()
+bird.makeSound()
 ```
 
 **Good: Abstract factory for UI components**
 
 ```typescript
-// Abstract product interfaces - define contracts for UI components
+/**
+ * Button component interface.
+ * @description Contract for rendering and clicks.
+ */
 interface Button {
+  /** Render button to display */
   render(): void
+  /**
+   * Attach click event handler.
+   * @description Attaches click event listener.
+   * @param callback - Function to execute
+   */
   onClick(callback: () => void): void
 }
 
+/**
+ * Input component interface.
+ * @description Contract for rendering and value access.
+ */
 interface Input {
+  /** Render input to display */
   render(): void
+  /**
+   * Get current input value.
+   * @description Returns current input value.
+   * @returns Current input value
+   */
   getValue(): string
+  /**
+   * Set input value.
+   * @description Sets input value to new value.
+   * @param value - New value to set
+   */
   setValue(value: string): void
 }
 
-// Concrete products for Material theme
+/**
+ * Material button component.
+ * @description Material theme implementation.
+ */
 class MaterialButton implements Button {
+  /**
+   * Initialize with button text
+   * @description Creates button with label
+   * @param text - Button label text
+   */
   constructor(private text: string) {}
 
+  /** Render material button */
   render(): void {
     console.log(`[Material] Rendering button: ${this.text}`)
   }
 
+  /**
+   * Attach click handler.
+   * @description Attaches click event listener.
+   * @param callback - Function to execute
+   */
   onClick(callback: () => void): void {
     console.log('[Material] Button click handler attached')
   }
 }
 
+/**
+ * Material input component.
+ * @description Material theme implementation.
+ */
 class MaterialInput implements Input {
+  /**
+   * Initialize with placeholder
+   * @description Creates input with placeholder
+   * @param placeholder - Input placeholder text
+   */
   constructor(private placeholder: string) {}
 
+  /** Render material input */
   render(): void {
     console.log(`[Material] Rendering input: ${this.placeholder}`)
   }
 
+  /**
+   * Get current input value.
+   * @description Returns current input value.
+   * @returns Current input value
+   */
   getValue(): string {
     return 'material input value'
   }
 
+  /**
+   * Set input value.
+   * @description Sets input value to new value.
+   * @param value - New value to display
+   */
   setValue(value: string): void {
     console.log(`[Material] Input value set to: ${value}`)
   }
 }
 
-// Concrete products for Bootstrap theme
+/**
+ * Bootstrap button component.
+ * @description Bootstrap theme implementation.
+ */
 class BootstrapButton implements Button {
+  /**
+   * Initialize with button text
+   * @description Creates button with label
+   * @param text - Button label text
+   */
   constructor(private text: string) {}
 
+  /** Render bootstrap button */
   render(): void {
     console.log(`[Bootstrap] Rendering button: ${this.text}`)
   }
 
+  /**
+   * Attach click handler.
+   * @description Attaches click event listener.
+   * @param callback - Function to execute
+   */
   onClick(callback: () => void): void {
     console.log('[Bootstrap] Button click handler attached')
   }
 }
 
+/**
+ * Bootstrap input component.
+ * @description Bootstrap theme implementation.
+ */
 class BootstrapInput implements Input {
+  /**
+   * Initialize with placeholder
+   * @description Creates input with placeholder
+   * @param placeholder - Input placeholder text
+   */
   constructor(private placeholder: string) {}
 
+  /** Render bootstrap input */
   render(): void {
     console.log(`[Bootstrap] Rendering input: ${this.placeholder}`)
   }
 
+  /**
+   * Get current input value.
+   * @description Returns current input value.
+   * @returns Current input value
+   */
   getValue(): string {
     return 'bootstrap input value'
   }
 
+  /**
+   * Set input value.
+   * @description Sets input value to new value.
+   * @param value - New value to display
+   */
   setValue(value: string): void {
     console.log(`[Bootstrap] Input value set to: ${value}`)
   }
 }
 
-// Abstract factory - defines interface for creating component families
+/**
+ * Abstract factory for UI components.
+ * @description Interface for creating themed families.
+ */
 abstract class UIComponentFactory {
+  /**
+   * Create button component.
+   * @description Creates new button instance.
+   * @param text - Button label text
+   * @returns New button instance
+   */
   abstract createButton(text: string): Button
+  /**
+   * Create input component.
+   * @description Creates new input instance.
+   * @param placeholder - Input placeholder text
+   * @returns New input instance
+   */
   abstract createInput(placeholder: string): Input
 }
 
-// Concrete factory for Material theme
+/**
+ * Material theme factory.
+ * @description Creates Material design components.
+ */
 class MaterialFactory extends UIComponentFactory {
+  /**
+   * Create material button
+   * @description Instantiates material button
+   * @param text - Button label text
+   * @returns New material button
+   */
   createButton(text: string): Button {
     return new MaterialButton(text)
   }
 
+  /**
+   * Create material input
+   * @description Instantiates material input
+   * @param placeholder - Input placeholder text
+   * @returns New material input
+   */
   createInput(placeholder: string): Input {
     return new MaterialInput(placeholder)
   }
 }
 
-// Concrete factory for Bootstrap theme
+/**
+ * Bootstrap theme factory.
+ * @description Creates Bootstrap UI components.
+ */
 class BootstrapFactory extends UIComponentFactory {
+  /**
+   * Create bootstrap button
+   * @description Instantiates bootstrap button
+   * @param text - Button label text
+   * @returns New bootstrap button
+   */
   createButton(text: string): Button {
     return new BootstrapButton(text)
   }
 
+  /**
+   * Create bootstrap input
+   * @description Instantiates bootstrap input
+   * @param placeholder - Input placeholder text
+   * @returns New bootstrap input
+   */
   createInput(placeholder: string): Input {
     return new BootstrapInput(placeholder)
   }
 }
 
-// Usage - app that uses factory to create UI components
+/**
+ * Application using UI factory.
+ * @description Renders forms with injected factory.
+ */
 class UIApp {
+  /**
+   * Initialize with factory
+   * @description Creates app with component factory
+   * @param factory - Factory for creating components
+   */
   constructor(private factory: UIComponentFactory) {}
 
+  /** Render form with components */
   renderForm(): void {
     const button = this.factory.createButton('Submit')
     const input = this.factory.createInput('Enter name')
-
     input.render()
     button.render()
   }
 }
 
-// Switch themes easily by changing factory
+/**
+ * Theme switching demonstration
+ * @description Demonstrates abstract factory pattern
+ */
 const materialApp = new UIApp(new MaterialFactory())
 const bootstrapApp = new UIApp(new BootstrapFactory())
-
 materialApp.renderForm()
 bootstrapApp.renderForm()
 ```
 
-**Good: Database connection factory**
-
 ```typescript
-// Database interface - defines contract for database operations
+/**
+ * Database interface.
+ * @description Contract for database operations.
+ */
 interface Database {
+  /** Connect to database */
   connect(): Promise<void>
+  /**
+   * Execute SQL query
+   * @description Executes SQL and returns results
+   * @param sql - SQL query string
+   * @returns Query result rows
+   */
   query(sql: string): Promise<any[]>
+  /** Disconnect from database */
   disconnect(): Promise<void>
 }
 
-// MySQL database implementation
+/**
+ * MySQL database implementation.
+ * @description MySQL database connection handler.
+ */
 class MySQL implements Database {
+  /**
+   * Initialize with connection config
+   * @description Creates MySQL with config
+   * @param config - Database connection config
+   */
   constructor(private config: { host: string; port: number }) {}
 
+  /** Connect to MySQL database */
   async connect(): Promise<void> {
     console.log(`Connecting to MySQL at ${this.config.host}:${this.config.port}`)
   }
 
+  /**
+   * Execute MySQL query
+   * @description Executes SQL on MySQL
+   * @param sql - SQL query string
+   * @returns Query result rows
+   */
   async query(sql: string): Promise<any[]> {
     console.log(`MySQL executing: ${sql}`)
     return [{ id: 1, name: 'MySQL Result' }]
   }
 
+  /** Disconnect from MySQL */
   async disconnect(): Promise<void> {
     console.log('Disconnecting from MySQL')
   }
 }
 
-// PostgreSQL database implementation
+/**
+ * PostgreSQL database implementation.
+ * @description PostgreSQL database connection handler.
+ */
 class PostgreSQL implements Database {
+  /**
+   * Initialize with connection config
+   * @description Creates PostgreSQL with config
+   * @param config - Database connection config
+   */
   constructor(private config: { host: string; port: number }) {}
 
+  /** Connect to PostgreSQL database */
   async connect(): Promise<void> {
     console.log(`Connecting to PostgreSQL at ${this.config.host}:${this.config.port}`)
   }
 
+  /**
+   * Execute PostgreSQL query
+   * @description Executes SQL on PostgreSQL
+   * @param sql - SQL query string
+   * @returns Query result rows
+   */
   async query(sql: string): Promise<any[]> {
     console.log(`PostgreSQL executing: ${sql}`)
     return [{ id: 1, name: 'PostgreSQL Result' }]
   }
 
+  /** Disconnect from PostgreSQL */
   async disconnect(): Promise<void> {
     console.log('Disconnecting from PostgreSQL')
   }
 }
 
-// DatabaseFactory - creates database instances based on type
+/**
+ * Database factory.
+ * @description Creates database instances by type.
+ */
 class DatabaseFactory {
-  // Factory method - creates appropriate database connection
+  /**
+   * Create database connection
+   * @description Creates database by type
+   * @param type - Database type to create
+   * @param config - Database connection config
+   * @returns New database instance
+   * @throws Error for unsupported type
+   */
   static createDatabase(
     type: 'mysql' | 'postgresql',
     config: { host: string; port: number }
@@ -300,128 +529,62 @@ class DatabaseFactory {
   }
 }
 
-// Usage - create database connections using factory
+/**
+ * Usage demonstration
+ * @description Demonstrates database factory pattern
+ */
 const mysql = DatabaseFactory.createDatabase('mysql', { host: 'localhost', port: 3306 })
 const postgresql = DatabaseFactory.createDatabase('postgresql', { host: 'localhost', port: 5432 })
-
 mysql.connect()
 postgresql.connect()
 ```
 
-**Bad: Factory that just hides constructors**
+**Good: Configurable vehicle factory**
 
 ```typescript
-// Wrong: Factory adds no value over direct construction
-class SimpleUser {
-  constructor(
-    public name: string,
-    public email: string
-  ) {}
-}
-
-class UserFactory {
-  // Factory method that just calls constructor - no added value
-  static createUser(name: string, email: string): SimpleUser {
-    return new SimpleUser(name, email)
-  }
-}
-
-// No benefit over: new SimpleUser(name, email)
-```
-
-**Bad: Factory with complex conditional logic**
-
-```typescript
-// Wrong: Too many conditions make factory hard to maintain
-class ComplexVehicleFactory {
-  static createVehicle(type: string, options: any): any {
-    if (type === 'car') {
-      if (options.electric) {
-        if (options.luxury) {
-          return new LuxuryElectricCar()
-        } else {
-          return new BasicElectricCar()
-        }
-      } else {
-        if (options.luxury) {
-          return new LuxuryGasCar()
-        } else {
-          return new BasicGasCar()
-        }
-      }
-    } else if (type === 'truck') {
-      // ... more nested conditions
-    }
-    // This becomes unmanageable
-  }
-}
-
-// Better: Use separate factories or builder pattern
-```
-
-## Important Points
-
-- **Encapsulates object creation** logic in one place
-- **Promotes loose coupling** between client code and concrete classes
-- **Supports open/closed principle** - easy to add new types
-- **Can hide complex initialization** logic
-- **Enables dependency injection** and testing
-- **May increase complexity** for simple cases
-
-### Factory Method vs Simple Factory
-
-```typescript
-// Simple Factory (static method) - centralized creation
-class SimpleAnimalFactory {
-  static createAnimal(type: string): Animal {
-    // Creation logic
-  }
-}
-
-// Factory Method (instance method, inheritable) - polymorphic creation
-abstract class AnimalCreator {
-  abstract factoryMethod(): Animal
-
-  public createAndUse(): void {
-    const animal = this.factoryMethod()
-    animal.makeSound()
-  }
-}
-
-// DogCreator - concrete factory for dogs
-class DogCreator extends AnimalCreator {
-  factoryMethod(): Animal {
-    return new Dog()
-  }
-}
-```
-
-### Factory with Configuration
-
-```typescript
-// VehicleConfig interface - defines vehicle configuration options
+/**
+ * Vehicle configuration interface.
+ * @description Vehicle configuration options.
+ */
 interface VehicleConfig {
+  /** Vehicle type category */
   type: 'car' | 'truck' | 'motorcycle'
+  /** Engine type option */
   engine: 'gas' | 'electric' | 'hybrid'
+  /** Vehicle color choice */
   color: string
+  /** Feature list array */
   features: string[]
 }
 
-// ConfigurableVehicleFactory - creates vehicles with configuration
+/**
+ * Configurable vehicle factory.
+ * @description Creates vehicles with configuration.
+ */
 class ConfigurableVehicleFactory {
+  /** Stored configuration templates */
   private static configurations = new Map<string, Partial<VehicleConfig>>()
 
-  // Register reusable configuration templates
+  /**
+   * Register configuration template
+   * @description Stores template for later use
+   * @param name - Template name
+   * @param config - Configuration template
+   */
   static registerConfiguration(name: string, config: Partial<VehicleConfig>): void {
     this.configurations.set(name, config)
   }
 
-  // Create vehicle with full configuration
+  /**
+   * Create vehicle with configuration
+   * @description Creates vehicle from configuration
+   * @param config - Full vehicle configuration
+   * @returns New vehicle instance
+   * @throws Error for unknown vehicle type
+   */
   static createVehicle(config: VehicleConfig): Vehicle {
-    // Apply registered configurations
     const baseConfig = { type: 'car', engine: 'gas', color: 'black', features: [] }
     const finalConfig = { ...baseConfig, ...config }
-
     switch (finalConfig.type) {
       case 'car':
         return new Car(finalConfig)
@@ -434,21 +597,28 @@ class ConfigurableVehicleFactory {
     }
   }
 }
-
-// Register common configurations for reuse
-ConfigurableVehicleFactory.registerConfiguration('eco-friendly', {
-  engine: 'electric',
-  features: ['regenerative-braking', 'eco-mode']
-})
 ```
 
-### Factory for Testing
+**Good: Testing with factory injection**
 
 ```typescript
-// Production factory - uses real database
+/**
+ * User service with database.
+ * @description Production service using real database.
+ */
 class UserService {
+  /**
+   * Initialize with factory
+   * @param databaseFactory - Factory for database connections
+   */
   constructor(private databaseFactory: DatabaseFactory) {}
 
+  /**
+   * Get user by ID
+   * @description Fetches user from database
+   * @param id - User ID to fetch
+   * @returns User instance
+   */
   async getUser(id: string): Promise<User> {
     const db = this.databaseFactory.createDatabase('production')
     const data = await db.query(`SELECT * FROM users WHERE id = ${id}`)
@@ -456,14 +626,26 @@ class UserService {
   }
 }
 
-// Test factory - uses mock database for testing
+/**
+ * Mock database factory.
+ * @description Factory for testing with mock data.
+ */
 class MockDatabaseFactory extends DatabaseFactory {
+  /**
+   * Create mock database
+   * @description Creates mock database instance
+   * @param type - Database type parameter
+   * @returns Mock database instance
+   */
   createDatabase(type: string): Database {
     return new MockDatabase([{ id: '1', name: 'Test User', email: 'test@example.com' }])
   }
 }
 
-// Easy testing with dependency injection
+/**
+ * Testing with dependency injection
+ * @description Demonstrates testable factory pattern
+ */
 const testService = new UserService(new MockDatabaseFactory())
 const user = await testService.getUser('1')
 ```

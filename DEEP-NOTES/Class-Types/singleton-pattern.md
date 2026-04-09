@@ -48,18 +48,29 @@ Common scenarios:
 **Good: Database connection singleton**
 
 ```typescript
-// DatabaseConnection singleton - ensures only one database connection exists
+/**
+ * Singleton database connection manager.
+ * @description Ensures single database connection instance exists.
+ */
 class DatabaseConnection {
+  /** Singleton instance storage */
   private static instance: DatabaseConnection
+  /** Database connection object */
   private connection: any
 
-  // Private constructor prevents direct instantiation
+  /**
+   * Private constructor prevents direct instantiation.
+   * @description Establishes database connection on first access.
+   */
   private constructor() {
     this.connection = this.connect()
-    console.log('Database connection established')
   }
 
-  // Global access point to the single instance
+  /**
+   * Global access to singleton instance.
+   * @description Creates instance on first call, returns existing.
+   * @returns Single database connection instance
+   */
   public static get getInstance(): DatabaseConnection {
     if (!DatabaseConnection.instance) {
       DatabaseConnection.instance = new DatabaseConnection()
@@ -67,42 +78,64 @@ class DatabaseConnection {
     return DatabaseConnection.instance
   }
 
-  // Establish database connection
+  /**
+   * Establish database connection.
+   * @description Internal connection setup logic.
+   * @returns Connection object
+   */
   private connect(): any {
-    // Database connection logic
     return { connected: true, database: 'myapp_db' }
   }
 
-  // Execute SQL query using the shared connection
+  /**
+   * Execute SQL query.
+   * @description Executes SQL query string.
+   * @param sql - SQL query string to execute
+   * @returns Array of query results
+   */
   public query(sql: string): any[] {
     return this.connection.execute(sql)
   }
 
-  // Close the shared database connection
+  /**
+   * Close database connection.
+   * @description Releases connection resources.
+   */
   public close(): void {
     this.connection.close()
   }
 }
 
-// Usage throughout the application
+/**
+ * Usage throughout the application.
+ * @description Demonstrates both references point to same instance.
+ */
 const db1 = DatabaseConnection.getInstance
 const db2 = DatabaseConnection.getInstance
-
-console.log(db1 === db2) // true - same instance
+console.log(db1 === db2)
 ```
 
 **Good: Logger singleton**
 
 ```typescript
-// Logger singleton - centralized logging for the entire application
+/**
+ * Singleton logger for application.
+ * @description Centralized logging with timestamp support.
+ */
 class Logger {
+  /** Singleton instance storage */
   private static instance: Logger
+  /** Internal log message array */
   private logs: string[] = []
 
-  // Private constructor prevents direct instantiation
+  /** Private constructor */
   private constructor() {}
 
-  // Global access point to the single logger instance
+  /**
+   * Global access to singleton instance.
+   * @description Creates instance on first call, returns existing.
+   * @returns Single logger instance
+   */
   public static get getInstance(): Logger {
     if (!Logger.instance) {
       Logger.instance = new Logger()
@@ -110,25 +143,38 @@ class Logger {
     return Logger.instance
   }
 
-  // Add timestamped log message
+  /**
+   * Add timestamped log message.
+   * @param message - Log message content
+   */
   public log(message: string): void {
     const timestamp = new Date().toISOString()
     this.logs.push(`[${timestamp}] ${message}`)
     console.log(`[${timestamp}] ${message}`)
   }
 
-  // Get copy of all logs (prevents external modification)
+  /**
+   * Get copy of all logs.
+   * @description Returns copy of all logs.
+   * @returns Array of log entries copy
+   */
   public getLogs(): string[] {
     return [...this.logs]
   }
 
-  // Clear all logs
+  /**
+   * Clear all log entries.
+   * @description Empties the internal log array.
+   */
   public clearLogs(): void {
     this.logs = []
   }
 }
 
-// Usage - get logger instance and log messages
+/**
+ * Usage - get logger instance and log messages.
+ * @description Demonstrates singleton logger usage pattern.
+ */
 const logger = Logger.getInstance
 logger.log('Application started')
 logger.log('User logged in')
@@ -137,17 +183,29 @@ logger.log('User logged in')
 **Good: Configuration manager singleton**
 
 ```typescript
-// ConfigManager singleton - manages application configuration globally
+/**
+ * Singleton configuration manager.
+ * @description Manages global application settings.
+ */
 class ConfigManager {
+  /** Singleton instance storage */
   private static instance: ConfigManager
+  /** Settings key-value storage */
   private settings: Map<string, string | number | boolean> = new Map()
 
-  // Private constructor loads default settings
+  /**
+   * Private constructor loads defaults.
+   * @description Initializes with default config values.
+   */
   private constructor() {
     this.loadDefaultSettings()
   }
 
-  // Global access point to the single config instance
+  /**
+   * Global access to singleton instance.
+   * @description Creates instance on first call, returns existing.
+   * @returns The single config manager instance
+   */
   public static get getInstance(): ConfigManager {
     if (!ConfigManager.instance) {
       ConfigManager.instance = new ConfigManager()
@@ -155,24 +213,42 @@ class ConfigManager {
     return ConfigManager.instance
   }
 
-  // Load default configuration values
+  /**
+   * Load default configuration values.
+   * @description Sets initial timeout, retries, debug.
+   */
   private loadDefaultSettings(): void {
     this.settings.set('api_timeout', 5000)
     this.settings.set('max_retries', 3)
     this.settings.set('debug_mode', false)
   }
 
-  // Get configuration value by key
+  /**
+   * Get configuration value by key.
+   * @description Returns configuration value.
+   * @param key - Configuration key to retrieve
+   * @returns Configuration value or undefined
+   */
   public get<T>(key: string): T | undefined {
     return this.settings.get(key) as T
   }
 
-  // Set configuration value
+  /**
+   * Set configuration value.
+   * @description Sets configuration value.
+   * @param key - Configuration key name
+   * @param value - Value to store
+   */
   public set(key: string, value: string | number | boolean): void {
     this.settings.set(key, value)
   }
 
-  // Check if configuration key exists
+  /**
+   * Check if configuration key exists.
+   * @description Checks if key exists.
+   * @param key - Configuration key to check
+   * @returns True if key exists in settings
+   */
   public has(key: string): boolean {
     return this.settings.has(key)
   }
@@ -182,15 +258,30 @@ class ConfigManager {
 **Bad: Singleton for objects that should have multiple instances**
 
 ```typescript
-// Wrong: User should not be a singleton
+/**
+ * Incorrect singleton user implementation.
+ * @description Warning: User should not be a singleton pattern.
+ */
 class User {
+  /** Singleton instance storage */
   private static instance: User
 
+  /**
+   * Private constructor.
+   * @param name - User display name
+   * @param email - User email address
+   */
   private constructor(
+    /** User display name */
     public name: string,
+    /** User email address */
     public email: string
   ) {}
 
+  /**
+   * Global access to singleton instance
+   * @returns Single user instance
+   */
   static get Instance(): User {
     if (!User.instance) {
       User.instance = new User('Default User', 'default@example.com')
@@ -199,29 +290,39 @@ class User {
   }
 }
 
-// Problem: Can only have one user in the entire system
-// Should use regular class instead
+/**
+ * Problem: Can only have one user in the entire system.
+ * @description Warning: Should use regular class instead.
+ */
 ```
 
 **Bad: Singleton with hidden dependencies**
 
 ```typescript
-// Wrong: Singleton creates hidden dependencies
+/**
+ * Singleton cache with hidden dependencies.
+ * @description Warning: Creates testing and dependency issues.
+ */
 class GlobalCache {
+  /** Singleton instance storage */
   private static instance: GlobalCache
+  /** Internal cache storage map */
   private cache: Map<string, any> = new Map()
 
+  /** Private constructor */
   private constructor() {}
 
+  /**
+   * Global access to singleton instance.
+   * @description Returns the single cache instance.
+   * @returns The single cache instance
+   */
   static get getInstance(): GlobalCache {
     if (!GlobalCache.instance) {
       GlobalCache.instance = new GlobalCache()
     }
     return GlobalCache.instance
   }
-
-  // Problem: Hard to test because of global state
-  // Problem: Hidden dependency in other classes
 }
 ```
 
@@ -237,12 +338,22 @@ class GlobalCache {
 ### Singleton Implementation Patterns
 
 ```typescript
-// Pattern 1: Basic singleton with lazy initialization
+/**
+ * Basic singleton with lazy initialization.
+ * @description Creates instance on first access only.
+ */
 class Singleton1 {
+  /** Singleton instance storage */
   private static instance: Singleton1
 
+  /** Private constructor */
   private constructor() {}
 
+  /**
+   * Global access to singleton instance.
+   * @description Returns the single instance.
+   * @returns Single instance
+   */
   public static get getInstance(): Singleton1 {
     if (!Singleton1.instance) {
       Singleton1.instance = new Singleton1()
@@ -251,21 +362,41 @@ class Singleton1 {
   }
 }
 
-// Pattern 2: Eager initialization (instance created at class load)
+/**
+ * Singleton with eager initialization
+ * @description Instance created at class load time
+ */
 class Singleton2 {
+  /** Pre-created singleton instance */
   private static readonly instance: Singleton2 = new Singleton2()
 
+  /** Private constructor */
   private constructor() {}
 
+  /**
+   * Global access to singleton instance.
+   * @description Returns the single instance.
+   * @returns Single instance
+   */
   public static get getInstance(): Singleton2 {
     return Singleton2.instance
   }
 }
 
-// Pattern 3: Generic singleton base class for reuse
+/**
+ * Generic singleton base class
+ * @description Reusable singleton pattern for any type
+ * @template T - Type of singleton subclass
+ */
 abstract class Singleton<T> {
+  /** Map storing all singleton instances */
   private static instances: Map<any, any> = new Map()
 
+  /**
+   * Get or create singleton instance.
+   * @description Returns existing instance or creates new one.
+   * @returns Singleton instance of type T
+   */
   protected static getInstance<T extends Singleton<any>>(this: new () => T): T {
     if (!Singleton.instances.has(this)) {
       Singleton.instances.set(this, new this())
@@ -274,12 +405,24 @@ abstract class Singleton<T> {
   }
 }
 
-// Database class using generic singleton base class
+/**
+ * Database using generic singleton base
+ * @description Implements singleton pattern via inheritance
+ */
 class Database extends Singleton<Database> {
+  /**
+   * Private constructor.
+   * @description Prevents direct instantiation.
+   */
   private constructor() {
     super()
   }
 
+  /**
+   * Global access to singleton instance.
+   * @description Returns the single database instance.
+   * @returns Single database instance
+   */
   public static get getInstance(): Database {
     return super.getInstance()
   }
@@ -289,21 +432,45 @@ class Database extends Singleton<Database> {
 ### Singleton vs Static Class
 
 ```typescript
-// Static class - no state, just utilities
+/**
+ * Static math utilities class
+ * @description Stateless utilities without instance data
+ */
 class MathUtils {
+  /** PI constant value */
   static PI = 3.14159
+
+  /**
+   * Calculate circle area.
+   * @param radius - Circle radius length
+   * @returns Area of the circle
+   */
   static calculateArea(radius: number): number {
     return MathUtils.PI * radius * radius
   }
 }
 
-// Singleton - can have state and implement interfaces
+/**
+ * Singleton cache manager with state
+ * @description Maintains stateful cache with global access
+ */
 class CacheManager {
+  /** Singleton instance storage */
   private static instance: CacheManager
+  /** Internal cache storage map */
   private cache: Map<string, any> = new Map()
 
+  /**
+   * Private constructor.
+   * @description Prevents instantiation from outside.
+   */
   private constructor() {}
 
+  /**
+   * Global access to singleton instance
+   * @description Returns the single cache manager instance
+   * @returns The single cache manager instance
+   */
   static get getInstance(): CacheManager {
     if (!CacheManager.instance) {
       CacheManager.instance = new CacheManager()
@@ -311,11 +478,20 @@ class CacheManager {
     return CacheManager.instance
   }
 
-  // Instance methods - can access state
+  /**
+   * Get value from cache.
+   * @param key - Cache key to retrieve
+   * @returns Cached value or undefined
+   */
   public get(key: string): any {
     return this.cache.get(key)
   }
 
+  /**
+   * Set value in cache.
+   * @param key - Cache key name
+   * @param value - Value to store
+   */
   public set(key: string, value: any): void {
     this.cache.set(key, value)
   }
@@ -325,25 +501,49 @@ class CacheManager {
 ### Testing Considerations
 
 ```typescript
-// Problem: Singleton makes testing difficult
+/**
+ * User service with hidden singleton dependency
+ * @description Warning: Hard to test due to singleton usage
+ */
 class UserService {
+  /**
+   * Get user by ID using singleton database
+   * @description Retrieves user from database
+   * @param id - User identifier to query
+   * @returns User object from database
+   */
   getUser(id: string): User {
-    // Hidden dependency on Database singleton
     const db = DatabaseConnection.getInstance
     return db.query(`SELECT * FROM users WHERE id = ${id}`)
   }
 }
 
-// Solution: Dependency injection for testability
-class UserService {
+/**
+ * User service with dependency injection
+ * @description Testable version with injected database
+ */
+class UserServiceDI {
+  /**
+   * Initialize with database dependency
+   * @param database - Database connection to use
+   */
   constructor(private database: DatabaseConnection) {}
 
+  /**
+   * Get user by ID from database
+   * @description Retrieves user from database
+   * @param id - User identifier to query
+   * @returns User object from database
+   */
   getUser(id: string): User {
     return this.database.query(`SELECT * FROM users WHERE id = ${id}`)
   }
 }
 
-// Now we can inject mock database for testing
+/**
+ * Injects mock database for testing.
+ * @description Demonstrates testable dependency injection pattern.
+ */
 ```
 
 ## Summary

@@ -48,24 +48,47 @@ Common scenarios:
 **Good: Simple weather station**
 
 ```typescript
-// Observer interface - defines contract for weather updates
+/**
+ * Weather observer interface.
+ * @description Contract for weather updates.
+ */
 interface WeatherObserver {
+  /**
+   * Update with weather data.
+   * @description Receives weather update notification.
+   * @param temperature - Current temperature value
+   * @param humidity - Current humidity percentage
+   */
   update(temperature: number, humidity: number): void
 }
 
-// Subject (Observable) - manages weather data and notifies observers
+/**
+ * Weather station subject.
+ * @description Manages data and notifies observers.
+ */
 class WeatherStation {
+  /** List of registered observers */
   private observers: WeatherObserver[] = []
+  /** Current temperature value */
   private temperature: number = 0
+  /** Current humidity percentage */
   private humidity: number = 0
 
-  // Subscribe observer to receive weather updates
+  /**
+   * Subscribe observer for updates.
+   * @description Registers observer for notifications.
+   * @param observer - Observer to register
+   */
   public subscribe(observer: WeatherObserver): void {
     this.observers.push(observer)
     console.log(`Observer subscribed. Total observers: ${this.observers.length}`)
   }
 
-  // Remove observer from weather updates
+  /**
+   * Unsubscribe observer from updates.
+   * @description Removes observer from list.
+   * @param observer - Observer to remove
+   */
   public unsubscribe(observer: WeatherObserver): void {
     const index = this.observers.indexOf(observer)
     if (index !== -1) {
@@ -74,14 +97,19 @@ class WeatherStation {
     }
   }
 
-  // Update weather data and notify all observers
+  /**
+   * Update measurements and notify.
+   * @description Sets measurements and notifies.
+   * @param temperature - New temperature value
+   * @param humidity - New humidity percentage
+   */
   public setMeasurements(temperature: number, humidity: number): void {
     this.temperature = temperature
     this.humidity = humidity
     this.notifyObservers()
   }
 
-  // Notify all subscribed observers of weather changes
+  /** Notify all observers of changes */
   private notifyObservers(): void {
     console.log('Notifying observers of weather changes...')
     this.observers.forEach(observer => {
@@ -90,43 +118,83 @@ class WeatherStation {
   }
 }
 
-// Concrete observers - display specific weather information
+/**
+ * Displays temperature information.
+ * @description Shows temperature on display.
+ */
 class TemperatureDisplay implements WeatherObserver {
+  /**
+   * Update and display temperature.
+   * @description Displays current temperature.
+   * @param temperature - Current temperature value
+   * @param humidity - Current humidity percentage
+   */
   update(temperature: number, humidity: number): void {
     console.log(`Temperature Display: Current temperature is ${temperature}°C`)
   }
 }
 
+/**
+ * Displays humidity information.
+ * @description Shows humidity on display.
+ */
 class HumidityDisplay implements WeatherObserver {
+  /**
+   * Update and display humidity.
+   * @description Displays current humidity.
+   * @param temperature - Current temperature value
+   * @param humidity - Current humidity percentage
+   */
   update(temperature: number, humidity: number): void {
     console.log(`Humidity Display: Current humidity is ${humidity}%`)
   }
 }
 
+/**
+ * Logs weather data with timestamps.
+ * @description Logs weather with timestamps.
+ */
 class WeatherLogger implements WeatherObserver {
+  /**
+   * Log weather with timestamp.
+   * @description Logs weather data with time.
+   * @param temperature - Current temperature value
+   * @param humidity - Current humidity percentage
+   */
   update(temperature: number, humidity: number): void {
     const timestamp = new Date().toISOString()
     console.log(`Weather Logger [${timestamp}]: ${temperature}°C, ${humidity}%`)
   }
 }
 
-// Usage - subscribe observers and trigger weather updates
+/**
+ * Usage - subscribe observers and trigger weather updates.
+ * @description Demonstrates observer subscription pattern.
+ */
 const weatherStation = new WeatherStation()
-
 const tempDisplay = new TemperatureDisplay()
 const humidityDisplay = new HumidityDisplay()
 const logger = new WeatherLogger()
 
-// Subscribe observers to receive weather updates
+/**
+ * Subscribe observers to receive weather updates.
+ * @description Registers observers with subject.
+ */
 weatherStation.subscribe(tempDisplay)
 weatherStation.subscribe(humidityDisplay)
 weatherStation.subscribe(logger)
 
-// Trigger weather changes and notify observers
+/**
+ * Trigger weather changes and notify observers.
+ * @description Updates subject state and notifies.
+ */
 weatherStation.setMeasurements(25, 60)
 weatherStation.setMeasurements(27, 65)
 
-// Unsubscribe one observer and continue
+/**
+ * Unsubscribe one observer and continue.
+ * @description Removes observer from notifications.
+ */
 weatherStation.unsubscribe(humidityDisplay)
 weatherStation.setMeasurements(23, 58)
 ```
@@ -134,28 +202,56 @@ weatherStation.setMeasurements(23, 58)
 **Good: Stock price monitoring**
 
 ```typescript
-// Stock observer interface - defines contract for stock price updates
+/**
+ * Stock observer interface.
+ * @description Contract for stock price updates.
+ */
 interface StockObserver {
+  /**
+   * Update with stock data.
+   * @description Receives stock price update.
+   * @param symbol - Stock ticker symbol
+   * @param price - Current stock price
+   * @param change - Price change amount
+   */
   update(symbol: string, price: number, change: number): void
 }
 
-// Stock data interface
+/**
+ * Stock data interface.
+ * @description Stock information structure.
+ */
 interface Stock {
+  /** Stock ticker symbol */
   symbol: string
+  /** Current stock price */
   price: number
 }
 
-// Stock market subject - manages stock data and notifies observers
+/**
+ * Stock market subject.
+ * @description Manages stocks and notifies observers.
+ */
 class StockMarket {
+  /** List of stock observers */
   private observers: StockObserver[] = []
+  /** Map of stock data by symbol */
   private stocks: Map<string, Stock> = new Map()
 
-  // Add observer to receive stock updates
+  /**
+   * Add observer for updates.
+   * @description Registers observer for notifications.
+   * @param observer - Observer to register
+   */
   public addObserver(observer: StockObserver): void {
     this.observers.push(observer)
   }
 
-  // Remove observer from stock updates
+  /**
+   * Remove observer from updates.
+   * @description Removes observer from list.
+   * @param observer - Observer to remove
+   */
   public removeObserver(observer: StockObserver): void {
     const index = this.observers.indexOf(observer)
     if (index !== -1) {
@@ -163,7 +259,11 @@ class StockMarket {
     }
   }
 
-  // Add new stock and notify observers if price changed
+  /**
+   * Add stock and notify observers.
+   * @description Adds stock and notifies observers.
+   * @param stock - Stock data to add
+   */
   public addStock(stock: Stock): void {
     const oldPrice = this.stocks.get(stock.symbol)?.price || stock.price
     this.stocks.set(stock.symbol, stock)
@@ -173,7 +273,12 @@ class StockMarket {
     }
   }
 
-  // Update existing stock price and notify observers
+  /**
+   * Update stock price and notify.
+   * @description Updates price and notifies observers.
+   * @param symbol - Stock ticker symbol
+   * @param newPrice - New stock price
+   */
   public updatePrice(symbol: string, newPrice: number): void {
     const stock = this.stocks.get(symbol)
     if (stock) {
@@ -183,7 +288,13 @@ class StockMarket {
     }
   }
 
-  // Notify all observers of stock price changes
+  /**
+   * Notify observers of price change.
+   * @description Sends price update to observers.
+   * @param symbol - Stock ticker symbol
+   * @param price - Current stock price
+   * @param change - Price change amount
+   */
   private notifyObservers(symbol: string, price: number, change: number): void {
     this.observers.forEach(observer => {
       observer.update(symbol, price, change)
@@ -191,10 +302,25 @@ class StockMarket {
   }
 }
 
-// Trader observer - reacts to stock price changes
+/**
+ * Trader reacting to price changes.
+ * @description Reacts to stock price changes.
+ */
 class Trader implements StockObserver {
+  /**
+   * Initialize with trader name.
+   * @description Creates trader with name.
+   * @param name - Trader identifier name
+   */
   constructor(private name: string) {}
 
+  /**
+   * React to stock price change.
+   * @description Reacts to price changes.
+   * @param symbol - Stock ticker symbol
+   * @param price - Current stock price
+   * @param change - Price change amount
+   */
   update(symbol: string, price: number, change: number): void {
     if (change > 0) {
       console.log(`${this.name}: ${symbol} went UP by $${change.toFixed(2)} to $${price}`)
@@ -206,8 +332,18 @@ class Trader implements StockObserver {
   }
 }
 
-// NewsAlert observer - sends alerts for significant stock movements
+/**
+ * Sends alerts for big movements.
+ * @description Sends alerts on big movements.
+ */
 class NewsAlert implements StockObserver {
+  /**
+   * Alert on significant movement.
+   * @description Alerts when price moves significantly.
+   * @param symbol - Stock ticker symbol
+   * @param price - Current stock price
+   * @param change - Price change amount
+   */
   update(symbol: string, price: number, change: number): void {
     if (Math.abs(change) > 5) {
       console.log(`BREAKING: ${symbol} significant movement! Price: $${price} (Change: $${change})`)
@@ -215,15 +351,31 @@ class NewsAlert implements StockObserver {
   }
 }
 
-// PortfolioTracker observer - tracks portfolio value changes
+/**
+ * Tracks portfolio value changes.
+ * @description Tracks portfolio value changes.
+ */
 class PortfolioTracker implements StockObserver {
+  /** Stock holdings map */
   private holdings: Map<string, number> = new Map()
 
-  // Add stock holding to portfolio
+  /**
+   * Add stock to portfolio.
+   * @description Adds shares to holdings.
+   * @param symbol - Stock ticker symbol
+   * @param shares - Number of shares
+   */
   addHolding(symbol: string, shares: number): void {
     this.holdings.set(symbol, shares)
   }
 
+  /**
+   * Update portfolio with price change.
+   * @description Updates portfolio value display.
+   * @param symbol - Stock ticker symbol
+   * @param price - Current stock price
+   * @param change - Price change amount
+   */
   update(symbol: string, price: number, change: number): void {
     const shares = this.holdings.get(symbol)
     if (shares) {
@@ -236,23 +388,30 @@ class PortfolioTracker implements StockObserver {
   }
 }
 
-// Usage - create stock market and observers
+/**
+ * Usage - create stock market and observers.
+ * @description Demonstrates stock market observer pattern.
+ */
 const market = new StockMarket()
-
 const alice = new Trader('Alice')
 const bob = new Trader('Bob')
 const newsAlert = new NewsAlert()
 const portfolio = new PortfolioTracker()
 
-// Subscribe observers to stock market updates
+/**
+ * Subscribe observers to stock market updates.
+ * @description Registers multiple observers.
+ */
 market.addObserver(alice)
 market.addObserver(bob)
 market.addObserver(newsAlert)
 market.addObserver(portfolio)
 
-// Add portfolio holding
+/**
+ * Add portfolio holding.
+ * @description Sets up portfolio tracking.
+ */
 portfolio.addHolding('GOOGL', 50)
-
 market.addStock({ symbol: 'AAPL', price: 150 })
 market.updatePrice('AAPL', 155)
 market.updatePrice('GOOGL', 2800)
@@ -261,27 +420,52 @@ market.updatePrice('GOOGL', 2800)
 **Good: Event-driven user interface**
 
 ```typescript
-// UI event interface - defines structure for UI events
+/**
+ * UI event interface.
+ * @description Structure for UI events.
+ */
 interface UIEvent {
+  /** Event type identifier */
   type: string
+  /** Optional event data */
   data?: any
 }
 
-// UI observer interface - defines contract for event handlers
+/**
+ * UI observer interface.
+ * @description Contract for event handlers.
+ */
 interface UIObserver {
+  /**
+   * Handle UI event.
+   * @description Processes UI event from component.
+   * @param event - UI event to handle
+   */
   onEvent(event: UIEvent): void
 }
 
-// Base UI component - manages observers and emits events
+/**
+ * Base UI component.
+ * @description Manages observers and emits events.
+ */
 class UIComponent {
+  /** List of UI observers */
   private observers: UIObserver[] = []
 
-  // Add observer to receive UI events
+  /**
+   * Add observer for events.
+   * @description Adds observer for events.
+   * @param observer - Observer to register
+   */
   public addObserver(observer: UIObserver): void {
     this.observers.push(observer)
   }
 
-  // Remove observer from UI events
+  /**
+   * Remove observer from events.
+   * @description Removes observer from events.
+   * @param observer - Observer to remove
+   */
   public removeObserver(observer: UIObserver): void {
     const index = this.observers.indexOf(observer)
     if (index !== -1) {
@@ -289,7 +473,11 @@ class UIComponent {
     }
   }
 
-  // Emit event to all observers
+  /**
+   * Emit event to observers.
+   * @description Emits event to observers.
+   * @param event - UI event to emit
+   */
   protected emit(event: UIEvent): void {
     this.observers.forEach(observer => {
       observer.onEvent(event)
@@ -297,22 +485,38 @@ class UIComponent {
   }
 }
 
-// Button component - emits click and text change events
+/**
+ * Button UI component.
+ * @description Emits click and change events.
+ */
 class Button extends UIComponent {
+  /** Button display text */
   private text: string
 
+  /**
+   * Initialize with button text.
+   * @description Creates button with text.
+   * @param text - Button label text
+   */
   constructor(text: string) {
     super()
     this.text = text
   }
 
-  // Simulate button click and emit click event
+  /**
+   * Simulate button click.
+   * @description Simulates button click event.
+   */
   public click(): void {
     console.log(`Button "${this.text}" clicked`)
     this.emit({ type: 'click', data: { button: this.text } })
   }
 
-  // Change button text and emit text change event
+  /**
+   * Change button text.
+   * @description Changes button text.
+   * @param text - New button text
+   */
   public setText(text: string): void {
     const oldText = this.text
     this.text = text
@@ -320,39 +524,66 @@ class Button extends UIComponent {
   }
 }
 
-// Input component - emits value change and focus events
+/**
+ * Input UI component.
+ * @description Emits value and focus events.
+ */
 class Input extends UIComponent {
+  /** Current input value */
   private value: string = ''
 
-  // Set input value and emit value change event
+  /**
+   * Set input value.
+   * @description Sets input value.
+   * @param value - New input value
+   */
   public setValue(value: string): void {
     const oldValue = this.value
     this.value = value
     this.emit({ type: 'valueChanged', data: { oldValue, newValue: value } })
   }
 
-  // Get current input value
+  /**
+   * Get current input value.
+   * @description Returns current input value.
+   * @returns Current input value
+   */
   public getValue(): string {
     return this.value
   }
 
-  // Simulate input focus and emit focus event
+  /**
+   * Simulate input focus.
+   * @description Simulates input focus.
+   */
   public focus(): void {
     console.log('Input field focused')
     this.emit({ type: 'focus' })
   }
 
-  // Simulate input blur and emit blur event
+  /**
+   * Simulate input blur.
+   * @description Simulates input blur.
+   */
   public blur(): void {
     console.log('Input field blurred')
     this.emit({ type: 'blur' })
   }
 }
 
-// FormValidator observer - validates form fields and shows errors
+/**
+ * Validates form fields.
+ * @description Shows validation errors.
+ */
 class FormValidator implements UIObserver {
+  /** Validation error messages */
   private errors: string[] = []
 
+  /**
+   * Handle UI event.
+   * @description Processes UI event from component.
+   * @param event - UI event to handle
+   */
   onEvent(event: UIEvent): void {
     switch (event.type) {
       case 'valueChanged':
@@ -364,7 +595,11 @@ class FormValidator implements UIObserver {
     }
   }
 
-  // Validate field data and store errors
+  /**
+   * Validate field data.
+   * @description Validates input field changes.
+   * @param data - Field old and new values
+   */
   private validateField(data: { oldValue: string; newValue: string }): void {
     this.errors = []
     if (data.newValue.length < 3) {
@@ -372,7 +607,7 @@ class FormValidator implements UIObserver {
     }
   }
 
-  // Display validation errors if any exist
+  /** Display validation errors */
   private showValidationErrors(): void {
     if (this.errors.length > 0) {
       console.log('Validation errors:', this.errors.join(', '))
@@ -380,25 +615,42 @@ class FormValidator implements UIObserver {
   }
 }
 
-// AnalyticsTracker observer - tracks UI events for analytics
+/**
+ * Tracks UI events.
+ * @description Analytics tracking observer.
+ */
 class AnalyticsTracker implements UIObserver {
+  /**
+   * Track UI event.
+   * @description Processes and logs UI event.
+   * @param event - UI event to track
+   */
   onEvent(event: UIEvent): void {
     console.log(`Analytics: Event "${event.type}" tracked`, event.data || '')
   }
 }
 
-// Usage - create UI components and observers
+/**
+ * Usage - create UI components and observers.
+ * @description Demonstrates UI event observer pattern.
+ */
 const button = new Button('Submit')
 const input = new Input()
 const validator = new FormValidator()
 const analytics = new AnalyticsTracker()
 
-// Subscribe observers to components
+/**
+ * Subscribe observers to components.
+ * @description Registers event observers.
+ */
 button.addObserver(analytics)
 input.addObserver(validator)
 input.addObserver(analytics)
 
-// Trigger UI events
+/**
+ * Trigger UI events.
+ * @description Simulates user interactions.
+ */
 button.click()
 input.setValue('ab')
 input.blur()
@@ -409,42 +661,56 @@ input.blur()
 **Bad: Observer with too much responsibility**
 
 ```typescript
-// Wrong: Observer doing too much in update method
+/**
+ * Bad observer with too much responsibility.
+ * @description Should be split into separate observers.
+ */
 class BadObserver implements WeatherObserver {
+  /**
+   * Update doing too many things
+   * @param temperature - Current temperature value
+   * @param humidity - Current humidity percentage
+   */
   update(temperature: number, humidity: number): void {
-    // Too many responsibilities in one observer
     console.log(`Temperature: ${temperature}`)
     console.log(`Humidity: ${humidity}`)
-
-    // Business logic
     if (temperature > 30) {
       console.log('Turn on AC')
     }
-
-    // Data persistence
     this.saveToDatabase(temperature, humidity)
-
-    // Network calls
     this.sendToAPI(temperature, humidity)
-
-    // UI updates
     this.updateDisplay(temperature, humidity)
   }
 
-  private saveToDatabase(temp: number, humidity: number): void {
-    // Database logic
-  }
+  /**
+   * Save weather data to database.
+   * @description Persists temperature and humidity records.
+   * @param temp - Temperature value in celsius
+   * @param humidity - Humidity percentage value
+   */
+  private saveToDatabase(temp: number, humidity: number): void {}
 
-  private sendToAPI(temp: number, humidity: number): void {
-    // API logic
-  }
+  /**
+   * Send data to external API.
+   * @description Transmits weather metrics to service.
+   * @param temp - Temperature value in celsius
+   * @param humidity - Humidity percentage value
+   */
+  private sendToAPI(temp: number, humidity: number): void {}
 
-  private updateDisplay(temp: number, humidity: number): void {
-    // UI logic
-  }
+  /**
+   * Update display with new data.
+   * @description Refreshes UI with current metrics.
+   * @param temp - Temperature value in celsius
+   * @param humidity - Humidity percentage value
+   */
+  private updateDisplay(temp: number, humidity: number): void {}
 }
 
-// Better: Split into focused observers
+/**
+ * Better: Split into focused observers.
+ * @description Separates concerns into multiple observers.
+ */
 ```
 
 ## Important Points
@@ -459,28 +725,69 @@ class BadObserver implements WeatherObserver {
 ### Generic Observer Implementation
 
 ```typescript
-// Generic Observer interface - works with any data type
+/**
+ * Generic observer interface.
+ * @description Works with any data type.
+ * @template T - Data type for updates
+ */
 interface Observer<T> {
+  /**
+   * Update with generic data.
+   * @description Receives update notification from subject.
+   * @param data - Update data payload
+   */
   update(data: T): void
 }
 
-// Generic Subject interface - defines contract for observable objects
+/**
+ * Generic subject interface.
+ * @description Contract for observables.
+ * @template T - Data type for notifications
+ */
 interface Subject<T> {
+  /**
+   * Subscribe observer.
+   * @description Registers observer for notifications.
+   * @param observer - Observer to register
+   */
   subscribe(observer: Observer<T>): void
+  /**
+   * Unsubscribe observer.
+   * @description Removes observer from notifications.
+   * @param observer - Observer to remove
+   */
   unsubscribe(observer: Observer<T>): void
+  /**
+   * Notify all observers.
+   * @description Sends data to all observers.
+   * @param data - Data to send observers
+   */
   notify(data: T): void
 }
 
-// EventEmitter - generic implementation of Subject pattern
+/**
+ * Generic event emitter.
+ * @description Implements subject pattern.
+ * @template T - Event data type
+ */
 class EventEmitter<T> implements Subject<T> {
+  /** List of observers */
   private observers: Observer<T>[] = []
 
-  // Add observer to receive notifications
+  /**
+   * Subscribe observer.
+   * @description Registers observer for notifications.
+   * @param observer - Observer to register
+   */
   subscribe(observer: Observer<T>): void {
     this.observers.push(observer)
   }
 
-  // Remove observer from notifications
+  /**
+   * Unsubscribe observer.
+   * @description Removes observer from notifications.
+   * @param observer - Observer to remove
+   */
   unsubscribe(observer: Observer<T>): void {
     const index = this.observers.indexOf(observer)
     if (index !== -1) {
@@ -488,30 +795,51 @@ class EventEmitter<T> implements Subject<T> {
     }
   }
 
-  // Notify all observers with data
+  /**
+   * Notify all observers.
+   * @description Sends data to all observers.
+   * @param data - Data to send observers
+   */
   notify(data: T): void {
     this.observers.forEach(observer => {
       observer.update(data)
     })
   }
 
-  // Get current number of observers
+  /**
+   * Get observer count.
+   * @description Returns number of observers.
+   * @returns Number of observers
+   */
   getObserverCount(): number {
     return this.observers.length
   }
 }
 
-// Usage with typed events
+/**
+ * Usage with typed events.
+ * @description Demonstrates typed event union.
+ */
 type UserEvent =
   | { type: 'login'; userId: string }
   | { type: 'logout'; userId: string }
   | { type: 'update'; userId: string; changes: any }
 
-// UserEventEmitter - typed event emitter for user events
+/**
+ * Typed event emitter.
+ * @description Emits user events.
+ */
 class UserEventEmitter extends EventEmitter<UserEvent> {}
 
-// UserAnalytics - observer that tracks user events
+/**
+ * Tracks user events.
+ * @description Analytics observer for users.
+ */
 class UserAnalytics implements Observer<UserEvent> {
+  /**
+   * Track user event
+   * @param event - User event to track
+   */
   update(event: UserEvent): void {
     console.log(`Analytics: User ${event.type}`, event)
   }
@@ -521,26 +849,44 @@ class UserAnalytics implements Observer<UserEvent> {
 ### Observer with Weak References
 
 ```typescript
-// WeakEventEmitter - prevents memory leaks with weak references
+/**
+ * Weak reference event emitter.
+ * @description Prevents memory leaks.
+ * @template T - Event data type
+ */
 class WeakEventEmitter<T> implements Subject<T> {
+  /** Weak references to observers */
   private observers: Set<WeakRef<Observer<T>>> = new Set()
+  /** Registry for cleanup */
   private finalizationRegistry: FinalizationRegistry<Observer<T>>
 
+  /**
+   * Initialize with auto-cleanup
+   * @description Cleanup when observers are garbage collected
+   */
   constructor() {
-    // Auto-cleanup when observers are garbage collected
     this.finalizationRegistry = new FinalizationRegistry(weakRef => {
       this.observers.delete(weakRef)
     })
   }
 
+  /**
+   * Subscribe with weak reference.
+   * @description Registers observer with weak reference.
+   * @param observer - Observer to register
+   */
   subscribe(observer: Observer<T>): void {
     const weakRef = new WeakRef(observer)
     this.observers.add(weakRef)
     this.finalizationRegistry.register(observer, weakRef)
   }
 
+  /**
+   * Unsubscribe observer.
+   * @description Removes observer from registry.
+   * @param observer - Observer to remove
+   */
   unsubscribe(observer: Observer<T>): void {
-    // Find and remove the weak reference
     for (const weakRef of this.observers) {
       const obs = weakRef.deref()
       if (obs === observer) {
@@ -551,15 +897,17 @@ class WeakEventEmitter<T> implements Subject<T> {
     }
   }
 
+  /**
+   * Notify remaining observers.
+   * @description Sends data to active observers.
+   * @param data - Data to send observers
+   */
   notify(data: T): void {
-    // Clean up garbage collected observers
     for (const weakRef of this.observers) {
       if (!weakRef.deref()) {
         this.observers.delete(weakRef)
       }
     }
-
-    // Notify remaining observers
     this.observers.forEach(weakRef => {
       const observer = weakRef.deref()
       if (observer) {
@@ -573,24 +921,47 @@ class WeakEventEmitter<T> implements Subject<T> {
 ### Observer vs Event Emitters
 
 ```typescript
-// Observer pattern - class-based approach
+/**
+ * Observer pattern class.
+ * @description Class-based approach.
+ */
 class WeatherStation {
+  /** List of observers */
   private observers: WeatherObserver[] = []
 
+  /**
+   * Subscribe observer.
+   * @description Registers observer for notifications.
+   * @param observer - Observer to register
+   */
   subscribe(observer: WeatherObserver): void {
     this.observers.push(observer)
   }
 
+  /**
+   * Notify all observers.
+   * @description Sends weather data to observers.
+   * @param data - Weather data to send
+   */
   notify(data: WeatherData): void {
     this.observers.forEach(obs => obs.update(data))
   }
 }
 
-// Event emitter approach - method-based event handling
+/**
+ * Event emitter approach.
+ * @description Method-based event handling.
+ */
 class WeatherEvents {
+  /** Event listeners map */
   private listeners: Map<string, Function[]> = new Map()
 
-  // Register event listener
+  /**
+   * Register event listener.
+   * @description Adds callback for event type.
+   * @param event - Event name to listen
+   * @param callback - Function to execute
+   */
   on(event: string, callback: Function): void {
     if (!this.listeners.has(event)) {
       this.listeners.set(event, [])
@@ -598,7 +969,12 @@ class WeatherEvents {
     this.listeners.get(event)!.push(callback)
   }
 
-  // Trigger event to all listeners
+  /**
+   * Trigger event to listeners.
+   * @description Emits event to all listeners.
+   * @param event - Event name to trigger
+   * @param data - Data to send listeners
+   */
   emit(event: string, data: any): void {
     const callbacks = this.listeners.get(event) || []
     callbacks.forEach(callback => callback(data))

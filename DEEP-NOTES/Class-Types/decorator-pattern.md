@@ -48,98 +48,140 @@ Common scenarios:
 **Good: Coffee shop decorator pattern**
 
 ```typescript
-// Coffee interface - defines contract for all coffee types
+/**
+ * Coffee component interface.
+ * @description Contract for coffee description and pricing.
+ */
 interface Coffee {
+  /** Get coffee description */
   getDescription(): string
+  /** Get coffee cost in dollars */
   getCost(): number
 }
 
-// Concrete component - basic coffee without any extras
+/**
+ * Basic coffee without extras.
+ * @description Concrete coffee with base price.
+ */
 class SimpleCoffee implements Coffee {
+  /** Get simple coffee description */
   getDescription(): string {
     return 'Simple coffee'
   }
 
+  /** Get simple coffee cost */
   getCost(): number {
     return 2.0
   }
 }
 
-// Base decorator - implements Coffee interface and wraps another Coffee
+/**
+ * Base decorator for coffee components.
+ * @description Wraps coffee and delegates calls by default.
+ */
 abstract class CoffeeDecorator implements Coffee {
+  /**
+   * Initialize with coffee to wrap.
+   * @description Stores wrapped coffee component.
+   * @param coffee - Coffee component to decorate
+   */
   constructor(protected coffee: Coffee) {}
 
-  // Delegate to wrapped coffee by default
+  /** Get wrapped coffee description */
   getDescription(): string {
     return this.coffee.getDescription()
   }
 
-  // Delegate to wrapped coffee by default
+  /** Get wrapped coffee cost */
   getCost(): number {
     return this.coffee.getCost()
   }
 }
 
-// Concrete decorators - add specific coffee extras
-
+/**
+ * Adds milk to coffee.
+ * @description Decorator adding milk to coffee.
+ */
 class MilkDecorator extends CoffeeDecorator {
+  /** Get description with milk */
   getDescription(): string {
     return `${this.coffee.getDescription()}, milk`
   }
 
+  /** Get cost with milk added */
   getCost(): number {
     return this.coffee.getCost() + 0.5
   }
 }
 
+/**
+ * Adds sugar to coffee.
+ * @description Decorator adding sugar to coffee.
+ */
 class SugarDecorator extends CoffeeDecorator {
+  /** Get description with sugar */
   getDescription(): string {
     return `${this.coffee.getDescription()}, sugar`
   }
 
+  /** Get cost with sugar added */
   getCost(): number {
     return this.coffee.getCost() + 0.25
   }
 }
 
+/**
+ * Adds whipped cream to coffee.
+ * @description Decorator adding whipped cream.
+ */
 class WhippedCreamDecorator extends CoffeeDecorator {
+  /** Get description with whipped cream */
   getDescription(): string {
     return `${this.coffee.getDescription()}, whipped cream`
   }
 
+  /** Get cost with whipped cream */
   getCost(): number {
     return this.coffee.getCost() + 0.75
   }
 }
 
+/**
+ * Adds vanilla flavor to coffee.
+ * @description Decorator adding vanilla flavor.
+ */
 class VanillaDecorator extends CoffeeDecorator {
+  /** Get description with vanilla */
   getDescription(): string {
     return `${this.coffee.getDescription()}, vanilla`
   }
 
+  /** Get cost with vanilla added */
   getCost(): number {
     return this.coffee.getCost() + 0.4
   }
 }
 
-// Usage - flexible combinations of decorators
+/**
+ * Usage - flexible combinations of decorators.
+ * @description Demonstrates decorator composition pattern.
+ */
 let coffee: Coffee = new SimpleCoffee()
 console.log(`${coffee.getDescription()}: $${coffee.getCost().toFixed(2)}`)
-// Simple coffee: $2.00
 
 coffee = new MilkDecorator(coffee)
 console.log(`${coffee.getDescription()}: $${coffee.getCost().toFixed(2)}`)
-// Simple coffee, milk: $2.50
 
 coffee = new SugarDecorator(coffee)
 console.log(`${coffee.getDescription()}: $${coffee.getCost().toFixed(2)}`)
-// Simple coffee, milk, sugar: $2.75
 
 coffee = new WhippedCreamDecorator(coffee)
 console.log(`${coffee.getDescription()}: $${coffee.getCost().toFixed(2)}`)
-// Simple coffee, milk, sugar, whipped cream: $3.50
 
-// Different combinations of decorators
+/**
+ * Different combinations of decorators.
+ * @description Shows flexible decorator stacking.
+ */
 const espressoWithVanilla = new VanillaDecorator(new SimpleCoffee())
 const deluxeCoffee = new WhippedCreamDecorator(
   new MilkDecorator(new SugarDecorator(new VanillaDecorator(new SimpleCoffee())))
@@ -149,30 +191,71 @@ const deluxeCoffee = new WhippedCreamDecorator(
 **Good: Web request decorators**
 
 ```typescript
-// RequestHandler interface - defines contract for request processing
+/**
+ * Request handler interface.
+ * @description Contract for HTTP request processing.
+ */
 interface RequestHandler {
+  /**
+   * Handle incoming request.
+   * @description Processes request and returns response.
+   * @param request - Request object to process
+   * @returns Response object
+   */
   handle(request: any): any
 }
 
-// BaseRequestHandler - basic request processing
+/**
+ * Basic request handler.
+ * @description Simple request processing implementation.
+ */
 class BaseRequestHandler implements RequestHandler {
+  /**
+   * Handle request with base processing.
+   * @description Processes request with base logic.
+   * @param request - Request object to process
+   * @returns Success response with data
+   */
   handle(request: any): any {
     console.log('Processing base request')
     return { status: 'success', data: request }
   }
 }
 
-// BaseRequestDecorator - wraps other handlers
+/**
+ * Base decorator for request handlers.
+ * @description Wraps handler and delegates by default.
+ */
 abstract class RequestDecorator implements RequestHandler {
+  /**
+   * Initialize with handler to wrap.
+   * @description Wraps handler for decoration.
+   * @param handler - Request handler to decorate
+   */
   constructor(protected handler: RequestHandler) {}
 
+  /**
+   * Delegate to wrapped handler.
+   * @description Delegates to wrapped handler.
+   * @param request - Request object to process
+   * @returns Response from wrapped handler
+   */
   handle(request: any): any {
     return this.handler.handle(request)
   }
 }
 
-// Concrete decorators - add middleware functionality
+/**
+ * Authenticates requests before processing.
+ * @description Decorator validating API authentication.
+ */
 class AuthenticationDecorator extends RequestDecorator {
+  /**
+   * Initialize with handler and API key.
+   * @description Wraps handler with authentication.
+   * @param handler - Handler to wrap
+   * @param apiKey - Valid API key for authentication
+   */
   constructor(
     handler: RequestHandler,
     private apiKey: string
@@ -180,6 +263,12 @@ class AuthenticationDecorator extends RequestDecorator {
     super(handler)
   }
 
+  /**
+   * Authenticate request then delegate.
+   * @description Validates API key and delegates.
+   * @param request - Request with headers to validate
+   * @returns Response or unauthorized error
+   */
   handle(request: any): any {
     console.log('Checking authentication...')
     if (!request.headers || request.headers['api-key'] !== this.apiKey) {
@@ -190,31 +279,58 @@ class AuthenticationDecorator extends RequestDecorator {
   }
 }
 
-// LoggingDecorator - logs request and response with timestamps
+/**
+ * Logs requests and responses with timestamps.
+ * @description Decorator logging request and response.
+ */
 class LoggingDecorator extends RequestDecorator {
+  /**
+   * Initialize with handler to wrap.
+   * @description Wraps handler with logging.
+   * @param handler - Handler to decorate with logging
+   */
   constructor(handler: RequestHandler) {
     super(handler)
   }
 
+  /**
+   * Log request and response.
+   * @description Logs request and response data.
+   * @param request - Request object to log and process
+   * @returns Response from wrapped handler
+   */
   handle(request: any): any {
     const timestamp = new Date().toISOString()
     console.log(`[${timestamp}] Incoming request:`, JSON.stringify(request))
-
     const response = super.handle(request)
-
     console.log(`[${timestamp}] Response:`, JSON.stringify(response))
     return response
   }
 }
 
-// CacheDecorator - caches responses to avoid repeated processing
+/**
+ * Caches responses to avoid repeated processing.
+ * @description Decorator caching response data.
+ */
 class CacheDecorator extends RequestDecorator {
+  /** Cache storage for responses */
   private cache = new Map<string, any>()
 
+  /**
+   * Initialize with handler to wrap.
+   * @description Wraps handler for logging.
+   * @param handler - Request handler to decorate
+   */
   constructor(handler: RequestHandler) {
     super(handler)
   }
 
+  /**
+   * Handle request with caching.
+   * @description Returns cached response or processes.
+   * @param request - Request data to process
+   * @returns Cached or fresh response
+   */
   handle(request: any): any {
     const cacheKey = JSON.stringify(request)
 
@@ -230,8 +346,17 @@ class CacheDecorator extends RequestDecorator {
   }
 }
 
-// ValidationDecorator - validates request data before processing
+/**
+ * Validates request data before processing.
+ * @description Decorator validating request data.
+ */
 class ValidationDecorator extends RequestDecorator {
+  /**
+   * Initialize with handler and schema.
+   * @description Wraps handler with validation.
+   * @param handler - Request handler to decorate
+   * @param schema - Validation schema object
+   */
   constructor(
     handler: RequestHandler,
     private schema: any
@@ -239,37 +364,48 @@ class ValidationDecorator extends RequestDecorator {
     super(handler)
   }
 
+  /**
+   * Handle request with validation.
+   * @description Validates request body and delegates.
+   * @param request - Request data to process
+   * @returns Validated response or error
+   */
   handle(request: any): any {
     console.log('Validating request...')
-
     if (!request.body || typeof request.body !== 'object') {
       return { status: 'error', message: 'Invalid request body' }
     }
-
     if (!request.body.userId) {
       return { status: 'error', message: 'Missing userId' }
     }
-
     console.log('Validation passed')
     return super.handle(request)
   }
 }
 
-// Usage - flexible middleware chain with decorators
+/**
+ * Usage - flexible middleware chain with decorators.
+ * @description Demonstrates request handler decoration.
+ */
 let handler: RequestHandler = new BaseRequestHandler()
 
-// Add decorators in any order to build middleware chain
+/**
+ * Adds decorators to build middleware chain.
+ * @description Shows flexible middleware composition.
+ */
 handler = new AuthenticationDecorator(handler, 'secret-api-key')
 handler = new LoggingDecorator(handler)
 handler = new ValidationDecorator(handler, { userId: 'string' })
 handler = new CacheDecorator(handler)
 
-// Test the decorated handler
+/**
+ * Test the decorated handler.
+ * @description Executes decorated request handling.
+ */
 const request = {
   headers: { 'api-key': 'secret-api-key' },
   body: { userId: '123', action: 'getData' }
 }
-
 const response = handler.handle(request)
 console.log('Final response:', response)
 ```
@@ -277,48 +413,118 @@ console.log('Final response:', response)
 **Good: Text processing decorators**
 
 ```typescript
-// TextProcessor interface - defines contract for text processing
+/**
+ * Text processor interface.
+ * @description Contract for text transformations.
+ */
 interface TextProcessor {
+  /**
+   * Process text and return result.
+   * @description Transforms input text to output.
+   * @param text - Input text to process
+   * @returns Processed text output
+   */
   process(text: string): string
 }
 
-// BasicTextProcessor - simplest text processor (returns text unchanged)
+/**
+ * Basic text processor.
+ * @description Returns text unchanged.
+ */
 class BasicTextProcessor implements TextProcessor {
+  /**
+   * Process text without changes.
+   * @description Returns text unchanged.
+   * @param text - Input text to process
+   * @returns Same text unchanged
+   */
   process(text: string): string {
     return text
   }
 }
 
-// TextDecorator - base decorator for text processing
+/**
+ * Base decorator for text processing.
+ * @description Delegates to wrapped processor.
+ */
 abstract class TextDecorator implements TextProcessor {
+  /**
+   * Initialize with processor to wrap.
+   * @description Wraps processor for decoration.
+   * @param processor - Text processor to decorate
+   */
   constructor(protected processor: TextProcessor) {}
 
+  /**
+   * Process text by delegation.
+   * @description Delegates to wrapped processor.
+   * @param text - Input text to process
+   * @returns Processed text output
+   */
   process(text: string): string {
     return this.processor.process(text)
   }
 }
 
-// Concrete decorators - add specific text transformations
-
+/**
+ * Converts text to uppercase.
+ * @description Decorator converting text to uppercase.
+ */
 class UpperCaseDecorator extends TextDecorator {
+  /**
+   * Process text to uppercase.
+   * @description Converts text to uppercase.
+   * @param text - Input text to process
+   * @returns Uppercase text result
+   */
   process(text: string): string {
     return super.process(text).toUpperCase()
   }
 }
 
+/**
+ * Trims whitespace from text.
+ * @description Decorator trimming whitespace from text.
+ */
 class TrimDecorator extends TextDecorator {
+  /**
+   * Process text with trim.
+   * @description Removes leading and trailing spaces.
+   * @param text - Input text to process
+   * @returns Trimmed text result
+   */
   process(text: string): string {
     return super.process(text).trim()
   }
 }
 
+/**
+ * Removes all spaces from text.
+ * @description Decorator removing all spaces.
+ */
 class RemoveSpacesDecorator extends TextDecorator {
+  /**
+   * Process text without spaces.
+   * @description Removes all whitespace from text.
+   * @param text - Input text to process
+   * @returns Text with no spaces
+   */
   process(text: string): string {
     return super.process(text).replace(/\s+/g, '')
   }
 }
 
+/**
+ * Adds prefix to text.
+ * @description Decorator adding prefix to text.
+ */
 class AddPrefixDecorator extends TextDecorator {
+  /**
+   * Initialize with processor and prefix.
+   * @description Wraps processor with prefix.
+   * @param processor - Text processor to decorate
+   * @param prefix - Prefix string to add
+   */
   constructor(
     processor: TextProcessor,
     private prefix: string
@@ -326,12 +532,28 @@ class AddPrefixDecorator extends TextDecorator {
     super(processor)
   }
 
+  /**
+   * Process text with prefix.
+   * @description Prepends prefix to text.
+   * @param text - Input text to process
+   * @returns Text with prefix added
+   */
   process(text: string): string {
     return this.prefix + super.process(text)
   }
 }
 
+/**
+ * Adds suffix to text.
+ * @description Decorator adding suffix to text.
+ */
 class AddSuffixDecorator extends TextDecorator {
+  /**
+   * Initialize with processor and suffix.
+   * @description Wraps processor with suffix.
+   * @param processor - Text processor to decorate
+   * @param suffix - Suffix string to add
+   */
   constructor(
     processor: TextProcessor,
     private suffix: string
@@ -339,53 +561,82 @@ class AddSuffixDecorator extends TextDecorator {
     super(processor)
   }
 
+  /**
+   * Process text with suffix.
+   * @description Appends suffix to text.
+   * @param text - Input text to process
+   * @returns Text with suffix added
+   */
   process(text: string): string {
     return super.process(text) + this.suffix
   }
 }
 
-// Usage - flexible text processing pipeline
+/**
+ * Usage - flexible text processing pipeline.
+ * @description Demonstrates text processor decoration.
+ */
 let processor: TextProcessor = new BasicTextProcessor()
 
-// Build processing chain with decorators
+/**
+ * Build processing chain with decorators.
+ * @description Shows decorator pipeline composition.
+ */
 processor = new TrimDecorator(processor)
 processor = new UpperCaseDecorator(processor)
 processor = new AddPrefixDecorator(processor, '>>> ')
 processor = new AddSuffixDecorator(processor, ' <<<')
 
-// Test the decorated processor
+/**
+ * Test the decorated processor.
+ * @description Executes text transformation pipeline.
+ */
 const input = '   hello world   '
 const output = processor.process(input)
 console.log(`"${input}" -> "${output}"`)
-// "   hello world   " -> ">>> HELLO WORLD <<<"
 
-// Different pipeline for different needs
+/**
+ * Different pipeline for different needs.
+ * @description Alternative text processing chain.
+ */
 const compactProcessor = new RemoveSpacesDecorator(
   new UpperCaseDecorator(new TrimDecorator(new BasicTextProcessor()))
 )
-
 const compactOutput = compactProcessor.process('  hello world  ')
 console.log(`Compact: "${compactOutput}"`)
-// Compact: "HELLOWORLD"
 ```
 
 **Bad: Decorator that changes the interface**
 
 ```typescript
-// Wrong: Decorator should implement the same interface
+/**
+ * Bad decorator breaking interface rules.
+ * @description Warning: Decorators must maintain interface contract.
+ */
 class BadDecorator implements Coffee {
+  /**
+   * Initialize with coffee to wrap.
+   * @description Wraps coffee for decoration.
+   * @param coffee - Coffee instance to decorate
+   */
   constructor(private coffee: Coffee) {}
 
+  /** Get description from wrapped coffee */
   getDescription(): string {
     return this.coffee.getDescription()
   }
 
-  // Wrong: Adding new method not in interface
+  /** Wrong new method not in interface */
   getTemperature(): number {
     return 85
   }
 
-  // Wrong: Changing method signature
+  /**
+   * Wrong changed method signature.
+   * @description Changes method signature wrongly.
+   * @param withTax - Whether to include tax
+   * @returns Cost with optional tax
+   */
   getCost(withTax?: boolean): number {
     const baseCost = this.coffee.getCost()
     if (withTax) {
@@ -395,47 +646,54 @@ class BadDecorator implements Coffee {
   }
 }
 
-// Better: Keep interface consistent
+/**
+ * Better: Keep interface consistent.
+ * @description Maintains interface contract properly.
+ */
 ```
 
 **Bad: Decorator with too many responsibilities**
 
 ```typescript
-// Wrong: One decorator doing multiple unrelated things
+/**
+ * Bad: Decorator with too many responsibilities.
+ * @description Warning: Should use focused decorators instead.
+ */
 class MegaDecorator extends CoffeeDecorator {
+  /** Gets description with many additions */
   getDescription(): string {
     let desc = this.coffee.getDescription()
-
-    // Too many responsibilities
     desc += ', milk, sugar, vanilla, caramel, whipped cream, cinnamon'
     return desc
   }
 
+  /** Gets cost with many additions */
   getCost(): number {
     let cost = this.coffee.getCost()
-
-    // Calculating many different things
-    cost += 0.5 // milk
-    cost += 0.25 // sugar
-    cost += 0.4 // vanilla
-    cost += 0.6 // caramel
-    cost += 0.75 // whipped cream
-    cost += 0.15 // cinnamon
-
+    cost += 0.5
+    cost += 0.25
+    cost += 0.4
+    cost += 0.6
+    cost += 0.75
+    cost += 0.15
     return cost
   }
 
-  // Wrong: Adding unrelated behavior
+  /** Brew the coffee */
   brew(): void {
     console.log('Brewing coffee...')
   }
 
+  /** Serve the coffee */
   serve(): void {
     console.log('Serving coffee...')
   }
 }
 
-// Better: Use focused decorators and combine them
+/**
+ * Better: Use focused decorators and combine them.
+ * @description Composes focused single-responsibility decorators.
+ */
 ```
 
 ## Important Points
@@ -450,10 +708,19 @@ class MegaDecorator extends CoffeeDecorator {
 ### Decorator Factory Pattern
 
 ```typescript
+/**
+ * Factory for creating coffee drinks.
+ * @description Creates decorated coffee by type.
+ */
 class CoffeeShop {
+  /**
+   * Create coffee by type.
+   * @description Creates decorated coffee by type.
+   * @param type - Coffee type to create
+   * @returns New decorated coffee instance
+   */
   static createCoffee(type: 'simple' | 'latte' | 'cappuccino' | 'mocha'): Coffee {
     let coffee: Coffee = new SimpleCoffee()
-
     switch (type) {
       case 'latte':
         coffee = new MilkDecorator(coffee)
@@ -471,37 +738,54 @@ class CoffeeShop {
       default:
         break
     }
-
     return coffee
   }
 }
 
+/**
+ * Create latte coffee with milk.
+ */
 const latte = CoffeeShop.createCoffee('latte')
+
+/**
+ * Create mocha coffee with extras.
+ */
 const mocha = CoffeeShop.createCoffee('mocha')
 ```
 
 ### Decorator with State
 
 ```typescript
+/**
+ * Decorator counting description requests.
+ * @description Tracks how many times description is called.
+ */
 class CountingDecorator extends CoffeeDecorator {
+  /** Count of description requests */
   private count = 0
 
+  /** Get description and increment count */
   getDescription(): string {
     this.count++
     console.log(`Description requested ${this.count} times`)
     return this.coffee.getDescription()
   }
 
+  /** Get cost from wrapped coffee */
   getCost(): number {
     return this.coffee.getCost()
   }
 
+  /** Get current request count */
   getCount(): number {
     return this.count
   }
 }
 
-// Test the counting decorator
+/**
+ * Test the counting decorator.
+ * @description Demonstrates decorator counting functionality.
+ */
 const counter = new CountingDecorator(new SimpleCoffee())
 counter.getDescription()
 counter.getDescription()
@@ -511,21 +795,26 @@ console.log(`Total requests: ${counter.getCount()}`)
 ### Decorator vs Inheritance
 
 ```typescript
-// Inheritance approach - rigid and inflexible
+/**
+ * Inheritance example: rigid approach.
+ * @description Demonstrates inflexible inheritance pattern.
+ */
 class MilkSugarCoffee extends SimpleCoffee {
+  /** Get description with milk and sugar */
   getDescription(): string {
     return `${super.getDescription()}, milk, sugar`
   }
 
+  /** Get cost with additions */
   getCost(): number {
     return super.getCost() + 0.5 + 0.25
   }
 }
 
-// Can't easily add milk without sugar, or sugar without milk
-// Need new class for every combination
-
-// Decorator approach - flexible and composable
+/**
+ * Decorator approach - flexible and composable.
+ * @description Demonstrates decorator flexibility.
+ */
 const milkOnly = new MilkDecorator(new SimpleCoffee())
 const sugarOnly = new SugarDecorator(new SimpleCoffee())
 const milkAndSugar = new SugarDecorator(new MilkDecorator(new SimpleCoffee()))
