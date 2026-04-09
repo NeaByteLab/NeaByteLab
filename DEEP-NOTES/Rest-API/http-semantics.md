@@ -67,13 +67,23 @@ Common API design decisions:
 **Good snippet (Express style):**
 
 ```ts
-// PUT endpoint - replace entire user resource
+/**
+ * Replace user resource completely.
+ * @description Performs full update of user data.
+ * @param req - Express request object
+ * @param res - Express response object
+ */
 app.put('/v1/users/:id', async (req, res) => {
   const user = await replaceUser(req.params.id, req.body)
   return res.status(200).json(user)
 })
 
-// PATCH endpoint - partial user update
+/**
+ * Partially update user resource.
+ * @description Applies partial modifications to user.
+ * @param req - Express request object
+ * @param res - Express response object
+ */
 app.patch('/v1/users/:id', async (req, res) => {
   const user = await updateUserPartial(req.params.id, req.body)
   return res.status(200).json(user)
@@ -83,9 +93,14 @@ app.patch('/v1/users/:id', async (req, res) => {
 **Bad snippet (semantic mismatch):**
 
 ```ts
-// Wrong: GET request that mutates server state
+/**
+ * Mutate server state incorrectly.
+ * @description Demonstrates anti-pattern of state mutation in GET.
+ * @param _req - Express request object unused
+ * @param res - Express response object
+ */
 app.get('/v1/logout', async (_req, res) => {
-  await revokeSession() // Mutation in GET violates HTTP semantics
+  await revokeSession()
   return res.status(200).json({ ok: true })
 })
 ```

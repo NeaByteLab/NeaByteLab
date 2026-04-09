@@ -61,10 +61,14 @@ You need strong validation in:
 **Good snippet (schema first):**
 
 ```ts
-// Validate request body using schema before processing
+/**
+ * Validate request against schema.
+ * @description Parses and validates incoming request body.
+ * @param req - Express request with body
+ * @param res - Express response object
+ */
 const result = createPromptSchema.safeParse(req.body)
 if (!result.success) {
-  // Return structured validation errors with 422 status
   return res.status(422).json({
     code: 'validation_failed',
     details: result.error.issues
@@ -76,11 +80,9 @@ if (!result.success) {
 
 ```ts
 try {
-  // Direct database insert without validation - bad practice
   await db.prompts.insert(req.body)
   return res.status(201).json({ ok: true })
 } catch {
-  // Generic error hides real validation issues
   return res.status(500).json({ message: 'Something went wrong' })
 }
 ```
