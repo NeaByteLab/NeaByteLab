@@ -13,6 +13,14 @@ A tolerant Markov model, or TMM, is a probabilistic-algorithmic Markov model bui
 
 This tolerance is valuable in domains where data is imperfect or highly varied, such as bioinformatics sequences and data compression. By not demanding an exact context match, a TMM degrades gracefully instead of failing outright on novel input. It sits between rigid fixed-order Markov models and more flexible variable-order approaches, trading a little precision for robustness. The core idea is simple: prefer a slightly looser but available prediction over an exact but impossible one.
 
+```mermaid
+flowchart LR
+  Ctx[noisy or unseen context] --> Match{exact match?}
+  Match -->|yes| Pred[predict next symbol]
+  Match -->|no| Near[fall back to near context]
+  Near --> Pred
+```
+
 ### Quick Takeaways
 
 - A TMM relaxes exact context matching so it still predicts under noise or unseen histories

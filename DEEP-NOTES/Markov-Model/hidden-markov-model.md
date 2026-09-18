@@ -13,6 +13,13 @@ A hidden Markov model, or HMM, extends a Markov chain by hiding the state. The s
 
 An HMM is defined by three things. Transition probabilities govern how hidden states change over time. Emission probabilities govern what each hidden state produces as an observation. An initial distribution says where the chain starts. Three classic problems drive HMM use. Evaluation asks how likely a sequence of observations is, solved by the forward algorithm. Decoding asks for the most likely hidden state sequence, solved by Viterbi. Learning asks how to fit the parameters from data, solved by Baum-Welch. HMMs powered speech recognition and part-of-speech tagging for decades.
 
+```mermaid
+flowchart LR
+  Hidden[hidden state] -->|transition| HiddenNext[next hidden state]
+  Hidden -->|emit| Obs[observed signal]
+  Obs -->|Viterbi decode| Path((most likely hidden path))
+```
+
 ### Quick Takeaways
 
 - The states are hidden and you only observe signals emitted by those states

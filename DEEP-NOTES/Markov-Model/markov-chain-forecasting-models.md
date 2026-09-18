@@ -13,6 +13,13 @@ Markov-chain forecasting models use the transition structure of a Markov chain t
 
 This approach shines when a system can be described by discrete conditions with stable transition tendencies, such as market regimes, credit ratings, or customer lifecycle stages. It is simple, interpretable, and directly usable for planning. Its accuracy rests on two assumptions: that the Markov property holds, so only the current state matters, and that the transition probabilities are stationary, so they do not drift over time. When those assumptions hold the forecasts are reliable and cheap. When they break, especially over long horizons, the forecast blurs toward the stationary distribution and loses sharpness.
 
+```mermaid
+flowchart LR
+  Now[current distribution] -->|multiply by matrix| Step[one step ahead]
+  Step -->|raise matrix to power| Horizon[multi-step forecast]
+  Horizon --> Spread((probability spread over states))
+```
+
 ### Quick Takeaways
 
 - Forecasting projects the current state distribution forward by multiplying by the transition matrix

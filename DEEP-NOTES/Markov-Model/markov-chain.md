@@ -13,6 +13,13 @@ A Markov chain is a sequence of random states where the probability of the next 
 
 The chain is defined by a set of states and a transition matrix. Each entry in the matrix gives the probability of moving from one state to another. Rows sum to one because you must land somewhere. Given a starting distribution over states, you multiply by the transition matrix to get the distribution at the next step. Repeat this many times and many chains settle into a stationary distribution, a fixed spread over states that no longer changes. Markov chains power PageRank, text generation, queueing models, and much more.
 
+```mermaid
+flowchart LR
+  State[current state] -->|transition matrix| Next[next state]
+  Next -->|repeat step| Iterate[distribution over states]
+  Iterate --> Stationary((stationary distribution))
+```
+
 ### Quick Takeaways
 
 - The next state depends only on the current state, never on the path taken to reach it

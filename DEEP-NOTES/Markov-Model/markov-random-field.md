@@ -13,6 +13,14 @@ A Markov random field, or MRF, moves the Markov idea from a line into a graph. I
 
 An MRF defines a joint probability over all variables using potential functions on cliques, groups of mutually connected nodes. By the Hammersley-Clifford theorem the joint distribution factorizes as a product of these clique potentials, normalized by a partition function. Unlike Bayesian networks, MRFs are undirected, so they express symmetric relationships without a notion of cause and effect. The catch is the partition function, which sums over all configurations and is usually intractable, forcing approximate inference. MRFs underpin image denoising, segmentation, and many computer vision tasks.
 
+```mermaid
+flowchart LR
+  Node[node] ---|neighbor edge| Neighbor[neighbor node]
+  Neighbor ---|clique| Node2[node]
+  Node ---|potential scores agreement| Neighbor
+  Neighbor --> Joint((joint over the graph))
+```
+
 ### Quick Takeaways
 
 - Variables sit on an undirected graph and each depends only on its immediate neighbors

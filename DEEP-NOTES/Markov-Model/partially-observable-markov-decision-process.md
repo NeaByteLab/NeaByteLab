@@ -13,6 +13,13 @@ A partially observable Markov decision process, or POMDP, is an MDP where the ag
 
 Because the true state is hidden, a POMDP agent maintains a belief state, a probability distribution over all possible states. After each action and observation, it updates this belief using Bayes' rule. The optimal policy maps beliefs, not states, to actions. This makes POMDPs far harder to solve than MDPs, because the belief space is continuous even when states are discrete. Exact solutions are intractable for all but tiny problems, so practitioners rely on approximate and point-based methods. The reward for this difficulty is a principled way to act under genuine uncertainty.
 
+```mermaid
+flowchart LR
+  Hidden[hidden true state] -->|noisy observation| Obs[observation]
+  Obs -->|Bayes update| Belief[belief over states]
+  Belief -->|policy maps belief| Action((action under uncertainty))
+```
+
 ### Quick Takeaways
 
 - The agent cannot see the true state and only receives noisy observations of it

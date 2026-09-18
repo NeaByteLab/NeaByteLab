@@ -13,6 +13,13 @@ A Markov decision process, or MDP, adds choice to a Markov chain. At each state 
 
 An MDP is defined by states, actions, transition probabilities, a reward function, and a discount factor. The discount factor weights future rewards less than immediate ones, keeping infinite-horizon sums finite and expressing preference for sooner payoffs. Solving an MDP means computing an optimal policy or its value function. Value iteration and policy iteration solve it exactly when the model is known, using the Bellman equations. When the model is unknown, reinforcement learning methods like Q-learning estimate the same quantities from experience.
 
+```mermaid
+flowchart LR
+  State[state] -->|policy picks action| Action[action]
+  Action -->|transition + reward| Next[next state]
+  Next -->|maximize discounted reward| Optimal((optimal policy))
+```
+
 ### Quick Takeaways
 
 - An MDP is a Markov chain plus actions and rewards, so the agent influences its own future

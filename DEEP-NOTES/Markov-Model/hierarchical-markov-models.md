@@ -13,6 +13,13 @@ Hierarchical Markov models stack Markov structure in layers to capture behavior 
 
 This layering matches how many real sequences are organized. Language has documents made of paragraphs made of sentences made of words. Behavior has activities made of sub-activities made of primitive motions. A single flat chain cannot cleanly express these nested time scales, but a hierarchy can, with each level having its own transitions. The cost is added complexity in both the model and its inference, since you now reason across levels. In return you get compact models that share sub-structures and represent long-range organization far better than a flat chain.
 
+```mermaid
+flowchart LR
+  Abstract[abstract state] -->|vertical: descend| Sub[lower-level sub-model]
+  Sub -->|horizontal: run states| Prod[production state emits]
+  Prod -->|end state| Return((control returns upward))
+```
+
 ### Quick Takeaways
 
 - States are organized in layers, and a high-level state expands into a lower-level sub-model
