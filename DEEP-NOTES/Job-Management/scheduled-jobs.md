@@ -15,6 +15,13 @@ tags:
 
 This note covers **scheduled jobs**: tasks that execute at specific times or intervals, managed by a scheduler (cron, job queue, cloud scheduler). They provide resource efficiency and predictable execution patterns. **Goal:** understand when scheduled jobs are optimal and how to implement them reliably.
 
+```mermaid
+flowchart LR
+  Scheduler[cron scheduler] -->|trigger at time| Start[process starts]
+  Start -->|run task| Execute[execute work]
+  Execute -->|then terminate| Free((resources freed, predictable timing))
+```
+
 ## Definition
 
 **Scheduled Job**: A task that runs at predetermined times or intervals, managed by an external scheduler rather than running continuously.
@@ -41,6 +48,13 @@ This note covers **scheduled jobs**: tasks that execute at specific times or int
 ## Examples
 
 **Good: Daily data sync**
+
+```mermaid
+flowchart LR
+  Cron[cron 0 2 star] -->|trigger at 2 AM| Sync[sync market data]
+  Sync -->|then| Analytics[update analytics]
+  Analytics --> Done((predictable daily run))
+```
 
 ```typescript
 /**
@@ -82,6 +96,13 @@ const apiPolling = new CronJob('0 * * * *', async () => {
 ```
 
 **Bad: Real-time message processing**
+
+```mermaid
+flowchart LR
+  Cron[cron every minute] -.->|fixed interval| Batch[process messages]
+  Batch -.->|up to 60s wait| Delay[messages queue up]
+  Delay -.-> Broken{{unacceptable real-time latency}}
+```
 
 ```typescript
 /**

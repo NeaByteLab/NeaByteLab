@@ -15,6 +15,14 @@ tags:
 
 This note covers **infinite loops**: processes that run continuously, typically with sleep/pause intervals, checking for work repeatedly. They provide immediate response but consume resources continuously. **Goal:** understand when infinite loops are the right choice and how to manage their operational complexity.
 
+```mermaid
+flowchart LR
+  Start[process start] -->|while true| Wait[wait for work]
+  Wait -->|work arrives| Handle[handle immediately]
+  Handle -->|loop back| Wait
+  Handle --> Response((low-latency response, continuous cost))
+```
+
 ## Definition
 
 **Infinite Loop**: A process that runs continuously without termination, using `while (true)` or similar constructs, often with periodic sleep or wait conditions.
@@ -40,6 +48,13 @@ This note covers **infinite loops**: processes that run continuously, typically 
 ## Examples
 
 **Good: WebSocket server**
+
+```mermaid
+flowchart LR
+  Loop[while true] -->|block on socket| Message[incoming message]
+  Message -->|no polling delay| Broadcast[broadcast to clients]
+  Broadcast --> Instant((instant real-time delivery))
+```
 
 ```typescript
 /**
@@ -71,6 +86,13 @@ function startQueueConsumer() {
 ```
 
 **Bad: Batch data processing**
+
+```mermaid
+flowchart LR
+  Loop[while true] -.->|sleep 5000| Poll[check hasNewData]
+  Poll -.->|mostly empty| Idle[burn CPU idling]
+  Idle -.-> Broken{{wasted resources for batch work}}
+```
 
 ```typescript
 /**
