@@ -11,6 +11,13 @@ tags: ['harmony', 'function-calling', 'tools', 'recipient']
 
 Harmony defines a formal tool-calling protocol where tools are declared in the developer message using a TypeScript-like syntax inside a `functions` namespace. When the model wants a tool, it emits a `commentary` message with a recipient and stops on the `<|call|>` token, then you run the tool, feed the result back, and resume inference. The round-trip has a subtle requirement, because you must pass the model own reasoning back together with the tool result, which is different from a normal turn.
 
+```mermaid
+flowchart LR
+  Developer[developer message] -->|defines functions| Model[model emits call]
+  Model -->|commentary, stops on call| Tool[run tool, feed result back]
+  Tool -->|resume with kept reasoning| Answer((final answer))
+```
+
 ### Quick Takeaways
 
 - Tools are defined in the developer message under a Tools section
@@ -67,6 +74,12 @@ format?: "celsius" | "fahrenheit", // default: celsius
 } // namespace functions
 ```
 
+```mermaid
+flowchart LR
+  Dev[developer message] -->|functions namespace| Def[type get_current_weather returns any]
+  Def -->|model reads menu| Ready((tool available to call))
+```
+
 **A tool call from the model:**
 
 ```text
@@ -77,6 +90,12 @@ format?: "celsius" | "fahrenheit", // default: celsius
 
 ```text
 ...<|channel|>analysis<|message|>Need to use function get_current_weather.<|end|><|start|>assistant<|channel|>commentary to=functions.get_current_weather <|constrain|>json<|message|>{"location":"San Francisco"}<|call|><|start|>functions.get_current_weather to=assistant<|channel|>commentary<|message|>{"sunny": true, "temperature": 20}<|end|><|start|>assistant
+```
+
+```mermaid
+flowchart LR
+  Result[tool result] -.->|chain-of-thought dropped| Resume[resume without reasoning]
+  Resume -.-> Bad{{continuity broken, model confused}}
 ```
 
 ## Important Points

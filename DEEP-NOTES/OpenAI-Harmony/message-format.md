@@ -13,6 +13,13 @@ A Harmony conversation is a sequence of messages, and each message follows one f
 
 The subtle part is the stop tokens, since there are three ways a message can end, and they mean different things for your inference loop.
 
+```mermaid
+flowchart LR
+  Start[start token] -->|header with role| Header[header]
+  Header -->|message token| Content[content]
+  Content -->|end, return, or call| Stop((message boundary set))
+```
+
 ### Quick Takeaways
 
 - One message shape, start, header, message, content, end
@@ -58,11 +65,23 @@ Think of a shipping label, where the start token is where the label begins, the 
 <|start|>assistant
 ```
 
+```mermaid
+flowchart LR
+  User[user message closed by end] -->|open assistant header| Continue[model continues]
+  Continue -->|no message token yet| Ready((model writes the reply))
+```
+
 **Model output** that ends with the return token:
 
 ```text
 <|channel|>analysis<|message|>Simple arithmetic. Provide answer.<|end|>
 <|start|>assistant<|channel|>final<|message|>2 + 2 = 4.<|return|>
+```
+
+```mermaid
+flowchart LR
+  Reply[assistant reply ends in return] -.->|stored without normalizing| History[return kept in history]
+  History -.-> Bad{{next prompt is malformed}}
 ```
 
 ## Important Points

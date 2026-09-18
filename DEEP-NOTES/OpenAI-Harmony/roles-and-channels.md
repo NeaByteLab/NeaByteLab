@@ -13,6 +13,13 @@ Every Harmony message carries a role, and the role decides who is speaking, and 
 
 Get roles and channels right and the rest of Harmony falls into place, but get them wrong and you leak chain-of-thought to users or send tool calls to the wrong place.
 
+```mermaid
+flowchart LR
+  Role[role sets authority] -->|system over developer over user| Win[whose instruction wins]
+  Assistant[assistant output] -->|tagged with channel| Split[analysis, commentary, final]
+  Split --> Safe((reasoning hidden, answer shown))
+```
+
 ### Quick Takeaways
 
 - Five roles, ordered by authority
@@ -51,7 +58,20 @@ Roles are ranks in a chain of command, and a higher rank overrides a lower one w
 
 **Good:** show the final channel to users and keep analysis server-side for logging only.
 
+```mermaid
+flowchart LR
+  Output[assistant output] -->|final channel| User[shown to user]
+  Output -->|analysis channel| Server[kept server-side]
+  User --> Safe((no reasoning leaked))
+```
+
 **Bad:** render the analysis channel in the UI, which exposes raw and possibly unsafe reasoning.
+
+```mermaid
+flowchart LR
+  Analysis[analysis channel] -.->|rendered in the UI| Shown[raw reasoning displayed]
+  Shown -.-> Bad{{unsafe chain-of-thought leaked}}
+```
 
 **Channel in raw output:**
 

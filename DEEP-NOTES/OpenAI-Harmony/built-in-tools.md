@@ -11,6 +11,12 @@ tags: ['harmony', 'built-in-tools', 'browser', 'python']
 
 The `gpt-oss` models were trained with two built-in tools, a `browser` tool for fetching information and a `python` tool for running code during reasoning, and unlike your own functions these are declared in the system message, while their calls default to the `analysis` channel instead of `commentary`. If you want reliable browsing or code execution, match the trained format closely, because the model was shaped around these exact definitions.
 
+```mermaid
+flowchart LR
+  System[system message] -->|declares browser and python| Tools[built-in tools]
+  Tools -->|calls route to analysis channel| Run((reliable browsing and code))
+```
+
 ### Quick Takeaways
 
 - Built-in tools go in the system message, not the developer message
@@ -55,6 +61,12 @@ source?: string,
 } // namespace browser
 ```
 
+```mermaid
+flowchart LR
+  Def[browser in system message] -->|namespace browser| Names[search, open, find]
+  Names -->|recipient browser.search| Call((call on analysis channel))
+```
+
 **Python tool description, kept to its original intent:**
 
 ```text
@@ -64,6 +76,12 @@ Use this tool to execute Python code in your chain of thought. The code will not
 to the user. When you send a message containing Python code to python, it will be executed
 in a stateful Jupyter notebook environment. python will respond with the output or time out
 after 120.0 seconds. The drive at '/mnt/data' can be used to persist user files.
+```
+
+```mermaid
+flowchart LR
+  Tools[built-in tools] -.->|placed in developer message| Custom[treated as custom functions]
+  Custom -.-> Bad{{trained behavior breaks}}
 ```
 
 ## Important Points

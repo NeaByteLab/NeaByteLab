@@ -11,6 +11,13 @@ tags: ['harmony', 'reasoning', 'chain-of-thought', 'analysis-channel']
 
 The `gpt-oss` models are reasoning models, so they think in the `analysis` channel and answer in the `final` channel. You control how hard they think with a reasoning effort setting, and you also decide whether to carry old reasoning into the next turn. The rule differs for plain answers versus tool calls, and this is where multi-turn correctness lives, because getting the chain-of-thought handling wrong will degrade the model.
 
+```mermaid
+flowchart LR
+  Model[gpt-oss] -->|thinks in analysis| Cot[chain-of-thought]
+  Cot -->|answers in final| Answer[final reply]
+  Answer -->|drop after final, keep during tool call| Correct((multi-turn stays correct))
+```
+
 ### Quick Takeaways
 
 - Reasoning effort is low, medium as the default, or high
@@ -47,7 +54,19 @@ The model is like a student solving a problem on scratch paper, where the scratc
 
 The prior analysis message is gone, and only the final answer is kept as history.
 
+```mermaid
+flowchart LR
+  Final[final answer given] -->|drop analysis content| Keep[keep only final in history]
+  Keep -->|clean next turn| Fresh((uncluttered context))
+```
+
 **Bad:** resending the old analysis chain-of-thought after a completed final answer.
+
+```mermaid
+flowchart LR
+  Stale[old analysis after final] -.->|resent into next turn| Pollute[stale reasoning in context]
+  Pollute -.-> Bad{{context polluted, quality drops}}
+```
 
 ## Important Points
 

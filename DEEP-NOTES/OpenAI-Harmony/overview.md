@@ -13,6 +13,12 @@ Harmony is the response format that the gpt-oss open models were trained on, and
 
 If you consume gpt-oss through an API or a provider like Ollama, the inference layer handles Harmony for you, so you only touch it directly when you build your own inference stack, and even then the model will not behave correctly if you feed it plain text without Harmony.
 
+```mermaid
+flowchart LR
+  Chatml[ChatML envelope] -->|add channels and tool fields| Harmony[Harmony format]
+  Harmony -->|required by gpt-oss| Correct((coherent model output))
+```
+
 ### Quick Takeaways
 
 - Harmony is mandatory for gpt-oss, not optional formatting
@@ -39,7 +45,19 @@ ChatML is a plain envelope that wraps each message with a role and nothing more,
 
 **Good:** feed the model a full Harmony prompt that ends with an open assistant header, then stop at the return or call token.
 
+```mermaid
+flowchart LR
+  Prompt[full Harmony prompt] -->|open assistant header| Model[model generates]
+  Model -->|stop at return or call| Reply((coherent reply))
+```
+
 **Bad:** send a raw string with no tokens and expect a coherent reply.
+
+```mermaid
+flowchart LR
+  Raw[raw string, no tokens] -.->|Harmony missing| Model[model cannot parse structure]
+  Model -.-> Bad{{garbage output}}
+```
 
 **ChatML vs Harmony, side by side:**
 

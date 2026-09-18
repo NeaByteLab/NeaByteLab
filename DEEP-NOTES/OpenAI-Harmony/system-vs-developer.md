@@ -11,6 +11,14 @@ tags: ['harmony', 'system-message', 'developer-message', 'prompt']
 
 In most formats the system prompt is one thing, but Harmony splits it in two. The `system` message holds the meta configuration, while the `developer` message holds the actual instructions that other formats would call the system prompt. Confusing the two is a common source of weak results, so knowing which layer owns which setting keeps your prompt clean and the model predictable.
 
+```mermaid
+flowchart LR
+  Prompt[Harmony prompt] -->|meta config| System[system message]
+  Prompt -->|real instructions| Developer[developer message]
+  System --> Clean((clean, predictable model))
+  Developer --> Clean
+```
+
 ### Quick Takeaways
 
 - The `system` message holds meta config, and the `developer` message holds the real instructions
@@ -58,6 +66,12 @@ Reasoning: high
 # Valid channels: analysis, commentary, final. Channel must be included for every message.<|end|>
 ```
 
+```mermaid
+flowchart LR
+  Meta[identity, dates, reasoning] -->|placed in system| System[system message]
+  System -->|meta only, no task rules| Clean((firmware layer stays clean))
+```
+
 **Good, a developer message with the real instructions:**
 
 ```text
@@ -67,6 +81,12 @@ Use a friendly tone.<|end|>
 ```
 
 **Bad:** putting the instruction to use a friendly tone inside the system message and leaving the developer message empty.
+
+```mermaid
+flowchart LR
+  Rule[friendly tone instruction] -.->|placed in system message| Wrong[task rules in meta layer]
+  Wrong -.-> Bad{{layers confused, weak results}}
+```
 
 ## Important Points
 
