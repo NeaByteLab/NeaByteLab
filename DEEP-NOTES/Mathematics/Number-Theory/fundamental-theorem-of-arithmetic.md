@@ -52,7 +52,19 @@ Think of an integer as a finished smoothie and primes as the pure fruits blended
 
 **Good:** Writing sixty as two squared times three times five. Any correct factorization of sixty gives exactly these primes with these exponents, only the order can differ.
 
+```mermaid
+flowchart LR
+  N["60"] -->|factor into primes| F["2^2 * 3 * 5"]
+  F -->|same primes and exponents| U(("unique factorization"))
+```
+
 **Bad:** Claiming a number has two genuinely different prime factorizations. For ordinary integers that is impossible, and believing it leads to false conclusions about divisibility.
+
+```mermaid
+flowchart LR
+  Claim["claim two factorizations"] -.->|violates uniqueness| Two["different prime sets"]
+  Two -.->|impossible for integers| Bad{{"false divisibility"}}
+```
 
 ## Important Points
 

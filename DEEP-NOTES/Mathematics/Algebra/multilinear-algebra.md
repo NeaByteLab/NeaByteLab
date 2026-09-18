@@ -51,7 +51,21 @@ Think of a linear map as a machine with one input slot. A multilinear map is a m
 
 **Good:** Viewing the determinant as an antisymmetric multilinear function of a matrix's columns. Swapping two columns flips the sign, which reflects orientation cleanly.
 
+```mermaid
+flowchart LR
+  Columns["Matrix columns"] -->|antisymmetric multilinear| Det["Determinant"]
+  Det -->|swap two columns| Sign["Sign flips"]
+  Sign --> Good((Orientation captured))
+```
+
 **Bad:** Treating a tensor as if it were an ordinary flat list of numbers with no transformation rule. Tensors change in a specific multilinear way under a change of basis, so ignoring that gives wrong results.
+
+```mermaid
+flowchart LR
+  Tensor["Tensor"] -.->|treat as flat list| Ignore["No transformation rule"]
+  Ignore -.->|change of basis| Wrong["Components mishandled"]
+  Wrong -.-> Bad{{Incorrect results}}
+```
 
 ## Important Points
 

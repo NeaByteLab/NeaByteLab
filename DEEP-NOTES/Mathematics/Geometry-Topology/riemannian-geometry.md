@@ -54,7 +54,20 @@ Picture a landscape where, standing anywhere, you have a small local ruler and p
 
 **Good:** Computing geodesic distance between two points on a curved surface using its metric. The metric gives the true intrinsic distance, not a flat approximation.
 
+```mermaid
+flowchart LR
+  PTS["Two points on curved surface"] --> MET["Riemannian metric"]
+  MET -->|integrate along geodesic| DIST["Geodesic distance"]
+  DIST --> OK((True intrinsic distance))
+```
+
 **Bad:** Assuming coordinate differences equal true distances on a curved manifold. Coordinates are arbitrary, so raw differences ignore the metric.
+
+```mermaid
+flowchart LR
+  COORD["Coordinate differences"] -.->|treat as distance| RAW["Ignore the metric"]
+  RAW -.-> BAD{{Arbitrary coordinates, wrong distance}}
+```
 
 ## Important Points
 

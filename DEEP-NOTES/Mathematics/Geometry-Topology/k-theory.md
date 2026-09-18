@@ -53,7 +53,20 @@ Think of collecting different types of building blocks stacked over a floor plan
 
 **Good:** Using topological K-theory to classify the possible vector bundles over a sphere. The K-theory group captures exactly which bundles can exist.
 
+```mermaid
+flowchart LR
+  SPH["Vector bundles over a sphere"] --> KT["Topological K-theory"]
+  KT -->|group of bundle classes| CLASS["Classification"]
+  CLASS --> OK((Which bundles can exist))
+```
+
 **Bad:** Expecting K-theory to recover every fine geometric detail of a space. It records bundle-level structure, not the full metric shape.
+
+```mermaid
+flowchart LR
+  KT["K-theory invariant"] -.->|expect full detail| METR["Ask for metric shape"]
+  METR -.-> BAD{{Bundle level only, detail lost}}
+```
 
 ## Important Points
 

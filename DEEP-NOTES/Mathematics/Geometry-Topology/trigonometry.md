@@ -54,7 +54,20 @@ Imagine standing at the base of a tall tree and wanting its height without climb
 
 **Good:** Finding a building height by measuring the angle of elevation from a known distance. The right triangle and its ratios give the answer directly.
 
+```mermaid
+flowchart LR
+  ANG["Angle of elevation"] --> RT["Right triangle"]
+  RT -->|tangent ratio| CALC["Height calculation"]
+  CALC --> OK((Building height found))
+```
+
 **Bad:** Applying the plain sine ratio to a triangle with no right angle. Without a right angle you need the law of sines or cosines instead.
+
+```mermaid
+flowchart LR
+  OBL["Triangle with no right angle"] -.->|use plain sine ratio| WRONG["Assume right triangle"]
+  WRONG -.-> BAD{{No right angle, ratio invalid}}
+```
 
 ## Important Points
 

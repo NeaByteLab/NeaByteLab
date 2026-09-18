@@ -54,7 +54,20 @@ Think of building a skyscraper. Calculus is the finished building where people w
 
 **Good:** Using uniform convergence to justify integrating an infinite series term by term. The uniform bound lets the integral and the sum swap legitimately.
 
+```mermaid
+flowchart LR
+  SER["Infinite series"] --> UNI["Uniform convergence"]
+  UNI -->|swap sum and integral| TERM["Term-by-term integration"]
+  TERM --> OK((Correct result))
+```
+
 **Bad:** Assuming pointwise convergence always lets you swap a limit and an integral. Counterexamples exist where the swap fails, giving a wrong answer.
+
+```mermaid
+flowchart LR
+  PT["Pointwise convergence only"] -.->|swap limit and integral| SWAP["Unjustified exchange"]
+  SWAP -.-> BAD{{Counterexample, wrong answer}}
+```
 
 ## Important Points
 

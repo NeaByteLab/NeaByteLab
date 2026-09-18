@@ -53,7 +53,19 @@ Think of tasks you could give an infinitely patient clerk with unlimited paper b
 
 **Good:** Reducing a new problem to the halting problem to prove it is undecidable. If solving the new problem would solve halting, the new problem must also be unsolvable.
 
+```mermaid
+flowchart LR
+  New["New problem"] -->|reduce to halting| Link["Solving it solves halting"]
+  Link -->|halting is undecidable| Undec((New problem undecidable))
+```
+
 **Bad:** Assuming that a slow or hard problem is uncomputable. Difficulty in practice is about complexity, not about whether any algorithm exists at all.
+
+```mermaid
+flowchart LR
+  Slow["Slow, hard problem"] -.->|confuse with unsolvable| Mix["Complexity mistaken for computability"]
+  Mix -.->|algorithm may exist| Wrong{{Wrong uncomputable label}}
+```
 
 ## Important Points
 

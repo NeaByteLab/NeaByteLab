@@ -55,7 +55,20 @@ Picture a river. At each point the water has a speed and direction, which is a v
 
 **Good:** Using the divergence theorem to convert a hard surface flux integral into an easier volume integral of divergence. The boundary computation becomes an interior one that is simpler to evaluate.
 
+```mermaid
+flowchart LR
+  FLUX["Hard surface flux integral"] --> DIV["Divergence theorem"]
+  DIV -->|boundary to interior| VOL["Volume integral of divergence"]
+  VOL --> OK((Simpler evaluation))
+```
+
 **Bad:** Computing curl on a field defined only along a single line rather than throughout a region. Curl needs neighboring values in all directions, so a one-dimensional slice cannot define it.
+
+```mermaid
+flowchart LR
+  LINE["Field on a single line"] -.->|compute curl| NEIGH["No neighbors off the line"]
+  NEIGH -.-> BAD{{Curl undefined}}
+```
 
 ## Important Points
 

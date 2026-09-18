@@ -51,7 +51,21 @@ Think of a field as a fully stocked toolbox for arithmetic. It has every tool yo
 
 **Good:** Treating the rational numbers with ordinary operations as a field. Every nonzero rational has an inverse, so division is always defined.
 
+```mermaid
+flowchart LR
+  Rationals["Rational numbers"] -->|every nonzero has inverse| Divide["Division defined"]
+  Divide -->|all axioms hold| Field["Valid field"]
+  Field --> Good((Arithmetic complete))
+```
+
 **Bad:** Calling the integers a field. The number 3 has no integer inverse, so division fails and the field axioms are not satisfied.
+
+```mermaid
+flowchart LR
+  Integers["Integers"] -.->|3 has no inverse| NoDiv["Division fails"]
+  NoDiv -.->|axiom violated| Claim["Called a field"]
+  Claim -.-> Bad{{Field axioms unmet}}
+```
 
 ## Important Points
 

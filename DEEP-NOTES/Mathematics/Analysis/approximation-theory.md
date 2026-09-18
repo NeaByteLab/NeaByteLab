@@ -53,7 +53,20 @@ Think of tracing a winding coastline with a few straight line segments. You want
 
 **Good:** Using a Chebyshev-based polynomial to approximate a function so the maximum error is minimized across the interval. The even error spread avoids the large end-point errors of naive fits.
 
+```mermaid
+flowchart LR
+  F["Target function"] --> CHEB["Chebyshev nodes"]
+  CHEB -->|even error spread| MIN["Minimax polynomial"]
+  MIN --> OK((Small worst-case error))
+```
+
 **Bad:** Interpolating a function at many equally spaced points with a high-degree polynomial. This can oscillate wildly near the ends, the Runge phenomenon, making the approximation worse, not better.
+
+```mermaid
+flowchart LR
+  EQ["Equally spaced points"] -.->|high degree| POLY["Interpolating polynomial"]
+  POLY -.-> BAD{{Runge oscillation at ends}}
+```
 
 ## Important Points
 

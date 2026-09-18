@@ -53,7 +53,20 @@ Think of a spreadsheet grid where every cell has a row and column number. Any lo
 
 **Good:** Proving two lines are perpendicular by checking that the product of their slopes is negative one. The geometry reduces to a clean algebraic test.
 
+```mermaid
+flowchart LR
+  LINES["Two lines"] --> SLOPE["Compute slopes"]
+  SLOPE -->|product equals -1| TEST["Algebraic test"]
+  TEST --> OK((Perpendicularity proven))
+```
+
 **Bad:** Choosing an awkward tilted coordinate frame for a simple circle, leaving messy cross terms in the equation. A centered frame would make it trivial.
+
+```mermaid
+flowchart LR
+  CIRC["Simple circle"] -.->|tilted coordinate frame| MESS["Cross terms in equation"]
+  MESS -.-> BAD{{Needlessly messy algebra}}
+```
 
 ## Important Points
 

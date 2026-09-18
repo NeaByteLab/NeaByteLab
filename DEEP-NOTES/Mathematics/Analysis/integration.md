@@ -53,7 +53,20 @@ Imagine measuring the water in an oddly shaped pond by slicing it into thin vert
 
 **Good:** Using substitution to turn a composite integrand into a simple power, then integrating cleanly. The substitution matches the inner function and its derivative, so the integral simplifies exactly.
 
+```mermaid
+flowchart LR
+  COMP["Composite integrand"] --> SUB["Substitution u = inner"]
+  SUB -->|matches derivative| POW["Simple power form"]
+  POW --> OK((Integral solved cleanly))
+```
+
 **Bad:** Trying to force an elementary antiderivative for a Gaussian bell curve. No elementary form exists, so the attempt fails and a numerical or special-function approach is needed.
+
+```mermaid
+flowchart LR
+  GAUSS["Gaussian bell curve"] -.->|seek elementary antiderivative| SEARCH["Symbolic attempt"]
+  SEARCH -.-> BAD{{No elementary form exists}}
+```
 
 ## Important Points
 

@@ -53,7 +53,21 @@ Imagine choosing the best route down a mountain, but instead of picking waypoint
 
 **Good:** Using the Euler-Lagrange equation to prove that the shortest path between two points on a flat plane is a straight line. The method turns intuition into a clean derivation.
 
+```mermaid
+flowchart LR
+  Length["Path length functional"] -->|first variation zero| EL["Euler-Lagrange equation"]
+  EL -->|solve| Straight[Straight line]
+  Straight --> Good((Proven shortest path))
+```
+
 **Bad:** Trying to guess the optimal path by testing a handful of shapes by hand. With infinitely many candidates, sampling a few gives no guarantee you found the true extremal.
+
+```mermaid
+flowchart LR
+  Guess[Test a few shapes] -.->|sample by hand| Space[Infinite candidates]
+  Space -.->|most unchecked| Miss[No coverage]
+  Miss -.-> Bad{{True extremal missed}}
+```
 
 ## Important Points
 

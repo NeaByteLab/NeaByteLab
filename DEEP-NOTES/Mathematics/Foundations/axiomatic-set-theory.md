@@ -52,7 +52,19 @@ Think of building with a strict permit system instead of a free-for-all. Naive s
 
 **Good:** Using the separation axiom to form the subset of a set whose elements satisfy a property. The parent set already exists, so no paradox can arise.
 
+```mermaid
+flowchart LR
+  Parent["Existing set"] -->|separation axiom| Sub["Subset by property"]
+  Sub -->|carved from valid set| Safe((No paradox))
+```
+
 **Bad:** Trying to form the set of all sets directly. ZFC has no axiom permitting a universal set, precisely to avoid the old contradictions.
+
+```mermaid
+flowchart LR
+  Univ["Set of all sets"] -.->|no axiom permits it| Self["Self-membership loop"]
+  Self -.->|Russell-style trap| Contra{{Contradiction}}
+```
 
 ## Important Points
 

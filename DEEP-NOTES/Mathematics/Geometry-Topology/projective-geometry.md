@@ -53,7 +53,20 @@ Look down a long straight railway track. The two rails are parallel, yet to your
 
 **Good:** Using a homography to correct the perspective distortion of a photographed document. The mapping is exactly a projective transformation.
 
+```mermaid
+flowchart LR
+  PHOTO["Skewed document photo"] --> HOM["Homography"]
+  HOM -->|projective transformation| RECT["Corrected perspective"]
+  RECT --> OK((Flat, readable document))
+```
+
 **Bad:** Trying to read off true distances or angles directly from a projective image. Those metric quantities are not preserved by projection.
+
+```mermaid
+flowchart LR
+  IMG["Projective image"] -.->|read distances or angles| METR["Assume metric preserved"]
+  METR -.-> BAD{{Projection drops distance and angle}}
+```
 
 ## Important Points
 

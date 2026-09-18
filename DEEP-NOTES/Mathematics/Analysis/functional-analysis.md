@@ -54,7 +54,20 @@ Think of ordinary space where each point is described by a few coordinates. Now 
 
 **Good:** Representing quantum states as unit vectors in a Hilbert space and observables as operators. The inner product gives probabilities and orthogonality separates distinct states cleanly.
 
+```mermaid
+flowchart LR
+  ST["Quantum state as unit vector"] --> H["Hilbert space"]
+  H -->|inner product| PROB["Probabilities"]
+  PROB --> OK((Distinct states separated))
+```
+
 **Bad:** Assuming every intuition from finite dimensions carries over unchanged. In infinite dimensions the closed unit ball is not compact, so naive finite-dimensional arguments can fail.
+
+```mermaid
+flowchart LR
+  FIN["Finite-dimensional intuition"] -.->|apply to infinite dims| BALL["Closed unit ball"]
+  BALL -.-> BAD{{Not compact, argument fails}}
+```
 
 ## Important Points
 

@@ -54,7 +54,21 @@ Think of an economy as a giant tug-of-war with many ropes pulling at once. Consu
 
 **Good:** Modeling a consumer's choice as maximizing utility subject to a budget constraint, then using it to predict how demand falls when a price rises. The model yields a clear, testable relationship.
 
+```mermaid
+flowchart LR
+  Utility[Maximize utility] -->|budget constraint| Choice[Optimal bundle]
+  Choice -->|price rises| Demand[Demand falls]
+  Demand --> Good((Testable prediction))
+```
+
 **Bad:** Assuming perfectly rational agents with complete information to model a panic-driven market crash. Real behavior there is emotional and herd-driven, so the rational model misses the actual dynamics.
+
+```mermaid
+flowchart LR
+  Rational[Rational agents] -.->|complete information| Model[Clean model]
+  Model -.->|panic and herding| Crash[Market crash]
+  Crash -.-> Bad{{Dynamics missed}}
+```
 
 ## Important Points
 

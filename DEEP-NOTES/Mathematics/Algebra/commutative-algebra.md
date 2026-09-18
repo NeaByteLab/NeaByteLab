@@ -51,7 +51,21 @@ Think of a commutative ring as a city and its ideals as neighborhoods with stric
 
 **Good:** Using prime ideals of a polynomial ring to describe points and curves in algebraic geometry. Each geometric object corresponds cleanly to an ideal.
 
+```mermaid
+flowchart LR
+  Poly["Polynomial ring"] -->|commutative| Prime["Prime ideals"]
+  Prime -->|correspondence| Geometry["Points and curves"]
+  Geometry --> Good((Clean dictionary))
+```
+
 **Bad:** Applying commutative algebra tools to matrix rings, where multiplication does not commute. The theory assumes commutativity, so its results do not carry over directly.
+
+```mermaid
+flowchart LR
+  Matrix["Matrix ring"] -.->|AB not BA| NonComm["Noncommutative"]
+  NonComm -.->|assumption violated| Tools["Commutative tools"]
+  Tools -.-> Bad{{Results do not transfer}}
+```
 
 ## Important Points
 

@@ -53,7 +53,19 @@ Think of rationals as pizza slices. A whole pizza is one, and cutting it into eq
 
 **Good:** Adding one third and one sixth by using a common denominator of six to get one half. The result stays rational and reduces to lowest terms cleanly.
 
+```mermaid
+flowchart LR
+  Frac["1/3 + 1/6"] -->|common denominator 6| Sum["3/6"]
+  Sum -->|reduce| Half(("equals 1/2"))
+```
+
 **Bad:** Writing the square root of two as a fraction. No such fraction exists, and assuming one leads to a contradiction, which is the classic irrationality proof.
+
+```mermaid
+flowchart LR
+  Root["assume sqrt(2) = a/b"] -.->|parity argument| Contra["a and b both even"]
+  Contra -.->|no lowest terms| Fail{{"no such fraction"}}
+```
 
 ## Important Points
 

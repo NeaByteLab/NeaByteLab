@@ -53,7 +53,20 @@ Think of a chef's pantry of prepared sauces. Instead of making a complex sauce f
 
 **Good:** Recognizing that a drum vibration problem in cylindrical coordinates is solved by Bessel functions and using their known zeros and tables. The named function turns a hard PDE into a standard lookup.
 
+```mermaid
+flowchart LR
+  DRUM["Drum vibration in cylindrical coordinates"] --> BES["Bessel functions"]
+  BES -->|known zeros and tables| LOOK["Standard lookup"]
+  LOOK --> OK((Hard PDE solved))
+```
+
 **Bad:** Trying to force an elementary closed form for the Gaussian integral's antiderivative. It does not exist, so labeling the answer as the error function is the correct move instead.
+
+```mermaid
+flowchart LR
+  GAUSS["Gaussian integral antiderivative"] -.->|force elementary form| SEARCH["Symbolic attempt"]
+  SEARCH -.-> BAD{{No elementary closed form}}
+```
 
 ## Important Points
 

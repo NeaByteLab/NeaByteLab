@@ -55,7 +55,19 @@ Think of a blueprint and the buildings that match it. The blueprint lists requir
 
 **Good:** Using the compactness theorem to prove that if a set of first-order axioms has arbitrarily large finite models, it also has an infinite model. The finite pieces force an infinite structure.
 
+```mermaid
+flowchart LR
+  Axioms["Arbitrarily large finite models"] -->|compactness theorem| Every["Every finite part satisfiable"]
+  Every -->|forces a model| Inf((Infinite model exists))
+```
+
 **Bad:** Assuming that because a theory describes "the" natural numbers, it has only one model. First-order arithmetic actually has many nonstandard models.
+
+```mermaid
+flowchart LR
+  One["Assume one true model"] -.->|Lowenheim-Skolem| Extra["Other models satisfy it too"]
+  Extra -.->|uniqueness fails| NonStd{{Nonstandard models}}
+```
 
 ## Important Points
 

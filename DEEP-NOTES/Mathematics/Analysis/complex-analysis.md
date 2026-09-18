@@ -54,7 +54,20 @@ Imagine a hologram where every small fragment contains the whole image. Cut off 
 
 **Good:** Using the residue theorem to evaluate a real definite integral by closing a contour in the complex plane. The integral reduces to summing residues at enclosed poles.
 
+```mermaid
+flowchart LR
+  INT["Hard real integral"] --> CONT["Close a contour"]
+  CONT -->|sum residues at poles| RES["Residue theorem"]
+  RES --> OK((Integral evaluated))
+```
+
 **Bad:** Assuming every function of a complex variable is holomorphic. Functions like complex conjugation fail the Cauchy-Riemann equations, so the powerful theorems do not apply.
+
+```mermaid
+flowchart LR
+  CONJ["Complex conjugation"] -.->|check Cauchy-Riemann| FAIL["Equations not satisfied"]
+  FAIL -.-> BAD{{Not holomorphic, theorems fail}}
+```
 
 ## Important Points
 

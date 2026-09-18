@@ -53,7 +53,20 @@ Think of weighing sand poured onto a scale. Length-based methods slice the groun
 
 **Good:** Using the dominated convergence theorem to swap a limit and a Lebesgue integral under a shared bound. Measure theory guarantees the exchange gives the correct value.
 
+```mermaid
+flowchart LR
+  SEQ["Sequence under shared bound"] --> DCT["Dominated convergence"]
+  DCT -->|swap limit and integral| VAL["Correct value"]
+  VAL --> OK((Exchange justified))
+```
+
 **Bad:** Trying to Riemann-integrate a function that is one on the rationals and zero elsewhere. It is not Riemann integrable, yet its Lebesgue integral is cleanly zero since the rationals have measure zero.
+
+```mermaid
+flowchart LR
+  DIRICH["One on rationals, zero else"] -.->|Riemann sums| UPLOW["Upper and lower sums disagree"]
+  UPLOW -.-> BAD{{Not Riemann integrable}}
+```
 
 ## Important Points
 

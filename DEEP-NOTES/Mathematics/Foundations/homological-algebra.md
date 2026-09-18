@@ -52,7 +52,19 @@ Think of a loop drawn on a surface. On a flat sheet you can always shrink the lo
 
 **Good:** Computing the homology of a torus to detect its two independent loops and one cavity. The nonzero groups precisely count its holes.
 
+```mermaid
+flowchart LR
+  Torus["Torus"] -->|compute homology| Groups["Nonzero homology groups"]
+  Groups -->|count holes| Count((Two loops, one cavity))
+```
+
 **Bad:** Treating a chain complex as exact without checking that cycles equal boundaries. If homology is nonzero, assuming exactness hides real structure.
+
+```mermaid
+flowchart LR
+  Assume["Assume complex is exact"] -.->|skip cycle check| Hidden["Nonzero homology ignored"]
+  Hidden -.->|structure lost| Miss{{Hidden holes}}
+```
 
 ## Important Points
 

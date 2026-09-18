@@ -52,7 +52,19 @@ Think of a jigsaw puzzle. Checking whether a finished puzzle is correct is fast,
 
 **Good:** Using big-O to see that a sorting algorithm running in n log n scales far better than one running in n squared. The comparison predicts behavior on huge inputs.
 
+```mermaid
+flowchart LR
+  BigO[Big-O analysis] -->|compare growth| NL[n log n vs n squared]
+  NL -->|predicts large inputs| Pick((Choose n log n))
+```
+
 **Bad:** Judging an algorithm only by its speed on tiny test inputs. Constant factors can mislead, since an exponential method may look fine until the input grows.
+
+```mermaid
+flowchart LR
+  Tiny[Speed on tiny inputs] -.->|constants mislead| Hide[Growth rate hidden]
+  Hide -.->|explodes when scaled| Blow{{Exponential blowup}}
+```
 
 ## Important Points
 

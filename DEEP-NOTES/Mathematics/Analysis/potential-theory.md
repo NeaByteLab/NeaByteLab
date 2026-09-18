@@ -53,7 +53,20 @@ Imagine a rubber sheet stretched over a wire frame bent into some shape at the e
 
 **Good:** Solving for the temperature inside a plate given fixed edge temperatures, using the fact that steady heat is harmonic. The boundary values determine the smooth interior distribution uniquely.
 
+```mermaid
+flowchart LR
+  EDGE["Fixed edge temperatures"] --> HARM["Harmonic interior"]
+  HARM -->|boundary determines interior| DIST["Smooth distribution"]
+  DIST --> OK((Unique temperature field))
+```
+
 **Bad:** Expecting a harmonic function to have a local maximum strictly inside its region. The maximum principle forbids this, so any such claim contradicts the theory.
+
+```mermaid
+flowchart LR
+  HARM["Harmonic function"] -.->|claim interior peak| PEAK["Local maximum inside"]
+  PEAK -.-> BAD{{Maximum principle violated}}
+```
 
 ## Important Points
 

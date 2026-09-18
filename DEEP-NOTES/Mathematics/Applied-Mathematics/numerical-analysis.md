@@ -55,7 +55,21 @@ Measuring a coastline with a ruler is numerical analysis in spirit. You can neve
 
 **Good:** Using Newton's method with a good initial guess to find a root quickly, checking that each step reduces the error. Convergence is fast and the answer is verifiably close.
 
+```mermaid
+flowchart LR
+  Guess[Good initial guess] -->|Newton's method| Step[Error shrinks each step]
+  Step -->|fast convergence| Root[Root located]
+  Root --> Good((Verifiably close))
+```
+
 **Bad:** Subtracting two nearly equal large numbers to get a small difference in low precision. Catastrophic cancellation wipes out significant digits, leaving a meaningless result.
+
+```mermaid
+flowchart LR
+  Near[Two nearly equal numbers] -.->|low precision| Subtract[Subtraction]
+  Subtract -.->|cancellation| Digits[Significant digits lost]
+  Digits -.-> Bad{{Meaningless result}}
+```
 
 ## Important Points
 

@@ -52,7 +52,19 @@ Think of getting dressed. Socks must go on before shoes, and a shirt before a ja
 
 **Good:** Modeling build dependencies as a partial order and using a topological sort to find a valid compile sequence. Independent modules stay incomparable and can build in any order.
 
+```mermaid
+flowchart LR
+  Dep[Build dependencies] -->|partial order| Topo[Topological sort]
+  Topo -->|respects constraints| Seq((Valid compile order))
+```
+
 **Bad:** Forcing a total order on tasks that are genuinely independent, inventing a rank between them that does not exist and creating false constraints.
+
+```mermaid
+flowchart LR
+  Ind[Independent tasks] -.->|force a total order| Fake[Invented rank]
+  Fake -.->|adds fake dependency| FC{{False constraints}}
+```
 
 ## Important Points
 

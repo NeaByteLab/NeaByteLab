@@ -53,7 +53,20 @@ Think of geometry like the rules of a city map. Points are addresses, lines are 
 
 **Good:** Using geometry to compute the area of a plot of land from its corner coordinates. The shapes and distances map directly onto the real problem.
 
+```mermaid
+flowchart LR
+  CORN["Corner coordinates"] --> SHAPE["Polygon shape"]
+  SHAPE -->|distances and area formula| AREA["Computed area"]
+  AREA --> OK((Land area found))
+```
+
 **Bad:** Treating flat plane geometry as valid on the surface of the Earth over long distances. Curvature breaks the flat rules, so angles and distances come out wrong.
+
+```mermaid
+flowchart LR
+  EARTH["Earth over long distances"] -.->|apply flat plane geometry| FLAT["Ignore curvature"]
+  FLAT -.-> BAD{{Curvature breaks flat rules}}
+```
 
 ## Important Points
 

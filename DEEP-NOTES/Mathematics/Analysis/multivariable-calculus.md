@@ -54,7 +54,20 @@ Imagine standing on a hilly landscape described by height as a function of your 
 
 **Good:** Using the gradient to guide gradient descent toward a minimum of a two-variable loss surface. Each step moves opposite the gradient, the direction of fastest decrease.
 
+```mermaid
+flowchart LR
+  LOSS["Two-variable loss surface"] --> GRAD["Compute gradient"]
+  GRAD -->|step opposite gradient| DESC["Fastest decrease"]
+  DESC --> OK((Reach minimum))
+```
+
 **Bad:** Treating a partial derivative as the total change when all variables move together. Ignoring the other directions misses cross effects and gives the wrong overall rate.
+
+```mermaid
+flowchart LR
+  PART["Single partial derivative"] -.->|treat as total change| IGN["Other directions ignored"]
+  IGN -.-> BAD{{Missed cross effects, wrong rate}}
+```
 
 ## Important Points
 

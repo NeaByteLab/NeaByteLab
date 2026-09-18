@@ -51,7 +51,21 @@ Think of a matrix as a machine with input dials and output gauges. Feed a list o
 
 **Good:** Multiplying a transformation matrix by a coordinate vector to move every point of an object at once. The single product applies the transformation uniformly.
 
+```mermaid
+flowchart LR
+  Matrix["Transformation matrix"] -->|multiply| Vector["Coordinate vector"]
+  Vector -->|single product| Moved["Every point moved"]
+  Moved --> Good((Uniform transformation))
+```
+
 **Bad:** Assuming AB equals BA for matrices. Matrix multiplication is generally noncommutative, so swapping the order usually changes or invalidates the result.
+
+```mermaid
+flowchart LR
+  Order["Product AB"] -.->|assume AB equals BA| Swap["Swap to BA"]
+  Swap -.->|noncommutative| Different["Different product"]
+  Different -.-> Bad{{Invalid result}}
+```
 
 ## Important Points
 

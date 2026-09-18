@@ -52,7 +52,21 @@ Think of a ring as a workshop with two machines. One machine, addition, always r
 
 **Good:** Treating the integers with ordinary addition and multiplication as a commutative ring. Both operations behave, and distribution holds throughout.
 
+```mermaid
+flowchart LR
+  Integers["Integers"] -->|addition and multiplication| Ops["Both operations behave"]
+  Ops -->|distribution holds| Ring["Commutative ring"]
+  Ring --> Good((Valid structure))
+```
+
 **Bad:** Assuming every ring lets you divide. In the integers, 2 has no multiplicative inverse, so division is not generally available and treating it as a field is wrong.
+
+```mermaid
+flowchart LR
+  RingDiv["Assume division in a ring"] -.->|2 has no inverse| NoUnit["Missing multiplicative inverse"]
+  NoUnit -.->|not a field| Field["Treated as a field"]
+  Field -.-> Bad{{Division fails}}
+```
 
 ## Important Points
 

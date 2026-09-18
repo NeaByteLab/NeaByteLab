@@ -53,7 +53,20 @@ Stretch a rubber band around a scattered handful of nails on a board. The band s
 
 **Good:** Formulating a resource allocation problem as a convex program so the solver reliably finds the global optimum. Convexity removes the risk of bad local minima.
 
+```mermaid
+flowchart LR
+  ALLOC["Resource allocation problem"] --> CONV["Convex program"]
+  CONV -->|no bad local minima| SOLVE["Reliable solver"]
+  SOLVE --> OK((Global optimum found))
+```
+
 **Bad:** Assuming a shape with an inward notch is convex and applying separation theorems to it. The theorems require true convexity and fail on the notch.
+
+```mermaid
+flowchart LR
+  NOTCH["Shape with inward notch"] -.->|assume convex| SEP["Apply separation theorem"]
+  SEP -.-> BAD{{Not convex, theorem fails}}
+```
 
 ## Important Points
 

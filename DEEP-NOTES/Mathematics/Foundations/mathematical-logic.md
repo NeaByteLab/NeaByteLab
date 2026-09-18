@@ -53,7 +53,19 @@ Think of chess. The pieces and the board are the symbols. The rules of movement 
 
 **Good:** Using first-order logic to state and prove that if all humans are mortal and Socrates is human, then Socrates is mortal. Each step follows a named inference rule.
 
+```mermaid
+flowchart LR
+  Prem["Premises in first-order logic"] -->|inference rules| Steps["Named derivation steps"]
+  Steps -->|each step justified| Concl((Socrates is mortal))
+```
+
 **Bad:** Claiming a statement is proved because it "feels obviously true," with no derivation from axioms and rules. That is intuition, not a logical proof.
+
+```mermaid
+flowchart LR
+  Feel["Feels obviously true"] -.->|no derivation| Gap["No axioms or rules"]
+  Gap -.->|intuition only| NoProof{{Not a proof}}
+```
 
 ## Important Points
 

@@ -54,7 +54,20 @@ Imagine trying to prove two knotted ropes are truly different without untying th
 
 **Good:** Using the fundamental group to show a circle and a disk are different spaces. The circle has nontrivial loops while the disk has none.
 
+```mermaid
+flowchart LR
+  SP["Circle and disk"] --> FG["Fundamental group"]
+  FG -->|circle has loops, disk none| DIFF["Different invariants"]
+  DIFF --> OK((Spaces proven distinct))
+```
+
 **Bad:** Concluding two spaces are identical just because their homology matches. Equal invariants are necessary but not sufficient for equivalence.
+
+```mermaid
+flowchart LR
+  HOM["Matching homology"] -.->|infer sameness| SAME["Claim spaces identical"]
+  SAME -.-> BAD{{Necessary, not sufficient}}
+```
 
 ## Important Points
 

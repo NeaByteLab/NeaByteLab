@@ -51,7 +51,21 @@ Imagine a lock that only opens with the right key. For a while it seemed each ne
 
 **Good:** Stating that x squared plus one equals zero has the two roots i and minus i. Over the complex numbers the polynomial factors fully and both roots exist.
 
+```mermaid
+flowchart LR
+  Poly["x squared plus one"] -->|over complex numbers| Roots["Roots i and minus i"]
+  Roots -->|factor fully| Factored["Linear factors"]
+  Factored --> Good((Both roots exist))
+```
+
 **Bad:** Claiming x squared plus one has no roots because none are real. The theorem only guarantees roots in the complex numbers, not the reals, so the claim confuses the two systems.
+
+```mermaid
+flowchart LR
+  Same["x squared plus one"] -.->|look only in reals| NoReal["No real roots"]
+  NoReal -.->|confuse systems| Claim["Claim no roots"]
+  Claim -.-> Bad{{Complex roots ignored}}
+```
 
 ## Important Points
 

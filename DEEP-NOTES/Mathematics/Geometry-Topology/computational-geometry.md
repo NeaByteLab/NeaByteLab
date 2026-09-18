@@ -54,7 +54,20 @@ Imagine a delivery service that must instantly answer which warehouse is closest
 
 **Good:** Building a Delaunay triangulation to generate a well-shaped mesh for a physics simulation. It avoids thin slivers that would ruin numerical accuracy.
 
+```mermaid
+flowchart LR
+  PTS["Point set"] --> DEL["Delaunay triangulation"]
+  DEL -->|maximize small angles| MESH["Well-shaped mesh"]
+  MESH --> OK((Accurate simulation))
+```
+
 **Bad:** Using exact-equality float comparisons in an intersection test. Rounding error makes points that should coincide differ, so the algorithm gives wrong results.
+
+```mermaid
+flowchart LR
+  ISECT["Intersection test"] -.->|exact float equality| ROUND["Rounding error"]
+  ROUND -.-> BAD{{Coincident points differ, wrong result}}
+```
 
 ## Important Points
 

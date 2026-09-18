@@ -54,7 +54,20 @@ Imagine looking at a rectangular grid drawn on rubber, then stretching and shear
 
 **Good:** Proving the midpoints of a quadrilateral sides form a parallelogram. The claim uses only parallelism and ratios, which are affine facts.
 
+```mermaid
+flowchart LR
+  QUAD["Quadrilateral"] --> MID["Take side midpoints"]
+  MID -->|parallelism and ratios| PAR["Midpoint figure"]
+  PAR --> OK((Parallelogram, proven affinely))
+```
+
 **Bad:** Trying to define a right angle or compute a distance purely in affine terms. Angle and distance are metric ideas that affine geometry does not have.
+
+```mermaid
+flowchart LR
+  AFF["Affine terms only"] -.->|define right angle or distance| METR["Need a metric"]
+  METR -.-> BAD{{No angle or distance in affine geometry}}
+```
 
 ## Important Points
 

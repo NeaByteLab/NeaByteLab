@@ -55,7 +55,21 @@ A subway map is a model of a city's transit. It throws away real distances, stre
 
 **Good:** Modeling a spreading rumor with a simple growth equation, checking it against real share counts, and using it to estimate when saturation hits. The model is small, testable, and answers the question.
 
+```mermaid
+flowchart LR
+  Rumor[Rumor spread] -->|simple growth equation| Model[Small model]
+  Model -->|check share counts| Saturation[Estimate saturation]
+  Saturation --> Good((Question answered))
+```
+
 **Bad:** Building a hundred-parameter model of a market and tuning it until it fits past data perfectly. It memorizes history and fails on anything new, a case of fitting noise instead of structure.
+
+```mermaid
+flowchart LR
+  Many[Hundred parameters] -.->|tune to past data| Fit[Perfect historical fit]
+  Fit -.->|memorizes noise| New[New data]
+  New -.-> Bad{{Fails on anything new}}
+```
 
 ## Important Points
 

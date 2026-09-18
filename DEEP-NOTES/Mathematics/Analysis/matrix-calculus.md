@@ -53,7 +53,20 @@ Think of a spreadsheet of rates of change. If you have many outputs each dependi
 
 **Good:** Differentiating a quadratic form to get a clean gradient in one step, then setting it to zero to solve least squares. The matrix rule replaces a long sum of partials with a single expression.
 
+```mermaid
+flowchart LR
+  QF["Quadratic form"] --> RULE["Matrix derivative rule"]
+  RULE -->|set gradient to zero| SOLVE["Least squares solution"]
+  SOLVE --> OK((Clean one-step result))
+```
+
 **Bad:** Mixing numerator and denominator layouts within one derivation. The mismatched conventions leave stray transposes, so the final gradient has the wrong shape.
+
+```mermaid
+flowchart LR
+  NUM["Numerator layout"] -.->|mix in one derivation| DEN["Denominator layout"]
+  DEN -.-> BAD{{Stray transposes, wrong shape}}
+```
 
 ## Important Points
 

@@ -53,7 +53,20 @@ Think of a musical chord. Your ear hears one blended sound, but it is really sev
 
 **Good:** Removing hum from a recording by transforming to the frequency domain, deleting the offending frequency, and transforming back. The problem is trivial in frequency but messy in time.
 
+```mermaid
+flowchart LR
+  REC["Recording with hum"] --> FRQ["Transform to frequency"]
+  FRQ -->|delete offending frequency| BACK["Transform back"]
+  BACK --> OK((Clean recording))
+```
+
 **Bad:** Expecting a Fourier series of a discontinuous square wave to converge neatly at the jump. It overshoots near the discontinuity, the Gibbs phenomenon, so naive pointwise expectations fail.
+
+```mermaid
+flowchart LR
+  SQ["Discontinuous square wave"] -.->|Fourier series| PART["Partial sums at jump"]
+  PART -.-> BAD{{Gibbs overshoot near jump}}
+```
 
 ## Important Points
 

@@ -54,7 +54,20 @@ Imagine describing the same arrow using different grids, one square and one skew
 
 **Good:** Using the covariant derivative to write Einstein's field equations so they hold in any coordinate system. The tensor form guarantees the physics does not depend on the chart chosen.
 
+```mermaid
+flowchart LR
+  COV["Covariant derivative"] --> EFE["Einstein's field equations"]
+  EFE -->|coordinate independent| ANY["Holds in any chart"]
+  ANY --> OK((Physics chart-independent))
+```
+
 **Bad:** Taking plain partial derivatives of vector components in curved coordinates and calling the result a vector. Without the Christoffel correction, the quantity is not a tensor and misstates the geometry.
+
+```mermaid
+flowchart LR
+  PART["Plain partial derivatives"] -.->|curved coordinates, no correction| NOCHR["Missing Christoffel terms"]
+  NOCHR -.-> BAD{{Not a tensor, geometry misstated}}
+```
 
 ## Important Points
 

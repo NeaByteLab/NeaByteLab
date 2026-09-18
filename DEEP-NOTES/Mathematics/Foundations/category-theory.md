@@ -52,7 +52,19 @@ Think of a subway map. It does not show what each station is built from, only ho
 
 **Good:** Defining a product by a universal property, so it works the same way for sets, groups, and spaces. One definition captures many concrete cases at once.
 
+```mermaid
+flowchart LR
+  UP["Universal property"] -->|one definition| Prod["Product construction"]
+  Prod -->|sets, groups, spaces| Reuse((Works everywhere))
+```
+
 **Bad:** Insisting on describing an object only by its internal elements when the useful information is how it maps to others. That misses the point of the categorical view.
+
+```mermaid
+flowchart LR
+  Elem["Describe by elements only"] -.->|ignores arrows| Blind["Mappings unseen"]
+  Blind -.->|misses structure| Miss{{Categorical view lost}}
+```
 
 ## Important Points
 

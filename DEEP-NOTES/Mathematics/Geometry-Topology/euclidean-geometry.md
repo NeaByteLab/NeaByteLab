@@ -54,7 +54,20 @@ Think of a perfectly flat sheet of graph paper on a table. Every straight line y
 
 **Good:** Using the Pythagorean theorem to find the diagonal of a rectangular room. Flat space is exactly where a squared plus b squared equals c squared holds.
 
+```mermaid
+flowchart LR
+  ROOM["Rectangular room"] --> FLAT["Flat Euclidean space"]
+  FLAT -->|a squared plus b squared| PYTH["Pythagorean theorem"]
+  PYTH --> OK((Diagonal length found))
+```
+
 **Bad:** Assuming triangle angles sum to 180 degrees on the surface of a sphere. On a curved surface that Euclidean fact simply fails.
+
+```mermaid
+flowchart LR
+  SPH["Triangle on a sphere"] -.->|apply Euclidean angle sum| SUM["Expect 180 degrees"]
+  SUM -.-> BAD{{Curved surface, sum exceeds 180}}
+```
 
 ## Important Points
 

@@ -53,7 +53,19 @@ Imagine the ordinary integers as a small town where every address is unique. Whe
 
 **Good:** Factoring in the Gaussian integers to show which ordinary primes are sums of two squares. The extended system makes a hard integer fact fall out cleanly.
 
+```mermaid
+flowchart LR
+  Prime["ordinary prime"] -->|factor in Gaussian integers| Split["splits as (a+bi)(a-bi)"]
+  Split -->|read off| Sum(("sum of two squares"))
+```
+
 **Bad:** Assuming numbers in every number field factor uniquely like ordinary integers. That assumption fails, and it led to famous flawed attempts at Fermat's Last Theorem.
+
+```mermaid
+flowchart LR
+  Assume["assume unique factorization"] -.->|holds only for ideals| Multi["numbers factor two ways"]
+  Multi -.->|proof collapses| Flaw{{"flawed Fermat attempt"}}
+```
 
 ## Important Points
 

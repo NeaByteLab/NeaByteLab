@@ -53,7 +53,20 @@ Imagine shining white light through a prism. The prism splits the single beam in
 
 **Good:** Using the fast Fourier transform to find and remove a 60 hertz power-line hum from a recording, then transforming back. The hum is a single spike in frequency, trivial to delete there.
 
+```mermaid
+flowchart LR
+  REC["Recording with hum"] --> FT["Fast Fourier transform"]
+  FT -->|delete 60 Hz spike| CLEAN["Cleaned spectrum"]
+  CLEAN --> OK((Hum removed, signal restored))
+```
+
 **Bad:** Expecting the Fourier series of a sharp square wave to converge cleanly at its jumps. It overshoots near the edges, the Gibbs phenomenon, so a naive reconstruction has ripples.
+
+```mermaid
+flowchart LR
+  SQ["Square wave with jumps"] -.->|Fourier series| SUM["Partial sums"]
+  SUM -.-> BAD{{Gibbs overshoot, ripples at edges}}
+```
 
 ## Important Points
 

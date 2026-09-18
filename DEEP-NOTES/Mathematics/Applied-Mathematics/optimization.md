@@ -54,7 +54,21 @@ Finding an optimum is like hiking to the lowest point of a landscape in fog. In 
 
 **Good:** Framing a least-squares curve fit as a convex problem and solving it with a standard method. Convexity guarantees the solution found is the true best fit.
 
+```mermaid
+flowchart LR
+  Fit[Least-squares fit] -->|convex problem| Solver[Standard solver]
+  Solver -->|single minimum| Best[Global optimum]
+  Best --> Good((True best fit))
+```
+
 **Bad:** Running plain gradient descent once on a highly non-convex neural loss and assuming the result is the global best. It found one local minimum, and others could be far better.
+
+```mermaid
+flowchart LR
+  Loss[Non-convex loss] -.->|one gradient run| Local[Nearest local minimum]
+  Local -.->|assumed global| Claim[Claimed best]
+  Claim -.-> Bad{{Better optima missed}}
+```
 
 ## Important Points
 

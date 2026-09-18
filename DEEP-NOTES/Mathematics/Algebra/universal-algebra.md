@@ -51,7 +51,21 @@ Think of universal algebra as studying recipes rather than dishes. A group, a ri
 
 **Good:** Defining the variety of groups by the identities for associativity, identity, and inverses, then proving a homomorphism theorem that holds for all of them at once.
 
+```mermaid
+flowchart LR
+  Identities["Group identities"] -->|define variety| Variety["Variety of groups"]
+  Variety -->|prove once| Theorem["Homomorphism theorem"]
+  Theorem --> Good((Holds for all groups))
+```
+
 **Bad:** Expecting universal algebra to give detailed results about a specific group's subgroup lattice. Its strength is generality, so fine structural detail of one object lies outside its focus.
+
+```mermaid
+flowchart LR
+  General["Universal algebra"] -.->|ask for fine detail| Lattice["One group's subgroup lattice"]
+  Lattice -.->|beyond generality| Detail["Specific structure"]
+  Detail -.-> Bad{{Question out of scope}}
+```
 
 ## Important Points
 

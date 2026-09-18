@@ -55,7 +55,21 @@ Think of a translator who does not just know two languages but also knows the su
 
 **Good:** A team models heat flow in a battery pack with a partial differential equation, solves it numerically, and redesigns the cooling before building a prototype. The model saves months of trial and error.
 
+```mermaid
+flowchart LR
+  Heat[Battery heat flow] -->|PDE model| Simulate[Numerical solve]
+  Simulate -->|redesign cooling| Prototype[Prototype]
+  Prototype --> Good((Failure avoided early))
+```
+
 **Bad:** A team fits a complex nonlinear model to ten noisy data points and trusts its predictions. With so little data the model captures noise, not the real system, and its forecasts mislead.
+
+```mermaid
+flowchart LR
+  Few[Ten noisy points] -.->|overfit| Complex[Complex nonlinear model]
+  Complex -.->|captures noise| Forecast[Confident forecast]
+  Forecast -.-> Bad{{Misleading predictions}}
+```
 
 ## Important Points
 

@@ -53,7 +53,19 @@ Think of two folders in a file system. Their "meet" is the deepest common parent
 
 **Good:** Using a lattice of program states in static analysis, where join merges information at control-flow joins. The guaranteed least upper bound makes the analysis well defined and convergent.
 
+```mermaid
+flowchart LR
+  States[Program states] -->|join at merges| LUB[Least upper bound exists]
+  LUB -->|well defined| Conv((Convergent analysis))
+```
+
 **Bad:** Treating an arbitrary partial order as a lattice when some pairs have no least upper bound. The join is undefined, so lattice-based algorithms break.
+
+```mermaid
+flowchart LR
+  PO[Arbitrary partial order] -.->|some pairs lack LUB| NoJ[Join undefined]
+  NoJ -.->|no bound to merge| Break{{Lattice algorithm breaks}}
+```
 
 ## Important Points
 

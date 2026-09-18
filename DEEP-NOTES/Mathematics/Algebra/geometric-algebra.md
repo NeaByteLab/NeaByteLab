@@ -51,7 +51,21 @@ Think of geometric algebra as a Swiss Army knife for geometry. Older methods car
 
 **Good:** Using a rotor to rotate a vector by sandwiching it between the rotor and its reverse. The operation composes rotations cleanly and avoids gimbal lock issues.
 
+```mermaid
+flowchart LR
+  Vector["Vector"] -->|sandwich with rotor| Rotor["Rotor and its reverse"]
+  Rotor -->|compose cleanly| Rotated["Rotated vector"]
+  Rotated --> Good((No gimbal lock))
+```
+
 **Bad:** Treating the geometric product as ordinary commutative multiplication. For vectors it is generally not commutative, so swapping order changes the wedge part and the result.
+
+```mermaid
+flowchart LR
+  Product["Geometric product"] -.->|assume commutative| Swap["Swap ab to ba"]
+  Swap -.->|wedge part flips| Change["Result changes"]
+  Change -.-> Bad{{Wrong answer}}
+```
 
 ## Important Points
 

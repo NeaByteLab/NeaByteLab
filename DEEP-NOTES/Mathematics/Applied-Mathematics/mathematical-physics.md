@@ -54,7 +54,21 @@ Think of physicists as explorers who find a fast river route through a jungle an
 
 **Good:** Recasting quantum mechanics in the language of Hilbert spaces and self-adjoint operators, which explains why observables have real values and gives the theory a solid base.
 
+```mermaid
+flowchart LR
+  Quantum[Quantum mechanics] -->|Hilbert space| Operators[Self-adjoint operators]
+  Operators -->|real spectrum| Observables[Real observables]
+  Observables --> Good((Solid foundation))
+```
+
 **Bad:** Manipulating divergent integrals in a calculation without any regularization or justification, then trusting the finite-looking number that falls out. The math is undefined and the result is unreliable.
+
+```mermaid
+flowchart LR
+  Divergent[Divergent integral] -.->|no regularization| Manipulate[Formal manipulation]
+  Manipulate -.->|finite-looking number| Trust[Trusted result]
+  Trust -.-> Bad{{Undefined and unreliable}}
+```
 
 ## Important Points
 

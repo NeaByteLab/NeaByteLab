@@ -54,7 +54,20 @@ Picture drawing a triangle on the surface of a globe using the equator and two l
 
 **Good:** Using spherical geometry to compute the shortest flight path between two cities. Great circles are the true straight lines on a sphere.
 
+```mermaid
+flowchart LR
+  CITIES["Two cities"] --> SPH["Spherical geometry"]
+  SPH -->|great circle| PATH["Shortest flight path"]
+  PATH --> OK((True geodesic route))
+```
+
 **Bad:** Assuming a triangle drawn on the Earth surface has angles summing to exactly 180 degrees. On the curved surface the sum is always larger.
+
+```mermaid
+flowchart LR
+  TRI["Triangle on the Earth"] -.->|apply Euclidean sum| EXP["Expect 180 degrees"]
+  EXP -.-> BAD{{Curved surface, sum exceeds 180}}
+```
 
 ## Important Points
 

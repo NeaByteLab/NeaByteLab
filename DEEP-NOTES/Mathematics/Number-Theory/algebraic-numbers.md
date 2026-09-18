@@ -52,7 +52,19 @@ Think of algebraic numbers as addresses that a polynomial equation can point to 
 
 **Good:** Recognizing the golden ratio as algebraic because it solves x squared minus x minus one equals zero. Its minimal polynomial has integer coefficients and degree two.
 
+```mermaid
+flowchart LR
+  Phi["golden ratio"] -->|root of x^2 - x - 1| Poly["integer polynomial"]
+  Poly -->|degree two, monic| Alg(("algebraic number"))
+```
+
 **Bad:** Assuming pi is algebraic and expecting a finite integer polynomial to have it as a root. Pi is transcendental, so no such polynomial exists, and squaring the circle is impossible.
+
+```mermaid
+flowchart LR
+  Pi["assume pi algebraic"] -.->|seek integer polynomial| None["no polynomial has it as root"]
+  None -.->|pi is transcendental| Fail{{"squaring the circle impossible"}}
+```
 
 ## Important Points
 

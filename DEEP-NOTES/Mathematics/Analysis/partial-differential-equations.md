@@ -53,7 +53,20 @@ Picture a drumhead. Its height at every point changes over time according to the
 
 **Good:** Solving the heat equation on a rod with fixed end temperatures by separation of variables into a sum of decaying modes. The boundary conditions select which modes appear and how fast they fade.
 
+```mermaid
+flowchart LR
+  HEAT["Heat equation on a rod"] --> SEP["Separation of variables"]
+  SEP -->|boundary selects modes| MODES["Sum of decaying modes"]
+  MODES --> OK((Temperature over time))
+```
+
 **Bad:** Trying to solve a PDE without specifying boundary or initial conditions. The equation alone allows infinitely many solutions, so the problem is ill-posed and has no single answer.
+
+```mermaid
+flowchart LR
+  PDE["PDE without conditions"] -.->|no boundary or initial data| MANY["Infinitely many solutions"]
+  MANY -.-> BAD{{Ill-posed, no unique answer}}
+```
 
 ## Important Points
 

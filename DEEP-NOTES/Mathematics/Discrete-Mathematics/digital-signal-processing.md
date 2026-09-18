@@ -53,7 +53,19 @@ Think of a flip-book animation. Real motion is continuous, but the flip-book cap
 
 **Good:** Sampling audio at 44.1 kHz to cover the audible range up to about 20 kHz, then applying a digital low-pass filter to remove hiss. The rate satisfies Nyquist, so the sound is faithful.
 
+```mermaid
+flowchart LR
+  Aud[Audio to 20 kHz] -->|sample at 44.1 kHz| Nyq[Above Nyquist rate]
+  Nyq -->|low-pass filter| F((Faithful sound))
+```
+
 **Bad:** Sampling a 15 kHz tone at only 20 kHz. That is below the Nyquist rate for the content, so aliasing folds the tone into a false lower frequency.
+
+```mermaid
+flowchart LR
+  Tone[15 kHz tone] -.->|sample at 20 kHz| Under[Below Nyquist rate]
+  Under -.->|folds spectrum| Al{{Aliased false tone}}
+```
 
 ## Important Points
 

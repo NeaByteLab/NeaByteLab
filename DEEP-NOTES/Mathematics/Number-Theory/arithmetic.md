@@ -55,7 +55,19 @@ Think of arithmetic as the basic grammar of numbers. Just as grammar tells you h
 
 **Good:** Applying the order of operations to evaluate three plus four times two as eleven, since multiplication is done before addition. The fixed rule removes any ambiguity.
 
+```mermaid
+flowchart LR
+  Expr["3 + 4 * 2"] -->|multiply first| Mul["3 + 8"]
+  Mul -->|then add| Res(("equals 11"))
+```
+
 **Bad:** Reading three plus four times two left to right as fourteen. Ignoring the order of operations gives a wrong and inconsistent answer.
+
+```mermaid
+flowchart LR
+  Same["3 + 4 * 2"] -.->|left to right| Add["7 * 2"]
+  Add -.->|order ignored| Wrong{{"wrong answer 14"}}
+```
 
 ## Important Points
 

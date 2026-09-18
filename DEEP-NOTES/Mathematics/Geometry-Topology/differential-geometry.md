@@ -54,7 +54,20 @@ Imagine an ant crawling on the surface of a hilly landscape. It cannot see the t
 
 **Good:** Computing geodesics to find the shortest path a robot arm can follow on its curved configuration space. Geodesics are the natural straight lines there.
 
+```mermaid
+flowchart LR
+  CFG["Curved configuration space"] --> GEO["Compute geodesics"]
+  GEO -->|natural straight lines| PATH["Shortest path"]
+  PATH --> OK((Optimal arm motion))
+```
+
 **Bad:** Assuming a flat map preserves the true curvature of a sphere. Any flat chart distorts a curved surface, so intrinsic curvature is lost.
+
+```mermaid
+flowchart LR
+  SPH["Curved sphere"] -.->|flatten to a map| FLAT["Flat chart"]
+  FLAT -.-> BAD{{Curvature distorted and lost}}
+```
 
 ## Important Points
 

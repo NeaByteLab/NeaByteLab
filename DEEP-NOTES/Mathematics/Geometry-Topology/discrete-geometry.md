@@ -54,7 +54,20 @@ Think of arranging oranges in a crate to fit as many as possible. You cannot ben
 
 **Good:** Using a hexagonal lattice to pack circles in the plane at the maximum possible density. The lattice gives the provably tightest arrangement.
 
+```mermaid
+flowchart LR
+  CIRC["Circles in the plane"] --> HEX["Hexagonal lattice"]
+  HEX -->|maximize density| PACK["Tightest arrangement"]
+  PACK --> OK((Provably optimal packing))
+```
+
 **Bad:** Assuming a square grid packs circles as tightly as possible in the plane. The hexagonal arrangement is denser, so the square grid wastes space.
+
+```mermaid
+flowchart LR
+  SQ["Square grid packing"] -.->|assume optimal| DENS["Compare density"]
+  DENS -.-> BAD{{Hexagonal denser, space wasted}}
+```
 
 ## Important Points
 

@@ -51,7 +51,21 @@ Think of an abstract group as a set of dance moves described only by words. Hard
 
 **Good:** Representing rotations of space as three by three matrices, so composing rotations becomes multiplying matrices. Symmetry questions turn into concrete linear algebra.
 
+```mermaid
+flowchart LR
+  Rotations["Space rotations"] -->|assign matrices| Matrices["Three by three matrices"]
+  Matrices -->|compose as products| Linear["Concrete linear algebra"]
+  Linear --> Good((Symmetry made computable))
+```
+
 **Bad:** Assuming every representation reveals the full structure of the group. A trivial representation sending all elements to the identity matrix loses almost all information about the group.
+
+```mermaid
+flowchart LR
+  Trivial["Trivial representation"] -.->|all map to identity| Collapse["Elements indistinguishable"]
+  Collapse -.->|structure erased| Info["Group information"]
+  Info -.-> Bad{{Structure lost}}
+```
 
 ## Important Points
 

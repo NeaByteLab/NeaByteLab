@@ -53,7 +53,19 @@ Think of number systems as a set of nested measuring cups. The smallest cup hand
 
 **Good:** Choosing the smallest number system that fits a problem, such as using integers for a bank balance that can go negative but never needs fractions.
 
+```mermaid
+flowchart LR
+  Bal["bank balance"] -->|can go negative| Int["integers"]
+  Int -->|no fractions needed| Fit(("right-sized system"))
+```
+
 **Bad:** Forcing every quantity into whole numbers, then being unable to express one third or the square root of two. The wrong system hides valid answers.
+
+```mermaid
+flowchart LR
+  Whole["force whole numbers only"] -.->|cannot hold 1/3| Miss["value not expressible"]
+  Miss -.->|too small a system| Fail{{"valid answers hidden"}}
+```
 
 ## Important Points
 

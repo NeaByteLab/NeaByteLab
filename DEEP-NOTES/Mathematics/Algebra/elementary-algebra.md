@@ -51,7 +51,21 @@ Solving an equation is like unwrapping a gift wrapped in several layers. The var
 
 **Good:** Solving 3x + 2 = 11 by subtracting 2 to get 3x = 9, then dividing by 3 to find x = 3. Each step keeps both sides equal.
 
+```mermaid
+flowchart LR
+  A["3x + 2 = 11"] -->|subtract 2| B["3x = 9"]
+  B -->|divide by 3| C["x = 3"]
+  C --> Good((Correct solution))
+```
+
 **Bad:** Combining 2x and 3 into 5x because they sit next to each other. Only like terms combine, and a variable term cannot merge with a constant.
+
+```mermaid
+flowchart LR
+  D["2x and 3"] -.->|unlike terms| E["Merge into 5x"]
+  E -.->|constant absorbed| F["Invalid expression"]
+  F -.-> Bad{{Wrong simplification}}
+```
 
 ## Important Points
 

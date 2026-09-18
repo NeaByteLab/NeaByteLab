@@ -53,7 +53,19 @@ Think of a recipe versus a finished dish. Model theory tastes the dish and asks 
 
 **Good:** Using cut elimination in the sequent calculus to show a logic has the subformula property, so every provable statement has a direct proof using only its own parts.
 
+```mermaid
+flowchart LR
+  Proof["Proof with cuts"] -->|cut elimination| Direct["Cut-free proof"]
+  Direct -->|only own subformulas| SubProp((Subformula property))
+```
+
 **Bad:** Claiming a theory is consistent just because no contradiction has been found yet. Absence of a known contradiction is not a proof-theoretic consistency argument.
+
+```mermaid
+flowchart LR
+  None["No contradiction found yet"] -.->|no formal argument| Gap["Consistency unproven"]
+  Gap -.->|absence is not proof| Weak{{Not a consistency proof}}
+```
 
 ## Important Points
 

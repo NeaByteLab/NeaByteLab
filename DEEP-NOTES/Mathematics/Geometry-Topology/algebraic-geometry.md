@@ -55,7 +55,20 @@ Think of a shape and its equation as two languages describing the same object. A
 
 **Good:** Using elliptic curves over finite fields to build a compact, secure public-key system. Their group structure gives strong security with small keys.
 
+```mermaid
+flowchart LR
+  EC["Elliptic curve over finite field"] --> GRP["Group structure"]
+  GRP -->|hard discrete log| KEY["Public-key system"]
+  KEY --> OK((Strong security, small keys))
+```
+
 **Bad:** Expecting a smooth-surface theorem to apply at a sharp cusp of a curve. Singular points violate the smoothness the theorem assumes.
+
+```mermaid
+flowchart LR
+  CUSP["Sharp cusp of a curve"] -.->|apply smooth-surface theorem| SING["Singular point"]
+  SING -.-> BAD{{Smoothness assumption violated}}
+```
 
 ## Important Points
 

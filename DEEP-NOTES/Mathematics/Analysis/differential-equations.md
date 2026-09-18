@@ -53,7 +53,20 @@ Think of a recipe written in terms of change rather than fixed amounts. It does 
 
 **Good:** Modeling radioactive decay with an equation stating the rate of loss is proportional to the amount present. The solution is a clean exponential that matches measured decay closely.
 
+```mermaid
+flowchart LR
+  LAW["Rate of loss proportional to amount"] --> DE["Linear decay equation"]
+  DE -->|solve| EXP["Exponential solution"]
+  EXP --> OK((Matches measured decay))
+```
+
 **Bad:** Expecting a simple formula for a general nonlinear system like turbulent fluid flow. Such equations rarely have closed forms, so a formula-only approach fails and numerics are required.
+
+```mermaid
+flowchart LR
+  TURB["Turbulent flow equation"] -.->|seek closed form| FORM["Formula-only approach"]
+  FORM -.-> BAD{{No closed form, method fails}}
+```
 
 ## Important Points
 

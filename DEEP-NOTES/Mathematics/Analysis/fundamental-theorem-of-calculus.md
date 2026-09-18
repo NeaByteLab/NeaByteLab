@@ -54,7 +54,20 @@ Think of filling a bathtub. The flow rate from the tap is the derivative, and th
 
 **Good:** Computing the area under a parabola by finding its antiderivative and subtracting endpoint values. One antiderivative and two substitutions replace an infinite sum of slices.
 
+```mermaid
+flowchart LR
+  PAR["Area under parabola"] --> ANTI["Find antiderivative"]
+  ANTI -->|F(b) minus F(a)| VAL["Two substitutions"]
+  VAL --> OK((Exact area computed))
+```
+
 **Bad:** Applying the second part to an integrand that has a jump discontinuity in the interval. The theorem assumes continuity, so the endpoint subtraction can give a wrong area.
+
+```mermaid
+flowchart LR
+  JUMP["Integrand with jump"] -.->|ignore continuity| SUB["Endpoint subtraction"]
+  SUB -.-> BAD{{Wrong area, theorem misapplied}}
+```
 
 ## Important Points
 

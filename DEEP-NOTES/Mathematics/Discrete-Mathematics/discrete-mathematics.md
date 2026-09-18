@@ -54,7 +54,19 @@ Think of a staircase versus a ramp. A ramp is continuous, you can stand at any h
 
 **Good:** Counting how many distinct passwords of length eight exist over a fixed alphabet. The set is finite and separable, so a counting rule gives an exact answer.
 
+```mermaid
+flowchart LR
+  PW[Length-8 passwords] -->|finite, separable set| Rule[Apply product rule]
+  Rule -->|exact count| Ans((Precise total))
+```
+
 **Bad:** Using discrete methods to model the smooth flow of heat through a metal bar. That is a continuous process better handled by calculus and differential equations.
+
+```mermaid
+flowchart LR
+  Heat[Heat flow in a bar] -.->|force into discrete steps| Mis[Wrong model]
+  Mis -.->|continuum ignored| Fail{{Loses smooth behavior}}
+```
 
 ## Important Points
 

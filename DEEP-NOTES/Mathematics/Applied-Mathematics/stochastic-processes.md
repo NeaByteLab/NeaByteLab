@@ -53,7 +53,21 @@ Picture a drunkard walking home, taking one random step left or right each momen
 
 **Good:** Modeling arrivals at a call center as a Poisson process to predict staffing needs. The random-arrival model matches reality and gives actionable staffing numbers.
 
+```mermaid
+flowchart LR
+  Arrivals[Call arrivals] -->|Poisson process| Rate[Constant average rate]
+  Rate -->|predict load| Staffing[Staffing estimate]
+  Staffing --> Good((Actionable numbers))
+```
+
 **Bad:** Modeling a strongly trending, autocorrelated series as independent increments. Treating dependent steps as independent throws away the very structure that drives the series.
+
+```mermaid
+flowchart LR
+  Series[Autocorrelated series] -.->|assume independent| Increments[Independent increments]
+  Increments -.->|discard structure| Trend[Trend ignored]
+  Trend -.-> Bad{{Structure thrown away}}
+```
 
 ## Important Points
 

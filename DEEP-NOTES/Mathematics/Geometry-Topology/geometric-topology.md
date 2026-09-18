@@ -54,7 +54,20 @@ Think about tying a shoelace and then gluing its ends into a loop. You can push 
 
 **Good:** Using a knot invariant to prove the trefoil knot cannot be untangled into a plain circle. The invariant distinguishes the two embeddings rigorously.
 
+```mermaid
+flowchart LR
+  TRE["Trefoil knot"] --> INV["Knot invariant"]
+  INV -->|differs from unknot| CMP["Compare embeddings"]
+  CMP --> OK((Cannot untangle, proven distinct))
+```
+
 **Bad:** Assuming higher-dimensional intuition transfers directly to dimension four. Dimension four has exotic behavior that lower and higher dimensions lack.
+
+```mermaid
+flowchart LR
+  HD["Higher-dimensional intuition"] -.->|transfer to dimension four| D4["Apply directly"]
+  D4 -.-> BAD{{Exotic four-dimensional behavior}}
+```
 
 ## Important Points
 

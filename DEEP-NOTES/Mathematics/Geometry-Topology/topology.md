@@ -54,7 +54,20 @@ Imagine every shape is made of infinitely stretchy clay you may bend and pull bu
 
 **Good:** Recognizing that a coffee mug and a doughnut are the same shape because each has one hole. Topology captures exactly this deformation equivalence.
 
+```mermaid
+flowchart LR
+  MUG["Coffee mug"] --> DEF["Continuous deformation"]
+  DEF -->|one hole preserved| TORUS["Doughnut"]
+  TORUS --> OK((Same shape topologically))
+```
+
 **Bad:** Using topology alone to measure the exact length of a curve. Topology ignores distance, so length is simply invisible to it.
+
+```mermaid
+flowchart LR
+  CURVE["A curve"] -.->|ask topology for length| TOP["Topology ignores distance"]
+  TOP -.-> BAD{{Length invisible to topology}}
+```
 
 ## Important Points
 

@@ -50,7 +50,21 @@ Think of an equation as a balance scale. Both pans hold the same weight, so the 
 
 **Good:** Writing 2x + 1 = 9 and subtracting 1 then dividing by 2 to find x = 4. Every step keeps both sides equal, so the answer is exact.
 
+```mermaid
+flowchart LR
+  A["2x + 1 = 9"] -->|subtract 1| B["2x = 8"]
+  B -->|divide by 2| C["x = 4"]
+  C --> Good((Both sides stay equal))
+```
+
 **Bad:** Dividing only one side of an equation by 2 while leaving the other unchanged. The balance breaks and the result no longer means what you started with.
+
+```mermaid
+flowchart LR
+  D["2x = 8"] -.->|divide one side only| E["x = 8"]
+  E -.->|balance broken| F["False equation"]
+  F -.-> Bad{{Meaning lost}}
+```
 
 ## Important Points
 

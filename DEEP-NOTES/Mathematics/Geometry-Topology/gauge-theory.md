@@ -54,7 +54,20 @@ Imagine every point of space has its own tilted coordinate frame, and you can re
 
 **Good:** Using gauge-theory invariants to distinguish smooth structures on four-dimensional manifolds. The Yang-Mills equations reveal differences no classical tool detects.
 
+```mermaid
+flowchart LR
+  M4["Four-dimensional manifolds"] --> YM["Yang-Mills equations"]
+  YM -->|gauge invariants| INV["Distinguishing data"]
+  INV --> OK((Smooth structures separated))
+```
+
 **Bad:** Treating the gauge field itself as a directly measurable quantity. Only gauge-invariant data like curvature and loop holonomies are physical.
+
+```mermaid
+flowchart LR
+  FIELD["Gauge field"] -.->|treat as measurable| MEAS["Read off raw value"]
+  MEAS -.-> BAD{{Not gauge invariant, unphysical}}
+```
 
 ## Important Points
 

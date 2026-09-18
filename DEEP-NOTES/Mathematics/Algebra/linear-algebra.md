@@ -51,7 +51,21 @@ Think of a vector space as a room and vectors as arrows from one fixed corner. A
 
 **Good:** Representing a rotation of the plane as a two by two matrix and applying it to every point at once. The matrix captures the entire transformation compactly.
 
+```mermaid
+flowchart LR
+  Rotation["Plane rotation"] -->|encode as matrix| Matrix["Two by two matrix"]
+  Matrix -->|apply to all points| Transform["Whole plane rotated"]
+  Transform --> Good((Compact transformation))
+```
+
 **Bad:** Modeling a curved, nonlinear relationship with a single linear map and expecting it to fit. Linear maps keep lines straight, so genuine curvature cannot be captured without extension.
+
+```mermaid
+flowchart LR
+  Curve["Curved relationship"] -.->|force linear map| Straight["Lines stay straight"]
+  Straight -.->|curvature dropped| Fit["Poor fit"]
+  Fit -.-> Bad{{Curvature lost}}
+```
 
 ## Important Points
 

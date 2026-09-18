@@ -53,7 +53,19 @@ Think of spelling names on a phone using "A as in Alpha, B as in Bravo." A singl
 
 **Good:** Using a Hamming code to correct any single-bit error in a block. The minimum distance of three lets the decoder pinpoint and flip the wrong bit automatically.
 
+```mermaid
+flowchart LR
+  H[Hamming code] -->|min distance 3| L[Locate flipped bit]
+  L -->|flip it back| C((Corrected block))
+```
+
 **Bad:** Adding a single parity bit and expecting to fix errors. One parity bit only detects an odd number of flips, it cannot locate or correct them.
+
+```mermaid
+flowchart LR
+  P[Single parity bit] -.->|distance 2 only| Det[Detect odd flips]
+  Det -.->|no position info| F{{Cannot correct error}}
+```
 
 ## Important Points
 

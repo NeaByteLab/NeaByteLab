@@ -53,7 +53,19 @@ Think of theoretical computer science as the physics of computing. Physics does 
 
 **Good:** Proving the halting problem is undecidable, which tells engineers not to seek a universal program that predicts whether any program stops. It sets a firm, useful limit.
 
+```mermaid
+flowchart LR
+  HP[Halting problem] -->|proved undecidable| Limit[Firm boundary]
+  Limit -->|guides engineers| Save((No wasted effort))
+```
+
 **Bad:** Assuming that because a problem is computable, it is also practical to solve. Many computable problems require time that grows so fast they are useless in practice.
+
+```mermaid
+flowchart LR
+  Comp[Computable in principle] -.->|assume practical| Cost[Explosive runtime]
+  Cost -.->|useless at scale| Imp{{Intractable in practice}}
+```
 
 ## Important Points
 

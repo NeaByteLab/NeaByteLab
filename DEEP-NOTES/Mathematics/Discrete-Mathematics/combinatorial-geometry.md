@@ -53,7 +53,19 @@ Imagine scattering matchsticks and marbles on a table. You are not asking how lo
 
 **Good:** Bounding the number of point-line incidences among n points and n lines using the Szemeredi-Trotter theorem. The geometric constraint yields a far smaller count than naive multiplication.
 
+```mermaid
+flowchart LR
+  PL[n points, n lines] -->|Szemeredi-Trotter| G[Geometric constraint]
+  G -->|far below n squared| T((Tight incidence bound))
+```
+
 **Bad:** Assuming any bipartite incidence pattern between points and lines is realizable. Geometry forbids many patterns, so pure combinatorial counts overestimate what can actually occur.
+
+```mermaid
+flowchart LR
+  BP[Any bipartite pattern] -.->|assume realizable| Over[Overcounts incidences]
+  Over -.->|geometry forbids it| NR{{Non-realizable pattern}}
+```
 
 ## Important Points
 

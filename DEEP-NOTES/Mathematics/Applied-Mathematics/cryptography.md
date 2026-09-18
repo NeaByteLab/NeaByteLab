@@ -53,7 +53,21 @@ Public-key cryptography is like a mailbox with a slot. Anyone can drop a letter 
 
 **Good:** Storing user passwords as salted hashes so a database breach does not reveal the actual passwords. Even the operator cannot read them, and each hash resists reversal.
 
+```mermaid
+flowchart LR
+  Password[User password] -->|salt and hash| Digest[Salted hash]
+  Digest -->|stored| Breach[Database breach]
+  Breach --> Good((Passwords stay secret))
+```
+
 **Bad:** Inventing a homemade encryption scheme and trusting it because it looks confusing. Untested schemes almost always have flaws, and security by obscurity fails against real attackers.
+
+```mermaid
+flowchart LR
+  Homemade[Homemade scheme] -.->|looks confusing| Trust[Assumed secure]
+  Trust -.->|hidden flaw| Attacker[Real attacker]
+  Attacker -.-> Bad{{Scheme broken}}
+```
 
 ## Important Points
 

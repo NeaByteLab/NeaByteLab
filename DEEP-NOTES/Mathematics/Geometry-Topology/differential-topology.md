@@ -54,7 +54,20 @@ Imagine two roads that connect the same towns and can be bent into each other to
 
 **Good:** Using Morse theory to reconstruct a manifold shape from a smooth height function critical points. The smooth structure encodes the topology cleanly.
 
+```mermaid
+flowchart LR
+  HT["Smooth height function"] --> CRIT["Critical points"]
+  CRIT -->|Morse theory| SHAPE["Manifold structure"]
+  SHAPE --> OK((Topology reconstructed))
+```
+
 **Bad:** Assuming two homeomorphic manifolds are automatically diffeomorphic. In dimension four especially, they can carry different smooth structures.
+
+```mermaid
+flowchart LR
+  HOMEO["Homeomorphic manifolds"] -.->|assume diffeomorphic| SMOOTH["Ignore smooth structure"]
+  SMOOTH -.-> BAD{{Distinct smooth structures possible}}
+```
 
 ## Important Points
 

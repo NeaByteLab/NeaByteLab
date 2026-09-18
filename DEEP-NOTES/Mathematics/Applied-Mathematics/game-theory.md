@@ -54,7 +54,21 @@ Two drivers race toward a one-lane bridge from opposite ends. Each wants to cros
 
 **Good:** Modeling an auction as a game to design rules that make honest bidding each bidder's best strategy. The theory directly shapes a mechanism that works.
 
+```mermaid
+flowchart LR
+  Auction[Auction as game] -->|design rules| Honest[Honest bidding best]
+  Honest -->|dominant strategy| Bidders[Bidders comply]
+  Bidders --> Good((Mechanism works))
+```
+
 **Bad:** Assuming both firms in a price war will cooperate to keep prices high without any binding agreement. Each has incentive to undercut, so the cooperative outcome is unstable and collapses.
+
+```mermaid
+flowchart LR
+  High[Keep prices high] -.->|no agreement| Incentive[Incentive to undercut]
+  Incentive -.->|each defects| Collapse[Cooperation breaks]
+  Collapse -.-> Bad{{Price war}}
+```
 
 ## Important Points
 

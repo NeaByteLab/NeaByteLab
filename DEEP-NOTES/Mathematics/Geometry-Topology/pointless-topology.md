@@ -54,7 +54,20 @@ Think of describing a territory only by naming its regions and stating which reg
 
 **Good:** Using locales to model a space in constructive mathematics where points are not available. The lattice of open sets still supports full topological reasoning.
 
+```mermaid
+flowchart LR
+  CONS["Constructive setting, no points"] --> LOC["Locale: lattice of opens"]
+  LOC -->|open sets carry structure| REASON["Topological reasoning"]
+  REASON --> OK((Space modeled without points))
+```
+
 **Bad:** Insisting every locale comes from an ordinary space of points. Some locales have no underlying points yet remain perfectly meaningful.
+
+```mermaid
+flowchart LR
+  LOC["A locale"] -.->|assume points exist| PTS["Demand point space"]
+  PTS -.-> BAD{{Pointless locale, no underlying points}}
+```
 
 ## Important Points
 

@@ -53,7 +53,21 @@ Picture zooming into a smooth curve with a microscope. The more you magnify one 
 
 **Good:** Differentiating a polynomial term by term with the power rule to get a clean, exact slope function. Each rule applies directly and the result holds everywhere.
 
+```mermaid
+flowchart LR
+  POLY["Polynomial"] --> PR["Power rule per term"]
+  PR -->|smooth everywhere| SLOPE["Exact slope function"]
+  SLOPE --> OK((Derivative valid everywhere))
+```
+
 **Bad:** Differentiating an absolute-value function at its corner and reporting a single slope. The left and right slopes disagree there, so no derivative exists at that point.
+
+```mermaid
+flowchart LR
+  ABS["Absolute-value corner"] -.->|left slope| L["-1"]
+  ABS -.->|right slope| R["+1"]
+  L -.-> BAD{{Slopes disagree, no derivative}}
+  R -.-> BAD
 
 ## Important Points
 
@@ -73,3 +87,4 @@ Picture zooming into a smooth curve with a microscope. The more you magnify one 
 - Chain, product, and quotient rules make the process mechanical.
 - Differentiability requires smoothness, so corners and jumps block it.
 - _Differentiation zooms in until the curve looks straight and reads its slope._
+```

@@ -52,7 +52,19 @@ Think of a librarian who promises to file a card for any rule you can state, inc
 
 **Good:** Using naive set notation to describe the set of even numbers or the intersection of two finite sets. These ordinary cases never trigger a paradox.
 
+```mermaid
+flowchart LR
+  Prop["Even-number property"] -->|form the set| Set["Set of even numbers"]
+  Set -->|no self-reference| Safe((Well-defined set))
+```
+
 **Bad:** Forming the universal set of all sets, or the set of all sets that do not contain themselves. These self-referential constructions collapse into contradiction.
+
+```mermaid
+flowchart LR
+  All["Set of non-self-membered sets"] -.->|ask if it contains itself| Both["True and false at once"]
+  Both -.->|self-reference| Para{{Russell's paradox}}
+```
 
 ## Important Points
 

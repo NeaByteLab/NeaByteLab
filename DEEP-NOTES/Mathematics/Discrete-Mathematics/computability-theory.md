@@ -53,7 +53,19 @@ Imagine a librarian who promises to tell you, for any book, whether reading it w
 
 **Good:** Citing the undecidability of the halting problem to explain why a compiler cannot flag every infinite loop. It correctly bounds what tooling can promise.
 
+```mermaid
+flowchart LR
+  HP[Halting problem undecidable] -->|bounds tooling| C[Compiler limits]
+  C -->|honest promise| Real((Realistic guarantees))
+```
+
 **Bad:** Believing a smart-enough analyzer could decide whether any program halts. No algorithm can, so the effort is provably doomed regardless of cleverness.
+
+```mermaid
+flowchart LR
+  An[Universal halt analyzer] -.->|self-reference trap| Con[Contradiction by diagonalization]
+  Con -.->|no algorithm exists| Imp{{Provably impossible}}
+```
 
 ## Important Points
 

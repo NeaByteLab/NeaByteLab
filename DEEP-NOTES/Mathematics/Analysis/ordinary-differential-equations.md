@@ -53,7 +53,20 @@ Imagine a marble rolling in a bowl. Its acceleration depends on where it sits on
 
 **Good:** Solving a linear first-order ODE for cooling with an integrating factor to get an exact exponential approach to room temperature. The linear structure makes a clean closed-form solution possible.
 
+```mermaid
+flowchart LR
+  COOL["Linear first-order cooling ODE"] --> IF["Integrating factor"]
+  IF -->|integrate| EXP["Exponential approach to room temperature"]
+  EXP --> OK((Exact closed form))
+```
+
 **Bad:** Assuming a general nonlinear ODE like the full pendulum equation has a simple elementary solution. Its exact solution needs special functions or numerics, so a naive formula guess is wrong.
+
+```mermaid
+flowchart LR
+  PEND["Full nonlinear pendulum equation"] -.->|guess elementary formula| ELEM["Naive closed form"]
+  ELEM -.-> BAD{{No elementary solution}}
+```
 
 ## Important Points
 

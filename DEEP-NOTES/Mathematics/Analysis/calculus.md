@@ -54,7 +54,20 @@ Imagine driving and watching two things. The speedometer shows your speed right 
 
 **Good:** Finding the maximum profit by setting the derivative of a profit function to zero and checking the sign change. The derivative pinpoints exactly where the rate of change flips from rising to falling.
 
+```mermaid
+flowchart LR
+  P["Profit function"] --> D["Set derivative to zero"]
+  D -->|sign change check| C["Rate flips rising to falling"]
+  C --> OK((Maximum profit found))
+```
+
 **Bad:** Applying standard calculus rules to a function with a sharp corner or jump. The derivative does not exist there, so differentiating anyway gives a meaningless result.
+
+```mermaid
+flowchart LR
+  CORNER["Function with corner or jump"] -.->|apply rules anyway| DIFF["Force differentiation"]
+  DIFF -.-> BAD{{Derivative undefined, meaningless result}}
+```
 
 ## Important Points
 

@@ -54,7 +54,21 @@ Think of entropy as how surprised you are on average. A message saying "the sun 
 
 **Good:** Compressing English text with an entropy-based coder that gives short codes to common letters and long codes to rare ones. It approaches the theoretical minimum size.
 
+```mermaid
+flowchart LR
+  Text[English text] -->|measure entropy| Coder[Entropy-based coder]
+  Coder -->|short codes common| Compact[Compact output]
+  Compact --> Good((Near entropy limit))
+```
+
 **Bad:** Trying to compress already-random data like an encrypted file and expecting it to shrink. Random data has maximum entropy, so there is no redundancy left to remove.
+
+```mermaid
+flowchart LR
+  Random[Encrypted file] -.->|maximum entropy| None[No redundancy]
+  None -.->|nothing to remove| Compress[Compression attempt]
+  Compress -.-> Bad{{No size reduction}}
+```
 
 ## Important Points
 

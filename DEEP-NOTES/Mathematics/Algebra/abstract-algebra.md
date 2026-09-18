@@ -51,7 +51,21 @@ Think of abstract algebra like studying board games by their rules, not their pi
 
 **Good:** Recognizing that clock arithmetic, where 11 plus 2 wraps to 1, forms a group under addition modulo 12. The group axioms hold, so group theorems apply directly.
 
+```mermaid
+flowchart LR
+  Clock["Clock: mod 12 addition"] -->|check axioms| Axioms["Identity and inverses hold"]
+  Axioms -->|is a group| Theorems["Group theorems apply"]
+  Theorems --> Good((Structure understood))
+```
+
 **Bad:** Assuming every set with a multiplication is a group. If elements lack inverses, like the integers under multiplication, the group axioms fail and its theorems do not apply.
+
+```mermaid
+flowchart LR
+  Integers["Integers under multiplication"] -.->|no inverse for 2| Fail["Inverse axiom fails"]
+  Fail -.->|not a group| Apply["Apply group theorems"]
+  Apply -.-> Bad{{Wrong conclusions}}
+```
 
 ## Important Points
 

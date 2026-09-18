@@ -52,7 +52,19 @@ Imagine a rulebook so complete it claims to answer every question about a game. 
 
 **Good:** Citing incompleteness to explain why Peano arithmetic cannot prove its own consistency, so we appeal to a stronger system to justify it. This is the second theorem in action.
 
+```mermaid
+flowchart LR
+  PA["Peano arithmetic"] -->|second theorem| NoSelf["Cannot prove own consistency"]
+  NoSelf -->|appeal upward| Strong((Stronger system certifies it))
+```
+
 **Bad:** Claiming incompleteness proves "mathematics is broken" or that anything can be true. The theorems are precise limits, not a license for vagueness.
+
+```mermaid
+flowchart LR
+  Misread["Read as math is broken"] -.->|ignores precise limits| Vague["Anything goes"]
+  Vague -.->|misuses the theorem| Wrong{{False conclusion}}
+```
 
 ## Important Points
 

@@ -54,7 +54,21 @@ Think of probability as a fixed budget of one unit of belief that you spread acr
 
 **Good:** Using Bayes' rule to combine a test's accuracy with a disease's base rate, correctly finding that a positive result on a rare disease is often a false alarm.
 
+```mermaid
+flowchart LR
+  Base[Low base rate] -->|Bayes' rule| Combine[Combine with accuracy]
+  Combine -->|posterior| Positive[Positive result weighed]
+  Positive --> Good((False alarm spotted))
+```
+
 **Bad:** Assuming a positive test on a rare disease means the person almost certainly has it. Ignoring the low base rate leads to a wildly overconfident and wrong conclusion.
+
+```mermaid
+flowchart LR
+  Test[Positive test] -.->|ignore base rate| Assume[Assume disease certain]
+  Assume -.->|skips priors| Overconfident[Overconfident claim]
+  Overconfident -.-> Bad{{Base rate fallacy}}
+```
 
 ## Important Points
 

@@ -54,7 +54,21 @@ Imagine tasting a spoonful of soup to judge the whole pot. You do not drink it a
 
 **Good:** Running a randomized trial, reporting the effect size with a confidence interval, and stating the sample size. Readers can judge both the effect and how solid the evidence is.
 
+```mermaid
+flowchart LR
+  Trial[Randomized trial] -->|effect size| Interval[Confidence interval]
+  Interval -->|report sample size| Evidence[Transparent evidence]
+  Evidence --> Good((Judgeable result))
+```
+
 **Bad:** Testing twenty hypotheses and trumpeting the one with a low p-value as a discovery. With that many tests, a false positive is expected by chance, so the finding is likely noise.
+
+```mermaid
+flowchart LR
+  Twenty[Twenty hypotheses] -.->|no correction| Low[One low p-value]
+  Low -.->|expected by chance| Claim[Claimed discovery]
+  Claim -.-> Bad{{Likely false positive}}
+```
 
 ## Important Points
 

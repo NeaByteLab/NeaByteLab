@@ -53,7 +53,19 @@ Think of natural numbers as an endless staircase with a first step. You always k
 
 **Good:** Using induction to prove a formula holds for every natural number by checking the first case and showing each case forces the next. This covers infinitely many cases with one argument.
 
+```mermaid
+flowchart LR
+  Base["prove base case"] -->|inductive step| Next["each case forces the next"]
+  Next -->|successor chain| All(("holds for all naturals"))
+```
+
 **Bad:** Using natural numbers to record a temperature that drops below zero. Naturals have no negatives, so the quantity does not fit and you need integers instead.
+
+```mermaid
+flowchart LR
+  Temp["temperature below zero"] -.->|no negatives available| Gap["value has no natural"]
+  Gap -.->|wrong number system| Fail{{"cannot represent it"}}
+```
 
 ## Important Points
 

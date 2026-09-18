@@ -53,7 +53,19 @@ Think of boxes that can hold objects, and can also hold other boxes. An empty bo
 
 **Good:** Defining an ordered pair, a function, and then the real numbers step by step from sets. This shows set theory can express the objects of analysis.
 
+```mermaid
+flowchart LR
+  Sets["Pure sets"] -->|build ordered pairs| Func["Functions"]
+  Func -->|construct step by step| Reals((Real numbers))
+```
+
 **Bad:** Forming "the set of all sets that do not contain themselves." This unrestricted comprehension leads to Russell's paradox and must be avoided.
+
+```mermaid
+flowchart LR
+  Comp["Unrestricted comprehension"] -.->|set of non-self-members| Ask["Does it contain itself?"]
+  Ask -.->|both answers fail| Para{{Russell's paradox}}
+```
 
 ## Important Points
 

@@ -53,7 +53,20 @@ Picture a leaf floating down a stream. The current carries it steadily downstrea
 
 **Good:** Modeling a stock price with geometric Brownian motion, where drift sets expected growth and diffusion sets volatility. This underlies the Black-Scholes option pricing framework.
 
+```mermaid
+flowchart LR
+  DRIFT["Drift plus diffusion"] --> GBM["Geometric Brownian motion"]
+  GBM -->|price dynamics| BS["Black-Scholes framework"]
+  BS --> OK((Option prices))
+```
+
 **Bad:** Applying the ordinary chain rule to a function of Brownian motion. Brownian paths are too rough for that, so you must use Ito's lemma with its extra correction term.
+
+```mermaid
+flowchart LR
+  BROWN["Function of Brownian motion"] -.->|ordinary chain rule| ROUGH["Ignore path roughness"]
+  ROUGH -.-> BAD{{Missing Ito correction term}}
+```
 
 ## Important Points
 

@@ -54,7 +54,20 @@ Think of a machine on an assembly line that takes an object in and gives a trans
 
 **Good:** Treating the quantum energy observable as a self-adjoint operator whose spectrum gives the allowed energy levels. Self-adjointness guarantees those measured values are real.
 
+```mermaid
+flowchart LR
+  OBS["Energy observable"] --> SA["Self-adjoint operator"]
+  SA -->|spectrum| LEV["Allowed energy levels"]
+  LEV --> OK((Real measured values))
+```
+
 **Bad:** Assuming a differential operator is bounded like a matrix. Differentiation is unbounded, so applying bounded-operator theorems to it without care gives false conclusions.
+
+```mermaid
+flowchart LR
+  DIFF["Differential operator"] -.->|assume bounded like matrix| THM["Bounded-operator theorems"]
+  THM -.-> BAD{{Unbounded, false conclusions}}
+```
 
 ## Important Points
 

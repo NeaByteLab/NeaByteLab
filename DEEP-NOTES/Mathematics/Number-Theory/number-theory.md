@@ -53,7 +53,19 @@ Think of the integers as a huge set of LEGO structures, and the primes as the in
 
 **Good:** Proving that there are infinitely many primes by assuming a finite list, multiplying them, and adding one to force a new prime factor. This uses only divisibility and pure logic.
 
+```mermaid
+flowchart LR
+  List["assume finite prime list"] -->|multiply all, add one| New["number with new prime factor"]
+  New -->|contradiction| Inf(("infinitely many primes"))
+```
+
 **Bad:** Trying to settle a claim about all integers by checking the first million cases and calling it proven. Number theory is full of patterns that hold for huge ranges and then fail.
+
+```mermaid
+flowchart LR
+  Check["check first million cases"] -.->|no general proof| Pattern["pattern assumed forever"]
+  Pattern -.->|fails at large n| Break{{"counterexample appears"}}
+```
 
 ## Important Points
 

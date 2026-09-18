@@ -53,7 +53,20 @@ Picture a crumpled sheet of foil that you slowly heat so it relaxes toward a smo
 
 **Good:** Using Ricci flow to smooth an irregular metric on a manifold until its geometry becomes standard and classifiable. The flow acts like a heat equation for curvature, evening out bumps.
 
+```mermaid
+flowchart LR
+  M["Irregular metric"] --> RF["Ricci flow"]
+  RF -->|heat equation for curvature| SM["Smoothed geometry"]
+  SM --> OK((Standard, classifiable shape))
+```
+
 **Bad:** Assuming every geometric flow runs forever without trouble. Flows can develop singularities where curvature blows up, so they need careful surgery or analysis to continue.
+
+```mermaid
+flowchart LR
+  FLOW["Geometric flow"] -.->|run indefinitely| SING["Curvature blows up"]
+  SING -.-> BAD{{Singularity, flow cannot continue}}
+```
 
 ## Important Points
 

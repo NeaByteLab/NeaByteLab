@@ -54,7 +54,19 @@ Think of a subway map. The stations are vertices and the track segments are edge
 
 **Good:** Modeling a road network as a weighted graph and running Dijkstra's algorithm to find the shortest route. Vertices are intersections and edge weights are distances.
 
+```mermaid
+flowchart LR
+  Road[Road network] -->|vertices and weighted edges| G[Weighted graph]
+  G -->|Dijkstra| SP((Shortest route))
+```
+
 **Bad:** Using a graph to model a quantity that changes continuously over time, like temperature, where there are no discrete nodes or pairwise links to represent.
+
+```mermaid
+flowchart LR
+  Temp[Continuous temperature] -.->|no discrete nodes| NoE[No pairwise edges]
+  NoE -.->|nothing to connect| Bad{{Graph model fails}}
+```
 
 ## Important Points
 

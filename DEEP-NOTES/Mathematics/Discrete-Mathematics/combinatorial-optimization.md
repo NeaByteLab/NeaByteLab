@@ -54,7 +54,19 @@ Think of packing a suitcase for a trip with a strict weight limit. Every subset 
 
 **Good:** Modeling delivery routing as a traveling salesman problem and using a proven approximation to get a tour within a known factor of optimal. It is fast and quality-bounded.
 
+```mermaid
+flowchart LR
+  R[Delivery routing] -->|model as TSP| Ap[Proven approximation]
+  Ap -->|bounded factor| Q((Fast quality tour))
+```
+
 **Bad:** Solving a 1,000-city traveling salesman instance by brute-force enumeration of all tours. The number of tours explodes factorially, so it never finishes.
+
+```mermaid
+flowchart LR
+  BF[1000-city brute force] -.->|enumerate all tours| Exp[Factorial explosion]
+  Exp -.->|never terminates| NF{{No solution in time}}
+```
 
 ## Important Points
 

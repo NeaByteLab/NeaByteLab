@@ -53,7 +53,21 @@ Picture a marble rolling on a landscape of hills and valleys. Where it goes next
 
 **Good:** Modeling a pendulum with a differential equation, finding its fixed points, and proving the downward rest point is stable. The analysis explains exactly how the system settles.
 
+```mermaid
+flowchart LR
+  Pendulum[Pendulum equation] -->|find fixed points| Rest[Downward rest point]
+  Rest -->|stability analysis| Settle[Perturbations decay]
+  Settle --> Good((Stable equilibrium))
+```
+
 **Bad:** Claiming a precise ten-day weather forecast from a chaotic model. Sensitive dependence means tiny measurement errors explode, so the specific forecast is meaningless that far out.
+
+```mermaid
+flowchart LR
+  Error[Tiny measurement error] -.->|sensitive dependence| Grow[Error explodes]
+  Grow -.->|ten days out| Forecast[Precise forecast]
+  Forecast -.-> Bad{{Meaningless prediction}}
+```
 
 ## Important Points
 

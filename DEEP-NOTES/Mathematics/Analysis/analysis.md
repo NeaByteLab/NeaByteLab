@@ -57,7 +57,20 @@ Think of walking toward a wall by always halving the remaining distance. You nev
 
 **Good:** Using the epsilon-delta definition to prove that a specific function is continuous at a point. The argument works for any tolerance you demand, so the claim is airtight.
 
+```mermaid
+flowchart LR
+  EPS["Any epsilon > 0"] --> DELTA["Find matching delta"]
+  DELTA --> CHECK["Output within epsilon"]
+  CHECK --> OK((Continuity proven))
+```
+
 **Bad:** Treating an infinitesimal as a plain number you can freely divide by without justification. That loose reasoning can produce contradictions and hides where a proof actually breaks.
+
+```mermaid
+flowchart LR
+  INF["Infinitesimal as number"] -.->|divide freely| STEP["Unjustified step"]
+  STEP -.-> BAD{{Contradiction, hidden gap}}
+```
 
 ## Important Points
 

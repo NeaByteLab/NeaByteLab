@@ -54,7 +54,21 @@ Driving a car in your lane is control in action. Your eyes measure how far you h
 
 **Good:** A PID controller on a drone reads its tilt, compares to level, and adjusts motor speeds many times a second. Tuned well, it holds steady hover even in light wind.
 
+```mermaid
+flowchart LR
+  Tilt[Measured tilt] -->|error| PID[Tuned PID controller]
+  PID -->|adjust motors| Correct[Gentle correction]
+  Correct --> Good((Steady hover))
+```
+
 **Bad:** Setting the proportional gain far too high on that same drone so it overcorrects every wobble. It oscillates harder each cycle and flips instead of stabilizing.
+
+```mermaid
+flowchart LR
+  Wobble[Small wobble] -.->|gain too high| Over[Overcorrection]
+  Over -.->|grows each cycle| Oscillate[Rising oscillation]
+  Oscillate -.-> Bad{{Drone flips}}
+```
 
 ## Important Points
 

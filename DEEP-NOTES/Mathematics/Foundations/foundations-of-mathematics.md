@@ -52,7 +52,19 @@ Think of building a skyscraper. Before any floor goes up, engineers pour a found
 
 **Good:** Constructing the natural numbers from the empty set inside ZFC, so arithmetic rests on a single agreed axiom system. Every later theorem traces back to those axioms.
 
+```mermaid
+flowchart LR
+  Empty["Empty set"] -->|build in ZFC| Nats["Natural numbers"]
+  Nats -->|arithmetic follows| Trace((Every theorem grounded))
+```
+
 **Bad:** Assuming "a set is just any collection you can describe" and reasoning freely from it. That naive view leads straight to Russell's paradox and a broken foundation.
+
+```mermaid
+flowchart LR
+  Naive["Any describable collection"] -.->|unrestricted comprehension| Russ["Russell's set"]
+  Russ -.->|self-reference| Broken{{Broken foundation}}
+```
 
 ## Important Points
 

@@ -52,7 +52,21 @@ Think of a group as the set of all moves you can make on a Rubik's cube. Doing n
 
 **Good:** Treating the rotations of a square by 0, 90, 180, and 270 degrees as a group under composition. Every rotation has an inverse and composing two gives another rotation.
 
+```mermaid
+flowchart LR
+  Rotations["Square rotations 0 to 270"] -->|compose| Closed["Result is a rotation"]
+  Closed -->|each reversible| Inverse["Every element has inverse"]
+  Inverse --> Good((Valid group))
+```
+
 **Bad:** Calling the set of positive integers under subtraction a group. Subtraction is not associative in the needed sense and inverses fall outside the set, so the axioms fail.
+
+```mermaid
+flowchart LR
+  Positives["Positive integers, subtraction"] -.->|3 minus 5| Outside["Result leaves the set"]
+  Outside -.->|no inverse inside| Fail["Closure and inverse fail"]
+  Fail -.-> Bad{{Not a group}}
+```
 
 ## Important Points
 

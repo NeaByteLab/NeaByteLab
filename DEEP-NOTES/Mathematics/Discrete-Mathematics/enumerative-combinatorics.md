@@ -53,7 +53,19 @@ Think of a coin-sorting machine that never dumps the coins out to count them one
 
 **Good:** Proving the number of ways to fully parenthesize a product equals the Catalan number, then using a generating function to derive its closed form. The whole sequence follows from one algebraic identity.
 
+```mermaid
+flowchart LR
+  Par[Parenthesizations] -->|equals Catalan number| GF[Generating function]
+  GF -->|solve identity| CF((Closed form for all n))
+```
+
 **Bad:** Trying to count binary trees of size 30 by listing every tree. The count explodes into the billions, so enumeration by listing is hopeless without a formula.
+
+```mermaid
+flowchart LR
+  List[List every tree] -.->|size 30| Bill[Billions of trees]
+  Bill -.->|no formula used| Stuck{{Enumeration hopeless}}
+```
 
 ## Important Points
 

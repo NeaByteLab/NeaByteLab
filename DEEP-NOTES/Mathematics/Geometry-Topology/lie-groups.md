@@ -54,7 +54,20 @@ Think of all the ways you can spin a globe. Each spin is a rotation, and you can
 
 **Good:** Representing 3D orientations with the rotation group and using its Lie algebra for smooth interpolation. The algebra makes averaging and blending rotations well behaved.
 
+```mermaid
+flowchart LR
+  ROT["3D orientations"] --> GRP["Rotation group"]
+  GRP -->|Lie algebra| INT["Smooth interpolation"]
+  INT --> OK((Well-behaved blending))
+```
+
 **Bad:** Treating rotations as if they simply add like plain numbers. Rotations do not commute, so naive addition gives wrong composite orientations.
+
+```mermaid
+flowchart LR
+  ROT["Two rotations"] -.->|add like numbers| ADD["Assume commuting"]
+  ADD -.-> BAD{{Non-commutative, wrong orientation}}
+```
 
 ## Important Points
 

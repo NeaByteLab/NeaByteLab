@@ -53,7 +53,19 @@ Picture primes as raindrops hitting a long sidewalk. Any single drop lands unpre
 
 **Good:** Using the prime number theorem to estimate that there are roughly x over ln x primes below x, giving a fast and accurate density figure without listing them.
 
+```mermaid
+flowchart LR
+  Bound["bound x"] -->|prime number theorem| Est["x over ln x"]
+  Est -->|no listing needed| Density(("accurate prime count"))
+```
+
 **Bad:** Trying to describe prime gaps with a single fixed spacing. Primes thin out and their gaps grow, so any constant spacing model breaks down quickly.
+
+```mermaid
+flowchart LR
+  Fixed["assume fixed spacing"] -.->|primes thin out| Grow["gaps keep growing"]
+  Grow -.->|model diverges| Break{{"constant spacing fails"}}
+```
 
 ## Important Points
 

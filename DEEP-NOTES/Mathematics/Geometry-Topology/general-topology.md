@@ -54,7 +54,20 @@ Think of describing a country not by exact distances but only by which regions o
 
 **Good:** Using compactness to guarantee a continuous function on a closed bounded interval attains its maximum. The property follows directly from the topology.
 
+```mermaid
+flowchart LR
+  INT["Closed bounded interval"] --> CMP["Compactness"]
+  CMP -->|continuous image compact| MAX["Maximum attained"]
+  MAX --> OK((Extreme value guaranteed))
+```
+
 **Bad:** Assuming every topological space behaves like ordinary distance space. Many spaces are not metric, so distance-based intuition can mislead.
+
+```mermaid
+flowchart LR
+  SPACE["General topological space"] -.->|assume metric behavior| DIST["Distance intuition"]
+  DIST -.-> BAD{{Not metric, intuition misleads}}
+```
 
 ## Important Points
 

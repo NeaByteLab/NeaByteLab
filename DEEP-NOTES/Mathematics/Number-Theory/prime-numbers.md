@@ -52,7 +52,19 @@ Think of primes as indivisible LEGO bricks and composites as built structures. Y
 
 **Good:** Choosing two large primes and multiplying them to form an RSA modulus. Recovering the primes from the product is hard, and that difficulty secures the system.
 
+```mermaid
+flowchart LR
+  Primes["two large primes"] -->|multiply| Mod["RSA modulus"]
+  Mod -->|factoring is hard| Sec(("secure system"))
+```
+
 **Bad:** Treating one as a prime. If one counted as prime, factorizations would no longer be unique, which breaks the fundamental theorem of arithmetic.
+
+```mermaid
+flowchart LR
+  One["treat one as prime"] -.->|extra factor allowed| Many["multiple factorizations"]
+  Many -.->|uniqueness lost| Break{{"breaks fundamental theorem"}}
+```
 
 ## Important Points
 

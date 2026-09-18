@@ -53,7 +53,19 @@ Think of different worlds each with their own idea of "true." In our familiar wo
 
 **Good:** Using the topos of sheaves on a space to treat continuously varying data as a single object. The topos structure handles gluing and local truth cleanly.
 
+```mermaid
+flowchart LR
+  Data["Continuously varying data"] -->|topos of sheaves| Glue["Gluing and local truth"]
+  Glue -->|one coherent object| Obj((Single sheaf object))
+```
+
 **Bad:** Assuming the law of excluded middle holds inside every topos. Most toposes are intuitionistic, so classical shortcuts can fail.
+
+```mermaid
+flowchart LR
+  LEM["Assume excluded middle"] -.->|topos is intuitionistic| Fail2["Classical shortcut invalid"]
+  Fail2 -.->|reasoning unsound| Broken2{{Wrong internal logic}}
+```
 
 ## Important Points
 

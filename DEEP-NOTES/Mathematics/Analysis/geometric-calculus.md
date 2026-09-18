@@ -54,7 +54,20 @@ Think of vector calculus as a toolbox with separate wrenches for divergence, cur
 
 **Good:** Writing Maxwell's four equations as one geometric-calculus equation using the vector derivative. The unified form exposes structure that the split vector-calculus version hides.
 
+```mermaid
+flowchart LR
+  MAX["Maxwell's four equations"] --> VD["Vector derivative"]
+  VD -->|unify| ONE["Single equation"]
+  ONE --> OK((Hidden structure exposed))
+```
+
 **Bad:** Reaching for geometric calculus to solve a routine one-variable derivative problem. The heavy machinery adds overhead with no benefit over ordinary calculus there.
+
+```mermaid
+flowchart LR
+  SIMPLE["Routine one-variable derivative"] -.->|apply heavy machinery| GC["Geometric calculus"]
+  GC -.-> BAD{{Overhead, no benefit}}
+```
 
 ## Important Points
 

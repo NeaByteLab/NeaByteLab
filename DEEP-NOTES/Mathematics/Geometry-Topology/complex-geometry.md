@@ -54,7 +54,20 @@ Think of upgrading from a number line to the full complex plane at every point o
 
 **Good:** Studying a compact Riemann surface to classify it by genus, its number of holes. Complex structure makes this classification clean and complete.
 
+```mermaid
+flowchart LR
+  RS["Compact Riemann surface"] --> CS["Complex structure"]
+  CS -->|count holes| GEN["Genus classification"]
+  GEN --> OK((Clean, complete classification))
+```
+
 **Bad:** Assuming any even-dimensional smooth manifold carries a complex structure. Many do not, so complex-geometric tools simply cannot be applied.
+
+```mermaid
+flowchart LR
+  MAN["Even-dimensional smooth manifold"] -.->|assume complex structure| NONE["No such structure exists"]
+  NONE -.-> BAD{{Complex tools inapplicable}}
+```
 
 ## Important Points
 

@@ -54,7 +54,21 @@ Pricing a derivative is like pricing an insurance policy on a house. You cannot 
 
 **Good:** Using Black-Scholes to price a simple option and building a hedge that neutralizes small price moves. Under normal conditions the model gives a consistent, defensible price.
 
+```mermaid
+flowchart LR
+  Option[Simple option] -->|Black-Scholes| Price[Fair price]
+  Price -->|build hedge| Neutral[Neutral to small moves]
+  Neutral --> Good((Defensible pricing))
+```
+
 **Bad:** Trusting a model that assumes normally distributed returns to size positions right before a crash. Real returns have fat tails, so the model badly understates the chance of a huge loss.
+
+```mermaid
+flowchart LR
+  Normal[Normal returns assumed] -.->|ignore fat tails| Size[Oversized position]
+  Size -.->|crash arrives| Loss[Huge loss]
+  Loss -.-> Bad{{Risk understated}}
+```
 
 ## Important Points
 

@@ -53,7 +53,19 @@ Imagine scheduling a round-robin tournament where every team must play every oth
 
 **Good:** Using a balanced incomplete block design to schedule seven judges over seven panels so every pair of judges serves together exactly once. The balance guarantees fair comparison.
 
+```mermaid
+flowchart LR
+  J[Seven judges] -->|BIBD schedule| B[Seven panels]
+  B -->|every pair once| Fair((Fair comparison))
+```
+
 **Bad:** Assigning blocks by hand so some element pairs never meet while others meet three times. The arrangement is unbalanced and defeats the purpose of a design.
+
+```mermaid
+flowchart LR
+  Hand[Hand-picked blocks] -.->|some pairs 3 times| Skew[Uneven co-occurrence]
+  Skew -.->|some pairs never| U{{Unbalanced design}}
+```
 
 ## Important Points
 

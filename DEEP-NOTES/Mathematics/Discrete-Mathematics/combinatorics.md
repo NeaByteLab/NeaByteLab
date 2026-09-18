@@ -53,7 +53,19 @@ Think of getting dressed from a wardrobe. If you pick one shirt from five and on
 
 **Good:** Counting how many five-card poker hands exist from a 52-card deck as C(52,5). Order does not matter, so a combination gives the exact count of 2,598,960.
 
+```mermaid
+flowchart LR
+  Deck[52-card deck] -->|order ignored| Comb["C(52,5)"]
+  Comb -->|exact count| Hands((2,598,960 hands))
+```
+
 **Bad:** Using permutations to count poker hands, which overcounts because it treats the same five cards in different orders as distinct hands.
+
+```mermaid
+flowchart LR
+  Perm[Use permutations] -.->|order counted| Dup[Same hand, many orders]
+  Dup -.->|inflated by 5!| Over{{Overcounted hands}}
+```
 
 ## Important Points
 

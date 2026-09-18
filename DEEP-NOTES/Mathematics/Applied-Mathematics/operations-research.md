@@ -55,7 +55,21 @@ Think of planning a road trip with a fixed budget, a set of cities you want to v
 
 **Good:** A retailer models inventory with demand data and solves for reorder points that minimize expected cost. The model cuts both stockouts and excess stock at once.
 
+```mermaid
+flowchart LR
+  Demand[Demand data] -->|inventory model| Reorder[Optimal reorder points]
+  Reorder -->|minimize cost| Balance[Fewer stockouts and excess]
+  Balance --> Good((Lower total cost))
+```
+
 **Bad:** Modeling a scheduling problem with thousands of integer variables and no structure, then expecting an exact solver to finish quickly. It may run for days, since integer problems can explode in difficulty.
+
+```mermaid
+flowchart LR
+  Thousands[Thousands of integers] -.->|no structure| Solver[Exact solver]
+  Solver -.->|combinatorial blowup| Runtime[Runs for days]
+  Runtime -.-> Bad{{No timely solution}}
+```
 
 ## Important Points
 
