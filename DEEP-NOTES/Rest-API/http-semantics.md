@@ -9,10 +9,18 @@ tags: ['rest-api', 'http-methods', 'semantics']
 
 ## Overview
 
-HTTP methods are contracts. If method semantics are wrong, clients cannot trust your API behavior.
-Most production API bugs start from semantic mismatch, not syntax errors.
+HTTP methods are contracts. If method semantics are wrong, clients cannot trust your API behavior. Most production API bugs start from semantic mismatch, not syntax errors.
 
 This note focuses on method intent, safety, and idempotency.
+
+```mermaid
+flowchart LR
+  Method[HTTP method] -->|GET, HEAD| Safe[safe, no state change]
+  Method -->|PUT, DELETE| Idem[idempotent, retry-safe]
+  Method -->|POST| NonIdem[non-idempotent, new outcome]
+  Safe --> Trust((trusted behavior))
+  Idem --> Trust
+```
 
 ### Quick Takeaways
 
@@ -60,9 +68,23 @@ Common API design decisions:
 
 - `DELETE /v1/sessions/{id}` to revoke one session
 
+```mermaid
+flowchart LR
+  Client[client] -->|DELETE /v1/sessions/id| Server[server revokes session]
+  Server --> Retry[repeat DELETE]
+  Retry -->|same final state| Done((idempotent revoke))
+```
+
 **Bad:**
 
 - `GET /v1/logout` that mutates session state
+
+```mermaid
+flowchart LR
+  Client[client] -.->|GET /v1/logout| Mutate[hidden state change]
+  Mutate -.->|cache or prefetch replays| Replay[unintended revoke]
+  Replay -.-> Broken{{unsafe GET side effect}}
+```
 
 **Good snippet (Express style):**
 

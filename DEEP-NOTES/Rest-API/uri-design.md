@@ -9,10 +9,18 @@ tags: ['rest-api', 'uri', 'resource-design']
 
 ## Overview
 
-Good URI design makes APIs self-explanatory. You should infer resource meaning without opening
-docs for every endpoint.
+Good URI design makes APIs self-explanatory. You should infer resource meaning without opening docs for every endpoint.
 
 URI naming is a small decision with large maintenance impact.
+
+```mermaid
+flowchart LR
+  URI[resource URI] -->|noun collection| Path[shallow hierarchy]
+  Path -->|path param| Identity[specific resource]
+  Path -->|query param| Filter[filter and sort]
+  Identity --> Clear((self-explanatory API))
+  Filter --> Clear
+```
 
 ### Quick Takeaways
 
@@ -53,9 +61,23 @@ You apply URI design on:
 
 - `/v1/users/{userId}/sessions`
 
+```mermaid
+flowchart LR
+  Users[/v1/users collection] -->|userId path param| User[one user]
+  User -->|nested noun| Sessions[/sessions collection]
+  Sessions --> Readable((self-documenting path))
+```
+
 **Bad:**
 
 - `/v1/getUserSessionListById`
+
+```mermaid
+flowchart LR
+  Verb[/v1/getUserSessionListById] -.->|action in path| Opaque[meaning hidden in name]
+  Opaque -.->|no hierarchy| Read[reader must open docs]
+  Read -.-> Broken{{unpredictable URI surface}}
+```
 
 **Good snippet (resource-first):**
 

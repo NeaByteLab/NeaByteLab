@@ -9,11 +9,16 @@ tags: ['rest-api', 'http', 'architecture']
 
 ## Overview
 
-REST API is not just JSON over HTTP. It is a design style for exposing resources through clear
-interfaces. Good REST design makes contracts predictable, easier to evolve, and easier to debug.
+REST API is not just JSON over HTTP. It is a design style for exposing resources through clear interfaces. Good REST design makes contracts predictable, easier to evolve, and easier to debug.
 
-The main goal is consistency. Teams move faster when naming, behavior, and response shape are
-stable across endpoints.
+The main goal is consistency. Teams move faster when naming, behavior, and response shape are stable across endpoints.
+
+```mermaid
+flowchart LR
+  Client[client] -->|request| URI[resource URI]
+  URI -->|HTTP method| Handler[stateless handler]
+  Handler -->|status + payload| Contract((predictable contract))
+```
 
 ### Quick Takeaways
 
@@ -57,11 +62,28 @@ You are usually in REST territory when:
 - `POST /v1/prompts`
 - `PATCH /v1/prompts/{id}`
 
+```mermaid
+flowchart LR
+  Noun[/v1/prompts resource] -->|GET list| Read[read]
+  Noun -->|POST create| Create[create]
+  Noun -->|PATCH id| Update[update]
+  Read --> Uniform((uniform contract))
+  Create --> Uniform
+  Update --> Uniform
+```
+
 **Bad:**
 
 - `POST /getPromptsList`
 - `POST /deletePromptById`
 - `POST /editPrompt`
+
+```mermaid
+flowchart LR
+  Verb[action-first URL] -.->|POST /getPromptsList| Guess[client must guess]
+  Verb -.->|POST /deletePromptById| Guess
+  Guess -.-> Broken{{opaque, non-REST contract}}
+```
 
 **Good snippet (uniform contract):**
 

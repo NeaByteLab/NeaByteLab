@@ -9,10 +9,17 @@ tags: ['rest-api', 'validation', 'api-contract']
 
 ## Overview
 
-Validation protects system boundaries. Without strict validation, bad payloads leak into storage,
-business logic, and downstream services.
+Validation protects system boundaries. Without strict validation, bad payloads leak into storage, business logic, and downstream services.
 
 Validation should happen before business processing starts.
+
+```mermaid
+flowchart LR
+  Request[incoming payload] -->|schema check| Gate[boundary validator]
+  Gate -->|valid| Logic[business processing]
+  Gate -.->|invalid| Reject{{422 field-level errors}}
+  Logic --> Safe((clean data in storage))
+```
 
 ### Quick Takeaways
 
@@ -54,9 +61,23 @@ You need strong validation in:
 
 - Reject invalid payload with `422` and field-level errors
 
+```mermaid
+flowchart LR
+  Payload[request body] -->|safeParse| Schema[schema check]
+  Schema -->|fails fast| Errors[field-level details]
+  Errors --> Client((422 actionable response))
+```
+
 **Bad:**
 
 - Accept everything, fail later in DB with generic `500`
+
+```mermaid
+flowchart LR
+  Payload[unchecked body] -.->|no validation| DB[db insert]
+  DB -.->|constraint blows up| Generic[generic catch]
+  Generic -.-> Broken{{500 opaque failure}}
+```
 
 **Good snippet (schema first):**
 

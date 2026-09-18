@@ -9,10 +9,17 @@ tags: ['rest-api', 'status-code', 'error-handling']
 
 ## Overview
 
-Status codes and error payloads are part of the API contract. If they are inconsistent, clients
-implement brittle workarounds and reliability drops fast.
+Status codes and error payloads are part of the API contract. If they are inconsistent, clients implement brittle workarounds and reliability drops fast.
 
 Treat errors as first-class response design.
+
+```mermaid
+flowchart LR
+  Outcome[request outcome] -->|status code| Family[2xx, 4xx, 5xx]
+  Outcome -->|error body| Envelope[stable envelope + code]
+  Family --> Contract((predictable client logic))
+  Envelope --> Contract
+```
 
 ### Quick Takeaways
 
@@ -64,9 +71,26 @@ Critical response mapping areas:
 - `403` for forbidden role
 - `422` for payload validation failure
 
+```mermaid
+flowchart LR
+  Fault[request fault] -->|no token| C401[401 unauthorized]
+  Fault -->|wrong role| C403[403 forbidden]
+  Fault -->|bad payload| C422[422 unprocessable]
+  C401 --> Clear((clear client branch))
+  C403 --> Clear
+  C422 --> Clear
+```
+
 **Bad:**
 
 - Returning `200` with `{ "error": true }` for failures
+
+```mermaid
+flowchart LR
+  Fault[request fault] -.->|status 200| Ok[looks successful]
+  Ok -.->|error flag in body| Parse[client must parse flags]
+  Parse -.-> Broken{{ambiguous success masking failure}}
+```
 
 **Good snippet (status + envelope):**
 
