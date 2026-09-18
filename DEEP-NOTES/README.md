@@ -11,6 +11,7 @@ _Structured learning notes: one topic per file, frontmatter and structured body.
 | **Class Types**          | TypeScript class types, patterns, singleton vs static vs abstract usage.   | [Class-Types/](./Class-Types/)                 |
 | **Data Streaming**       | Chunk streaming patterns: sequential vs parallel, throughput vs ordering.  | [Data-Streaming/](./Data-Streaming/)           |
 | **Deep Learning**        | Foundations, training paradigms, and learning strategies for neural nets.  | [Deep-Learning/](./Deep-Learning/)             |
+| **Diagram Notations**    | OMG notations: BPMN, DMN, CMMN, UML, SysML, KerML, OCL, MOF, ReqIF, more.  | [Diagram-Notations/](./Diagram-Notations/)     |
 | **Google Auth**          | Google sign-in, token roles, and when auth differs from API access.        | [Google-Auth/](./Google-Auth/)                 |
 | **Job Management**       | Background processing patterns, infinite loops vs scheduled jobs.          | [Job-Management/](./Job-Management/)           |
 | **Machine Translation**  | MT paradigms: rule-based (transfer, interlingual, dictionary), SMT, NMT.   | [Machine-Translation/](./Machine-Translation/) |
