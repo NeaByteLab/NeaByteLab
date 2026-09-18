@@ -15,6 +15,13 @@ tags:
 
 This note covers **parallel chunk streaming**: transmitting multiple data chunks simultaneously over separate streams or connections. Chunks may arrive out of order and must be reassembled using sequence numbers. The trade-off is higher throughput at the cost of complexity and memory overhead for buffering and reordering. **Goal:** recognize when chunks are independent and throughput matters more than immediate ordering, and implement proper reassembly without data loss.
 
+```mermaid
+flowchart LR
+  Data[large data] -->|split + sequence| Streams[parallel streams]
+  Streams -->|out of order| Buffer[reassembly buffer]
+  Buffer -->|sort by sequence| Whole((complete data, high throughput))
+```
+
 ## Definition
 
 **Parallel chunk streaming** means dividing data into chunks, assigning explicit sequence numbers, and transmitting them simultaneously over multiple streams or connections. Chunks may complete at different times and arrive out of order. The receiver buffers out-of-order chunks and reassembles them into the correct sequence before delivery to the application.
@@ -51,6 +58,13 @@ Common scenarios:
 ## Examples
 
 **Good: Parallel file upload with reassembly**
+
+```mermaid
+flowchart LR
+  File[file split into chunks] -->|4 concurrent uploads| Server[server receives out of order]
+  Server -->|store by sequence| Reassembler[chunk reassembler]
+  Reassembler -->|iterate 0..N| Rebuilt((rebuilt file))
+```
 
 ```typescript
 /**
@@ -248,6 +262,13 @@ class ParallelDownloader {
 ```
 
 **Bad: Parallel when order is critical**
+
+```mermaid
+flowchart LR
+  Tokens[ordered tokens] -.->|fire all in parallel| Race[requests race]
+  Race -.->|arrive shuffled| Client[client renders now]
+  Client -.-> Broken{{scrambled token output}}
+```
 
 ```typescript
 /**

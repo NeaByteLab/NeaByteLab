@@ -15,6 +15,13 @@ tags:
 
 This note covers **sequential chunk streaming**: transmitting data chunks one at a time in strict order over a single stream or connection. Each chunk waits for the previous to complete before sending. Order is preserved naturally without extra logic. The trade-off is head-of-line blocking, one delayed chunk stalls everything behind it. **Goal:** recognize when order matters more than raw throughput, and implement without accidental complexity.
 
+```mermaid
+flowchart LR
+  Data[data chunks] -->|send chunk N| Stream[single stream]
+  Stream -->|wait ack, then N+1| Order[natural ordering]
+  Order --> Result((in-order delivery, simple state))
+```
+
 ## Definition
 
 **Sequential chunk streaming** means dividing data into chunks and transmitting them one after another over the same stream or connection. The sender waits for acknowledgment (or completion) of chunk N before sending chunk N+1. The receiver processes chunks immediately as they arrive in the exact order they were sent.
@@ -50,6 +57,13 @@ Common scenarios:
 ## Examples
 
 **Good: Video frame streaming with natural ordering**
+
+```mermaid
+flowchart LR
+  Frame[frame N] -->|send + await ack| Stream[single stream]
+  Stream -->|ack received| Next[frame N+1]
+  Next --> Decoded((frames decode in order))
+```
 
 ```typescript
 /**
@@ -184,6 +198,13 @@ class TokenStreamer {
 ```
 
 **Bad: Sequential for independent chunks**
+
+```mermaid
+flowchart LR
+  Chunks[independent file parts] -.->|one at a time| Wait[each waits for previous]
+  Wait -.->|one slow chunk| Stall[pipeline stalls]
+  Stall -.-> Broken{{wasted throughput, head-of-line blocking}}
+```
 
 ```typescript
 /**
