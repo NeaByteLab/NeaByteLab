@@ -13,6 +13,14 @@ A decision tree is a tree whose internal nodes ask questions and whose leaves gi
 
 In machine learning, decision trees are learned from data. An algorithm picks, at each node, the feature test that best separates the examples, using a criterion like information gain or Gini impurity, and recurses on the resulting subsets. The result is highly interpretable: you can read off exactly why a prediction was made by following its path. The weakness is overfitting, since a deep tree can memorize noise, which is why trees are pruned or combined into ensembles like random forests and gradient boosting. As a plain decision aid, the same structure encodes expert rules as a readable flow of yes/no questions.
 
+```mermaid
+flowchart TB
+  Root{root test} -->|branch matches| Inner{next test}
+  Root -->|other branch| Leaf1[leaf: decision]
+  Inner -->|yes| Leaf2((prediction))
+  Inner -->|no| Leaf3[leaf: decision]
+```
+
 ### Quick Takeaways
 
 - Internal nodes test conditions and leaves hold the final decision or prediction

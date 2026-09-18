@@ -13,6 +13,14 @@ A pseudoforest is a graph in which every connected component contains at most on
 
 Pseudoforests appear naturally whenever each node has at most one outgoing edge, because following those edges can only ever wander into one loop per component. This is exactly the shape of a "functional graph," where every element points to exactly one successor. Such structures show up in disjoint-set data structures, in modeling functions on a finite set, and in memory-efficient graph algorithms. The single-cycle bound makes pseudoforests sparse and predictable, so they enjoy efficient algorithms much like forests do, while still capturing the minimal amount of cyclic structure some problems require.
 
+```mermaid
+flowchart LR
+  A[node] -->|one out-edge| B[node]
+  B -->|chain feeds in| C[node]
+  C -->|closes single loop| B
+  A -->|at most one cycle| Loop((one cycle per component))
+```
+
 ### Quick Takeaways
 
 - Every connected component may contain at most one cycle, unlike a fully acyclic forest

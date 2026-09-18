@@ -13,6 +13,13 @@ Nested parentheses encode a tree as a flat string of balanced brackets. Each nod
 
 This representation is how hierarchy lives inside text and code. Nested function calls, S-expressions in Lisp, JSON and XML nesting, and mathematical grouping all rely on balanced brackets to express tree structure linearly. Its great advantages are compactness and that it is plain text, easy to store, transmit, and parse. The tradeoff is human readability at depth: counting many nested closing brackets is error-prone, which is exactly why editors add bracket matching and indentation. Underneath, though, the string and the tree are the same object.
 
+```mermaid
+flowchart LR
+  Tree[tree of nodes] -->|serialize| Open[open bracket per node]
+  Open -->|children in order| Close[matching close bracket]
+  Close -->|depth = nesting| String((balanced bracket string))
+```
+
 ### Quick Takeaways
 
 - A tree becomes a flat string where nesting depth equals depth in the hierarchy

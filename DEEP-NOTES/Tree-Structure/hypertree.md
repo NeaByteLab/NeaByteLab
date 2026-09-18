@@ -13,6 +13,13 @@ A hypertree generalizes a tree from ordinary edges to hyperedges. In a normal tr
 
 Hypertrees matter because many real relationships are not pairwise. A single database constraint may involve several columns, a single reaction may involve several molecules, a single meeting may involve several people. Modeling these as hyperedges is more faithful than forcing them into pairs. When such a hypergraph is acyclic in the hypertree sense, hard problems become tractable: constraint satisfaction and database join queries that are NP-hard in general can be solved efficiently when they have low "hypertree width." So the hypertree is both a structural idea and a key to efficient computation. Note the name is also used separately for a radial tree visualization in hyperbolic space, a different meaning.
 
+```mermaid
+flowchart TB
+  H1["hyperedge joins {A, B, C}"] -->|host tree| H2["hyperedge {C, D}"]
+  H1 -->|acyclic arrangement| H3["hyperedge {B, E}"]
+  H2 -->|low hypertree width| Fast((tractable joins))
+```
+
 ### Quick Takeaways
 
 - A hyperedge can connect many nodes at once, generalizing the two-node edges of a tree

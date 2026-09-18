@@ -13,6 +13,14 @@ A tree structure is the general concept of hierarchy: a set of items connected s
 
 The concept is defined by a few invariants. There is exactly one root, the item with no parent. Every other item has exactly one parent, so lineage is unambiguous. Following parent links always leads back to the root, and there is exactly one path between the root and any item. These rules give the tree its two hallmark powers: clear ownership, since each item belongs to one parent, and clean recursion, since every subtree is itself a smaller tree of the same kind. This is why hierarchy is such a natural way to organize the world, and why more specialized tree ideas all build on this common core.
 
+```mermaid
+flowchart TB
+  Root[root: no parent] -->|one parent per child| Child1[child]
+  Root -->|one parent per child| Child2[child]
+  Child1 -->|unique path| Leaf[leaf]
+  Child2 -->|every subtree is a tree| Subtree((clean recursion))
+```
+
 ### Quick Takeaways
 
 - A tree is the abstract idea of hierarchy: one root and unique parent-child chains

@@ -13,6 +13,14 @@ A classical node-link diagram is the most familiar way to draw a tree. Each node
 
 The strength of node-link diagrams is clarity of structure. Relationships are drawn, not implied, so parent, child, sibling, and ancestor are all read at a glance. The weakness is space. As a tree grows wide or deep, the drawing spreads out and wastes area, and large trees quickly overflow the screen. This is why alternative layouts like icicle, radial, and nested representations exist, each trading some of this directness for better use of space. But when a tree is small to medium, the node-link diagram remains the clearest choice.
 
+```mermaid
+flowchart TB
+  Root[root at top] -->|drawn link| Child1[child node]
+  Root -->|drawn link| Child2[child node]
+  Child1 -->|depth grows down| Leaf1[leaf]
+  Child2 -->|structure read at a glance| Leaf2[leaf]
+```
+
 ### Quick Takeaways
 
 - Nodes are shapes and every parent-child link is drawn as an explicit connecting line

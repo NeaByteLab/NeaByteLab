@@ -13,6 +13,13 @@ The nested set model represents a tree through containment rather than pointers.
 
 This model shines in relational databases where recursive parent-child queries are awkward or slow. To fetch an entire subtree, you select every node whose left and right values fall inside the parent's range, a single fast range query with no recursion. The cost appears on writes. Inserting or moving a node shifts the boundary numbers of many other nodes, so updates are expensive and must renumber a range. Nested sets therefore fit read-heavy hierarchies like category trees far better than frequently reorganized ones.
 
+```mermaid
+flowchart TB
+  Root["root (1,10)"] -->|encloses range| Child["child (2,7)"]
+  Child -->|contained interval| Leaf["leaf (3,4)"]
+  Child -->|range query| Subtree((whole subtree in one read))
+```
+
 ### Quick Takeaways
 
 - Each node stores a left and right boundary, and containment of ranges encodes ancestry

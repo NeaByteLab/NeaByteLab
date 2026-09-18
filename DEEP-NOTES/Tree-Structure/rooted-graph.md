@@ -13,6 +13,14 @@ A rooted graph is simply a graph together with one distinguished vertex singled 
 
 Choosing a root is a lightweight but powerful act. In a tree, picking a root instantly induces parent-child directions, depths, and subtrees, converting an unrooted tree into the familiar hierarchical one. In a general graph, a root defines reachability, which vertices you can get to from the start, and grounds algorithms like breadth-first and depth-first search that must begin somewhere. The root also serves as an anchor for accessibility conditions, spanning-tree construction, and pointer-based traversal. The key insight is that the graph's edges stay the same; rooting only adds a distinguished vantage point from which to view and traverse it.
 
+```mermaid
+flowchart TB
+  Root((chosen root)) -->|orientation| A[vertex]
+  Root -->|traversal starts here| B[vertex]
+  A -->|induces depth| A1[reachable vertex]
+  B -->|same edges| Reach((reachability defined))
+```
+
 ### Quick Takeaways
 
 - A rooted graph is any graph with one vertex singled out as the root

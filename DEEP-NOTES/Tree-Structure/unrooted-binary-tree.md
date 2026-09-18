@@ -13,6 +13,15 @@ An unrooted binary tree is a tree with no distinguished root and a strict degree
 
 This structure is central to phylogenetics, the study of evolutionary relationships. Species sit at the leaves, and the internal degree-three nodes represent hypothetical common ancestors where lineages split in two. An unrooted tree says which species are more closely related without claiming which came first, because the data often cannot tell you where the root belongs. To add a direction of time you "root" the tree by picking a point, often using an outgroup, which turns it into an ordinary rooted binary tree. The unrooted form is thus the honest representation when you know the branching but not the origin.
 
+```mermaid
+flowchart LR
+  A[leaf] ---|no direction| I1((degree-three node))
+  B[leaf] --- I1
+  I1 ---|pure topology| I2((degree-three node))
+  C[leaf] --- I2
+  D[leaf] --- I2
+```
+
 ### Quick Takeaways
 
 - There is no root, so no parent-child direction exists, only relationships among leaves

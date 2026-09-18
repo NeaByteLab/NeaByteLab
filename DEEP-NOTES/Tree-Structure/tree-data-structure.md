@@ -13,6 +13,14 @@ A tree data structure is the concrete, in-memory realization of the tree concept
 
 The power of a tree data structure comes from recursion and balance. Because each child is itself the root of a subtree, most tree algorithms are written recursively: do something with the node, then recurse into each child. Traversals like preorder, inorder, and postorder visit nodes in principled sequences. Specialized trees add invariants for speed: a binary search tree keeps left less than right for logarithmic lookup, a heap keeps parents ordered against children for fast priority access, and balanced trees like AVL or red-black guarantee the tree never grows lopsided. When balance is maintained, key operations run in logarithmic time; when it degrades, a tree can decay into a slow linked list.
 
+```mermaid
+flowchart TB
+  Root[root node] -->|child pointer| Left[left subtree]
+  Root -->|child pointer| Right[right subtree]
+  Left -->|recurse| Leaf[leaf holds data]
+  Right -->|keep balanced| Fast((logarithmic operations))
+```
+
 ### Quick Takeaways
 
 - A tree is built from nodes holding data and references to their children, rooted at one node

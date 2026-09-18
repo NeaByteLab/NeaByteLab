@@ -13,6 +13,14 @@ An outline or tree view presents a hierarchy as indented rows of text. Depth is 
 
 The core idea is progressive disclosure. Instead of drawing the whole tree at once, a tree view shows the top and lets you open only the branches you care about. This keeps even enormous hierarchies manageable, since collapsed branches take no vertical space. Indentation communicates parent-child relationships without any drawn lines, though many implementations add faint guide lines to help. The limitation is that you see structure one column deep at a time and cannot easily perceive the whole shape of a large tree at a glance.
 
+```mermaid
+flowchart TB
+  Root["root row"] -->|indent one level| Open["expanded node"]
+  Root -->|collapsed| Hidden["closed branch hides children"]
+  Open -->|indent again| Child["child row"]
+  Open -->|progressive disclosure| Compact((huge tree stays manageable))
+```
+
 ### Quick Takeaways
 
 - Depth is shown by indentation and each node can expand or collapse its children

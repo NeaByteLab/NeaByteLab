@@ -13,6 +13,14 @@ A radial tree draws a hierarchy outward from a center. The root sits at the midd
 
 The reason to go radial is space. A traditional top-down layout gets very wide at deep levels because each level needs horizontal room for all its nodes. A radial layout gives each ring a full 360 degrees, and outer rings have more circumference, so wide levels fit more gracefully. This makes radial trees good for large, bushy hierarchies where the balanced circular shape uses the canvas efficiently. The downside is that labels rotate around the circle and can be harder to read, and precise comparison across branches is less intuitive than in a straight layout.
 
+```mermaid
+flowchart TB
+  Root((center root)) -->|inner ring| A[level 1]
+  Root -->|inner ring| B[level 1]
+  A -->|distance = depth| A1[outer leaf]
+  B -->|360 degrees of space| Fit((wide levels fit))
+```
+
 ### Quick Takeaways
 
 - The root is centered and depth is drawn as distance outward along concentric rings

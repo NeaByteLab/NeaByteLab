@@ -13,6 +13,14 @@ A multitree is a directed acyclic graph with a special restriction: for every no
 
 The value of a multitree is that it allows sharing without ambiguity. Because the ancestors of any node form a tree, there is always a clean, tree-like view from any node's perspective, even though the whole structure is not a tree. This is useful for representing overlapping hierarchies where the same item legitimately belongs under multiple parents, yet you still want each item's lineage to be unambiguous. Multitrees are also called strongly unambiguous graphs or diamond-free posets, and they appear in inheritance systems, category overlaps, and version histories that branch and share but never merge into diamonds.
 
+```mermaid
+flowchart TB
+  ParentA[parent] -->|shares| Shared[shared subtree]
+  ParentB[parent] -->|shares| Shared
+  Shared -->|no split-rejoin| Child[descendant]
+  Child --> Lineage((ancestors form a tree))
+```
+
 ### Quick Takeaways
 
 - A node may have multiple parents, so subtrees can be shared across the structure

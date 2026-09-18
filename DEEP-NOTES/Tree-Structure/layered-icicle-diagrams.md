@@ -13,6 +13,14 @@ An icicle diagram draws a tree as stacked bars instead of nodes and lines. Each 
 
 The big advantage is space efficiency and the ability to encode quantity. Because rectangles fill the space, the length of a node's bar can represent the size of its subtree, the number of files in a folder, or any weight. This turns the layout into a data visualization, not just a structure drawing. The tradeoff is that deep hierarchies produce many thin rows that get hard to read, and precise ancestor tracing is less immediate than following drawn lines. Icicle diagrams and their radial cousin, the sunburst, are popular for showing where space or time is spent in a hierarchy.
 
+```mermaid
+flowchart TB
+  Root["root bar (100%)"] -->|child within width| A["child (60%)"]
+  Root -->|child within width| B["child (40%)"]
+  A -->|length encodes weight| A1["subtree (45%)"]
+  B -->|space-filling| Hot((where weight concentrates))
+```
+
 ### Quick Takeaways
 
 - Nodes are stacked rectangles per level, with children constrained under their parent's width
