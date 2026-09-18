@@ -13,6 +13,15 @@ A pushdown automaton, or PDA, is a finite-state machine with one extra piece of 
 
 This single addition lifts the PDA from recognizing regular languages up to recognizing context-free languages. That is exactly the class needed to describe balanced parentheses, nested blocks, and the grammar of most programming languages. A PDA can push a marker when it sees an opening symbol and pop it when it sees a matching closing symbol, so counting and nesting finally become possible. The catch is that the stack only exposes its top. The PDA cannot freely inspect the middle of its memory, which keeps it below the full power of a Turing machine.
 
+```mermaid
+flowchart LR
+  Input[input symbol] -->|read| State[control state]
+  Top[stack top] -->|guides| State
+  State -->|push or pop| Stack[(stack)]
+  Stack -->|top exposed| Top
+  State -->|counts match| Accept((context-free accepted))
+```
+
 ### Quick Takeaways
 
 - A PDA is a finite-state machine plus a stack for unbounded, last-in first-out memory

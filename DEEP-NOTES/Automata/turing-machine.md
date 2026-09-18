@@ -13,6 +13,15 @@ A Turing machine is the most powerful model in the classical automata hierarchy.
 
 The Turing machine matters because it defines what "computable" means. The Church-Turing thesis holds that anything effectively computable by any procedure can be computed by a Turing machine. A universal Turing machine can simulate any other Turing machine given its description, which is the theoretical seed of the stored-program computer. The model also draws the sharpest line in computation: the halting problem, deciding whether a given machine stops on a given input, is provably undecidable. So the Turing machine both marks the ceiling of computability and shows that ceiling has holes no machine can fill.
 
+```mermaid
+flowchart LR
+  State[control state] -->|read symbol| Head[tape head]
+  Head -->|write and move| Tape[(unbounded tape)]
+  Tape -->|revisit any cell| Head
+  Head -->|feeds back| State
+  State -->|no transition applies| Halt((halt))
+```
+
 ### Quick Takeaways
 
 - A Turing machine has finite control plus an unbounded read-write tape it can revisit freely

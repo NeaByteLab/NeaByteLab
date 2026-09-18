@@ -13,6 +13,14 @@ A finite-state machine is the simplest model of computation. It has a fixed, fin
 
 FSMs come in two main flavors. A deterministic finite automaton, or DFA, has exactly one transition per state and input symbol. A nondeterministic finite automaton, or NFA, may have several, but any NFA can be converted to an equivalent DFA. FSMs recognize exactly the regular languages, the same class captured by regular expressions. Their power is limited precisely because they cannot count or remember arbitrary amounts of input. This limitation is the whole reason richer models like pushdown automata and Turing machines exist.
 
+```mermaid
+flowchart LR
+  Input[input symbol] -->|read| State[current state]
+  State -->|transition function| State
+  State -->|ends in accepting| Accept((accepted))
+  State -->|ends elsewhere| Reject{{rejected}}
+```
+
 ### Quick Takeaways
 
 - An FSM has finitely many states and no memory beyond the state it is currently in
