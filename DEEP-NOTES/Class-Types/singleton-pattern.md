@@ -11,6 +11,13 @@ tags: ['typescript', 'singleton', 'design-pattern', 'global-state']
 
 The Singleton pattern ensures that a class has exactly one instance while providing a global access point to that instance. This is useful when you need exactly one object to coordinate actions across the system, such as database connections, logging, or configuration management.
 
+```mermaid
+flowchart LR
+  Caller[any caller] -->|getInstance| Guard[private constructor plus static check]
+  Guard -->|create once, then reuse| One[single shared instance]
+  One -->|same object everywhere| Access((one global access point))
+```
+
 ## Definition
 
 A **singleton** is a class that restricts its instantiation to a single object. The pattern implements a private constructor and a static method that returns the single instance, creating it only if it doesn't already exist.
@@ -113,6 +120,13 @@ class DatabaseConnection {
 const db1 = DatabaseConnection.getInstance
 const db2 = DatabaseConnection.getInstance
 console.log(db1 === db2)
+```
+
+```mermaid
+flowchart LR
+  Req1[db1 = getInstance] -->|first call creates| Store[static instance]
+  Req2[db2 = getInstance] -->|reuses stored| Store
+  Store -->|db1 === db2| Same((one shared connection))
 ```
 
 **Good: Logger singleton**
@@ -294,6 +308,12 @@ class User {
  * Problem: Can only have one user in the entire system.
  * @description Warning: Should use regular class instead.
  */
+```
+
+```mermaid
+flowchart LR
+  App[app needs many users] -.->|User forced to singleton| One[single User.Instance]
+  One -.->|second user overwrites first| Lost{{cannot hold multiple users}}
 ```
 
 **Bad: Singleton with hidden dependencies**

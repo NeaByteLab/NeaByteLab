@@ -11,6 +11,13 @@ tags: ['typescript', 'static-classes', 'utilities', 'stateless']
 
 Static classes contain only static members and cannot be instantiated. They serve as containers for utility functions, constants, and stateless operations. Think of them as organized namespaces for related functionality that doesn't need object state.
 
+```mermaid
+flowchart LR
+  Class[static class] -->|no new, call by name| Members[static methods and constants]
+  Members -->|stateless, shared| Callers[any caller]
+  Callers -->|same result every time| Utility((namespaced utilities))
+```
+
 ## Definition
 
 A **static class** is a class where all members are marked as `static`. These members belong to the class itself rather than to any instance. Since TypeScript doesn't have a true `static class` keyword like C#, we create static classes by making all members static and often making the constructor private.
@@ -92,6 +99,12 @@ class MathUtils {
     return Math.min(Math.max(value, min), max)
   }
 }
+```
+
+```mermaid
+flowchart LR
+  Call[MathUtils.calculateCircleArea] -->|pass radius| Compute[uses static PI, no instance]
+  Compute -->|pure, stateless| Result((computed value))
 ```
 
 **Good: String manipulation utilities**
@@ -208,6 +221,12 @@ class Counter {
 /**
  * Better: Use regular class or singleton for stateful behavior.
  * @description Recommendation for stateful behavior patterns.
+```
+
+```mermaid
+flowchart LR
+  Counter[static Counter.count] -.->|shared global mutable state| Callers[every caller writes it]
+  Callers -.->|no isolation, no instance owner| Race{{hidden global state, hard to track}}
 ```
 
 **Bad: Static class that needs instance data**

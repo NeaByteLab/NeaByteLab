@@ -11,6 +11,14 @@ tags: ['typescript', 'abstract-classes', 'inheritance', 'contracts']
 
 Abstract classes are base classes that cannot be instantiated directly. They provide a way to define common behavior and state while requiring derived classes to implement specific methods. Think of them as incomplete blueprints that other classes must complete.
 
+```mermaid
+flowchart LR
+  Abstract[abstract base, shared code plus abstract methods] -->|extend and implement| Sub1[concrete subclass A]
+  Abstract -->|extend and implement| Sub2[concrete subclass B]
+  Sub1 --> Usable((instantiable objects))
+  Sub2 --> Usable
+```
+
 ## Definition
 
 An **abstract class** is a class that cannot be instantiated and may contain abstract methods that must be implemented by derived classes. Abstract methods have no implementation in the base class, only method signatures.
@@ -169,6 +177,14 @@ const dog = new Dog('Buddy', 3, 'Golden Retriever')
 const cat = new Cat('Whiskers', 2)
 dog.performDailyRoutine()
 cat.performDailyRoutine()
+```
+
+```mermaid
+flowchart LR
+  Animal[abstract Animal, eat and move plus abstract makeSound, sleep] -->|extend| Dog[Dog implements makeSound, sleep]
+  Animal -->|extend| Cat[Cat implements makeSound, sleep]
+  Dog -->|performDailyRoutine reuses base| Behavior((working animal instances))
+  Cat --> Behavior
 ```
 
 **Good: Abstract controller base class**
@@ -465,6 +481,14 @@ abstract class BaseLogger {
     return [...this.logs]
   }
 }
+```
+
+```mermaid
+flowchart LR
+  Misuse[abstract class misused] -.->|only concrete methods, no contract| AsRegular[Calculator should be a regular class]
+  Misuse -.->|only abstract methods, no shared code| AsInterface[Drawable should be an interface]
+  AsRegular -.-> Wrong{{wrong tool, abstract adds no value}}
+  AsInterface -.-> Wrong
 ```
 
 ### Abstract Properties

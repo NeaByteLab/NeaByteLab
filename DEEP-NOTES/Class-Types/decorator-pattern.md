@@ -11,6 +11,13 @@ tags: ['typescript', 'decorator-pattern', 'structural-pattern', 'wrappers', 'com
 
 The Decorator pattern lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors. Using decorators, you can wrap objects multiple times and combine behaviors without modifying the original object's code.
 
+```mermaid
+flowchart LR
+  Base[SimpleCoffee] -->|wrap| Milk[MilkDecorator]
+  Milk -->|wrap| Sugar[SugarDecorator]
+  Sugar -->|same interface, added cost and text| Result((decorated coffee))
+```
+
 ## Definition
 
 A **decorator** is an object that adds new functionality to another object dynamically, without altering its structure. The decorator implements the same interface as the object it decorates and delegates calls to the wrapped object while adding its own behavior before or after the delegation.
@@ -186,6 +193,13 @@ const espressoWithVanilla = new VanillaDecorator(new SimpleCoffee())
 const deluxeCoffee = new WhippedCreamDecorator(
   new MilkDecorator(new SugarDecorator(new VanillaDecorator(new SimpleCoffee())))
 )
+```
+
+```mermaid
+flowchart LR
+  Simple[SimpleCoffee cost 2.00] -->|MilkDecorator adds 0.50| Milk[coffee, milk]
+  Milk -->|WhippedCreamDecorator adds 0.75| Cream[coffee, milk, whipped cream]
+  Cream -->|each layer adds cost and text| Order((final drink and price))
 ```
 
 **Good: Web request decorators**
@@ -650,6 +664,14 @@ class BadDecorator implements Coffee {
  * Better: Keep interface consistent.
  * @description Maintains interface contract properly.
  */
+```
+
+```mermaid
+flowchart LR
+  Coffee[Coffee interface] -.->|BadDecorator adds getTemperature| Extra[new method not in interface]
+  Coffee -.->|changes getCost signature| Signature[getCost with tax flag]
+  Extra -.-> Break{{clients coded to Coffee break}}
+  Signature -.-> Break
 ```
 
 **Bad: Decorator with too many responsibilities**

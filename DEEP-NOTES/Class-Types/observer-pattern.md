@@ -11,6 +11,16 @@ tags: ['typescript', 'observer-pattern', 'behavioral-pattern', 'events', 'publis
 
 The Observer pattern defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically. It's like a subscription service where objects can subscribe to receive updates when something interesting happens.
 
+```mermaid
+flowchart LR
+  Subject[subject changes state] -->|notify| O1[observer 1]
+  Subject -->|notify| O2[observer 2]
+  Subject -->|notify| O3[observer 3]
+  O1 --> Updated((all stay in sync))
+  O2 --> Updated
+  O3 --> Updated
+```
+
 ## Definition
 
 An **observer pattern** consists of a subject (observable) that maintains a list of observers (subscribers) and notifies them of state changes. Observers register themselves with the subject and receive updates when the subject's state changes.
@@ -197,6 +207,16 @@ weatherStation.setMeasurements(27, 65)
  */
 weatherStation.unsubscribe(humidityDisplay)
 weatherStation.setMeasurements(23, 58)
+```
+
+```mermaid
+flowchart LR
+  Station[WeatherStation setMeasurements] -->|notifyObservers| Temp[TemperatureDisplay]
+  Station -->|notifyObservers| Humid[HumidityDisplay]
+  Station -->|notifyObservers| Log[WeatherLogger]
+  Temp --> Synced((displays and log updated))
+  Humid --> Synced
+  Log --> Synced
 ```
 
 **Good: Stock price monitoring**
@@ -711,6 +731,12 @@ class BadObserver implements WeatherObserver {
  * Better: Split into focused observers.
  * @description Separates concerns into multiple observers.
  */
+```
+
+```mermaid
+flowchart LR
+  Update[BadObserver.update] -.->|display plus AC plus save plus API| Mixed[many jobs in one observer]
+  Mixed -.->|one failure breaks the rest| Tangled{{coupled concerns, hard to test}}
 ```
 
 ## Important Points

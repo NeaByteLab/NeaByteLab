@@ -11,6 +11,14 @@ tags: ['typescript', 'classes', 'regular-classes', 'instances']
 
 Regular classes are the standard way to create objects in TypeScript. They support multiple instances, each with its own state and behavior. When you need independent objects that can exist simultaneously with different data, regular classes are the default choice.
 
+```mermaid
+flowchart LR
+  Blueprint[class blueprint] -->|new| Inst1[instance 1 own state]
+  Blueprint -->|new| Inst2[instance 2 own state]
+  Inst1 --> Objects((independent objects))
+  Inst2 --> Objects
+```
+
 ## Definition
 
 A **regular class** is a class that can be instantiated multiple times using the `new` operator. Each instance maintains its own copy of instance properties and can execute methods independently of other instances.
@@ -89,6 +97,14 @@ const user2 = new User('Bob', 'bob@example.com', 35)
  * @description Shows independent state modification.
  */
 user1.updateProfile('Alice Smith')
+```
+
+```mermaid
+flowchart LR
+  User[User class] -->|new Alice| A[user1 own name, email, age]
+  User -->|new Bob| B[user2 own name, email, age]
+  A -->|updateProfile on user1 only| Isolated((state stays independent))
+  B --> Isolated
 ```
 
 **Good: Product catalog with independent items**
@@ -177,6 +193,14 @@ class ConfigurationManager {
  */
 const config1 = new ConfigurationManager()
 const config2 = new ConfigurationManager()
+```
+
+```mermaid
+flowchart LR
+  Cfg[ConfigurationManager] -.->|new| C1[config1 settings]
+  Cfg -.->|new| C2[config2 settings]
+  C1 -.->|two copies drift apart| Split{{fragmented config, needed one source}}
+  C2 -.-> Split
 ```
 
 ## Important Points

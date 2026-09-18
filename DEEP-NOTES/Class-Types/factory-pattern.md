@@ -11,6 +11,13 @@ tags: ['typescript', 'factory-pattern', 'creational-pattern', 'object-creation']
 
 The Factory pattern defines an interface for creating objects but lets subclasses decide which class to instantiate. It lets a class defer instantiation to subclasses, promoting loose coupling by eliminating the need to bind application-specific classes into your code.
 
+```mermaid
+flowchart LR
+  Client[client asks for a type] -->|createAnimal type| Factory[factory decides class]
+  Factory -->|new Dog, Cat or Bird| Product[concrete product]
+  Product -->|client codes to interface| Decoupled((loose coupling))
+```
+
 ## Definition
 
 A **factory** is a class or method responsible for creating objects without specifying the exact class of the object that will be created. The Factory pattern encapsulates object creation logic, making it easier to manage and modify.
@@ -143,6 +150,13 @@ const bird = AnimalFactory.createAnimal('bird')
 dog.makeSound()
 cat.makeSound()
 bird.makeSound()
+```
+
+```mermaid
+flowchart LR
+  Type[type dog, cat or bird] -->|createAnimal switch| Select[pick concrete class]
+  Select -->|new Dog, Cat or Bird| Animal[Animal instance]
+  Animal -->|caller uses interface only| Ready((usable animal))
 ```
 
 **Good: Abstract factory for UI components**
@@ -648,6 +662,12 @@ class MockDatabaseFactory extends DatabaseFactory {
  */
 const testService = new UserService(new MockDatabaseFactory())
 const user = await testService.getUser('1')
+```
+
+```mermaid
+flowchart LR
+  Client[client code] -.->|new MySQL, new PostgreSQL directly| Hardcode[bound to concrete classes]
+  Hardcode -.->|add a new type, edit everywhere| Rigid{{tight coupling, no factory to isolate change}}
 ```
 
 ## Summary
