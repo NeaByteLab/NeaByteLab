@@ -13,6 +13,13 @@ A base model is trained on raw text to predict the next token, while an instruct
 
 The catch is that a base model can be fine-tuned on different chat templates, so when you use an instruct model you must use the matching template, or the formatting the model learned will not line up.
 
+```mermaid
+flowchart LR
+  Base[base model] -->|predict next token| Raw[raw text continuation]
+  Base -->|fine-tune on chat template| Instruct[instruct model]
+  Instruct -->|matching template| Follow((follows instructions))
+```
+
 ### Quick Takeaways
 
 - A base model only predicts the next token from raw text
@@ -39,7 +46,19 @@ A base model is like a fluent writer who can continue any text but has never bee
 
 **Good:** use SmolLM2-135M-Instruct with the exact template it was trained on.
 
+```mermaid
+flowchart LR
+  Model[SmolLM2-135M-Instruct] -->|exact trained template| Match[formatting lines up]
+  Match --> Reliable((reliable behavior))
+```
+
 **Bad:** feed an instruct model a prompt formatted with a different model template and expect reliable behavior.
+
+```mermaid
+flowchart LR
+  Model[instruct model] -.->|wrong template| Mismatch[formatting off]
+  Mismatch -.-> Break{{inconsistent, broken output}}
+```
 
 **Good:** apply a consistent ChatML format to a base model so it can imitate instruction following.
 

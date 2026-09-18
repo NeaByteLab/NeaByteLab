@@ -13,6 +13,13 @@ A ChatML conversation is a list of messages, and every message carries a role an
 
 Getting the roles right matters, because the system message is the one that shapes tone, rules, and, for agents, the available tools and how actions should be formatted.
 
+```mermaid
+flowchart LR
+  System[system role] -->|sets behavior| Assistant[assistant reply]
+  User[user role] -->|human input| Assistant
+  Assistant -->|alternating turns| History((coherent conversation))
+```
+
 ### Quick Takeaways
 
 - Three core roles, namely system, user, and assistant
@@ -47,6 +54,12 @@ system_message = {
 }
 ```
 
+```mermaid
+flowchart LR
+  Rules[behavior rules] -->|placed in system role| System[system message]
+  System -->|persists across turns| Shape((polite, consistent assistant))
+```
+
 **A multi-turn conversation with all three roles:**
 
 ```python
@@ -56,6 +69,12 @@ messages = [
     {"role": "assistant", "content": "Calculus is a branch of mathematics..."},
     {"role": "user", "content": "Can you give me an example?"},
 ]
+```
+
+```mermaid
+flowchart LR
+  Behavior[behavior rules] -.->|put in a user message| Mixed[rules buried in one turn]
+  Mixed -.-> Bad{{persona ignored, context lost}}
 ```
 
 ## Important Points

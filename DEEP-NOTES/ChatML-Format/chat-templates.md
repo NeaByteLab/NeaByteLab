@@ -13,6 +13,12 @@ Because each instruct model uses its own conversation format and special tokens,
 
 The key insight is that the same message list can produce very different prompt strings, since the template encodes the delimiters and defaults of one specific model.
 
+```mermaid
+flowchart LR
+  Messages[ChatML message list] -->|Jinja2 template| Render[apply per-model rules]
+  Render -->|delimiters and defaults| Prompt((model-specific prompt))
+```
+
 ### Quick Takeaways
 
 - A chat template is Jinja2 code that renders messages into a prompt
@@ -51,6 +57,12 @@ You are a helpful AI assistant named SmolLM, trained by Hugging Face
 {% endfor %}
 ```
 
+```mermaid
+flowchart LR
+  List[message list] -->|loop over messages| Wrap[wrap each in im_start and im_end]
+  Wrap -->|inject default system if missing| Prompt((SmolLM2 prompt string))
+```
+
 **The prompt it produces from a message list:**
 
 ```text
@@ -62,6 +74,12 @@ Can you explain what a chat template is?<|im_end|>
 A chat template structures conversations between users and AI models...<|im_end|>
 <|im_start|>user
 How do I use it ?<|im_end|>
+```
+
+```mermaid
+flowchart LR
+  List[same message list] -.->|another model template| Wrong[wrong delimiters and defaults]
+  Wrong -.-> Bad{{prompt the model cannot parse}}
 ```
 
 ## Important Points

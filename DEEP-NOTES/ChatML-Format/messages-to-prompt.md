@@ -11,6 +11,12 @@ tags: ['chatml', 'apply-chat-template', 'tokenizer', 'transformers']
 
 The easiest and safest way to turn a conversation into a correctly formatted prompt is to use the chat template that ships with the model tokenizer, where in transformers you load the tokenizer and call apply_chat_template on your message list, and it returns a prompt string that is ready to send to the model. This same function runs in the backend of chat APIs whenever you interact with messages in the ChatML format, so by letting the tokenizer own the formatting you avoid hand-writing delimiters and you always match the exact format the chosen model expects.
 
+```mermaid
+flowchart LR
+  Messages[message list] -->|apply_chat_template| Tokenizer[model tokenizer]
+  Tokenizer -->|owns the correct template| Prompt((ready-to-send prompt))
+```
+
 ### Quick Takeaways
 
 - Use apply_chat_template rather than building the prompt by hand
@@ -45,6 +51,12 @@ messages = [
 ]
 ```
 
+```mermaid
+flowchart LR
+  Messages[conversation messages] -->|apply_chat_template| Render[tokenizer renders format]
+  Render -->|add_generation_prompt| Cue((assistant cued to reply))
+```
+
 **Loading the tokenizer and rendering the prompt:**
 
 ```python
@@ -52,6 +64,12 @@ from transformers import AutoTokenizer
 
 tokenizer = AutoTokenizer.from_pretrained("HuggingFaceTB/SmolLM2-1.7B-Instruct")
 rendered_prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+```
+
+```mermaid
+flowchart LR
+  Messages[message list] -.->|hand-concatenated by you| Manual[guessed delimiters]
+  Manual -.-> Bad{{prompt does not match the model}}
 ```
 
 ## Important Points

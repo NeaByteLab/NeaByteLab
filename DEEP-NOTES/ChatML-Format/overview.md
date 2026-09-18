@@ -13,6 +13,12 @@ ChatML is a template format that structures a conversation with clear role indic
 
 This is the job of a chat template, which acts as the bridge between conversational messages and the specific formatting rules of the model you chose, so that every model receives a correctly formatted prompt despite using its own special tokens.
 
+```mermaid
+flowchart LR
+  Messages[message list with roles] -->|concatenate and format| Template[chat template]
+  Template -->|model special tokens| Prompt((single model prompt))
+```
+
 ### Quick Takeaways
 
 - A conversation is really one concatenated prompt, not separate memories
@@ -47,6 +53,12 @@ conversation = [
 ]
 ```
 
+```mermaid
+flowchart LR
+  List[ChatML message list] -->|SmolLM2 template| Flatten[concatenate all turns]
+  Flatten -->|im_start and im_end tokens| Prompt((one correct prompt))
+```
+
 **The same list rendered by the SmolLM2 template:**
 
 ```text
@@ -59,6 +71,12 @@ I'd be happy to help. Could you provide your order number?<|im_end|>
 <|im_start|>user
 It's ORDER-123<|im_end|>
 <|im_start|>assistant
+```
+
+```mermaid
+flowchart LR
+  Raw[messages sent as-is] -.->|no roles, no tokens| Flat[unstructured text]
+  Flat -.-> Bad{{model cannot parse the turns}}
 ```
 
 ## Important Points

@@ -13,6 +13,14 @@ Special tokens are what models use to delimit where each user and assistant turn
 
 This is why the same conversation looks different once rendered, since SmolLM2 wraps turns one way and Llama 3.2 wraps them another way, even though the underlying message list is identical.
 
+```mermaid
+flowchart LR
+  Conversation[shared message shape] -->|SmolLM2 delimiters| SmolLM2[im_start, im_end, eos]
+  Conversation -->|Llama 3.2 delimiters| Llama[header_id, eot_id]
+  SmolLM2 --> Parsed((clean turn boundaries))
+  Llama --> Parsed
+```
+
 ### Quick Takeaways
 
 - Special tokens mark the start and end of each turn
@@ -45,6 +53,12 @@ I need help with my order<|im_end|>
 <|im_start|>assistant
 ```
 
+```mermaid
+flowchart LR
+  Turn[each message] -->|im_start role, content| Wrap[wrapped turn]
+  Wrap -->|im_end closes the turn| Stop((generation ends cleanly))
+```
+
 **Llama 3.2 style, using header ids and eot_id:**
 
 ```text
@@ -56,6 +70,12 @@ Today Date: 10 Feb 2025
 <|eot_id|><|start_header_id|>user<|end_header_id|>
 
 I need help with my order<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+```
+
+```mermaid
+flowchart LR
+  Llama[Llama 3.2 conversation] -.->|wrapped with SmolLM2 tokens| Wrong[mismatched delimiters]
+  Wrong -.-> Bad{{turns misread, generation runs on}}
 ```
 
 ## Important Points
