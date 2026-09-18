@@ -15,6 +15,13 @@ Three families of solutions exist. Regularization methods like elastic weight co
 
 Continual learning is closely related to online learning but adds the harder constraint that old tasks may never reappear. In online learning the data stream is often stationary or slowly drifting. In continual learning the tasks are distinct and sequential, and forgetting is the primary failure mode.
 
+```mermaid
+flowchart LR
+  TaskA[task A learned] -->|train on| TaskB[task B]
+  TaskB -->|shared weights shift| Forget[forgetting risk]
+  Forget -->|regularization, replay, architecture| Retain((retained knowledge))
+```
+
 ### Quick Takeaways
 
 - Catastrophic forgetting destroys old knowledge when new tasks overwrite shared weights
@@ -46,7 +53,21 @@ A musician learns piano for years, then switches to guitar. If practicing guitar
 
 **Good:** A model trained on ten object classes uses EWC when learning ten more. The Fisher information matrix identifies which weights matter most for the first ten classes, and the penalty keeps those weights stable. After learning all twenty classes, accuracy on the first ten drops only a few percent instead of collapsing to near zero.
 
+```mermaid
+flowchart LR
+  First[first ten classes] -->|Fisher information| Protect[protect key weights]
+  Protect -->|EWC penalty| Learn[learn ten more]
+  Learn --> Good((twenty classes retained))
+```
+
 **Bad:** Fine-tuning a pretrained model on a new task with no forgetting mitigation. After a few epochs on the new task, the model performs well on it but accuracy on the original task drops from 95 percent to 30 percent. The weights that encoded the original knowledge were overwritten without protection. This is the default behavior and happens every time without an explicit countermeasure.
+
+```mermaid
+flowchart LR
+  Pretrained[pretrained model] -.->|fine-tune, no mitigation| NewTask[new task weights]
+  NewTask -.->|overwrite old weights| Original[original task]
+  Original -.-> Bad{{accuracy drops 95 to 30 percent}}
+```
 
 ## Important Points
 

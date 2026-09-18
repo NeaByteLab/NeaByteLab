@@ -15,6 +15,13 @@ The two main strategies are feature extraction and fine-tuning. In feature extra
 
 Most modern deep learning pipelines use transfer learning by default. ImageNet pretrained models are the standard starting point for vision tasks. BERT and GPT-family models serve the same role for language tasks. Training from random initialization is now the exception rather than the rule.
 
+```mermaid
+flowchart LR
+  Pretrained[model pretrained on large data] -->|reuse early layers| Adapt[replace head, fine-tune]
+  Adapt -->|small target dataset| New[new related task]
+  New --> Fast((strong model, low cost))
+```
+
 ### Quick Takeaways
 
 - Early layers capture general features that transfer well across domains
@@ -46,7 +53,21 @@ A chef who spent years mastering French cuisine moves to a Japanese kitchen. The
 
 **Good:** Loading a ResNet-50 pretrained on ImageNet, freezing all convolutional layers, replacing the final classification head with a two-class layer, and training on 500 X-ray images to detect pneumonia. The model converges in minutes and reaches 90 percent accuracy because the low-level edge and texture features from ImageNet are directly useful for reading medical scans.
 
+```mermaid
+flowchart LR
+  ResNet[ResNet-50 on ImageNet] -->|freeze conv layers| Frozen[reused edge, texture features]
+  Frozen -->|train new two-class head| XRay[500 X-ray images]
+  XRay --> Good((90 percent accuracy in minutes))
+```
+
 **Bad:** Taking a model pretrained on natural photos and directly fine-tuning it on satellite imagery with a high learning rate and no frozen layers. The pretrained features get destroyed in the first few epochs because the domain gap is large and the learning rate is too aggressive. A better approach would be to freeze early layers, use a learning rate ten times smaller than the default, and unfreeze gradually.
+
+```mermaid
+flowchart LR
+  Photos[model on natural photos] -.->|high lr, nothing frozen| Satellite[satellite imagery]
+  Satellite -.->|large domain gap| Destroy[features overwritten]
+  Destroy -.-> Bad{{pretrained knowledge destroyed}}
+```
 
 **Good:** Taking a BERT model pretrained on general English text and fine-tuning it on 2000 labeled legal contract clauses. The language understanding transfers directly, and the model outperforms a bag-of-words baseline trained on the same data.
 

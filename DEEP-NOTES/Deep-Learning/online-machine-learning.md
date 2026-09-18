@@ -15,6 +15,13 @@ The theoretical framework is regret minimization. The learner makes a prediction
 
 In practice, most production systems blend batch and online. They retrain from scratch periodically and run online updates between retrains. Pure online learning from a cold start is rare because initial performance is poor until enough samples arrive.
 
+```mermaid
+flowchart LR
+  Stream[incoming sample] -->|predict| Prediction[prediction]
+  Prediction -->|observe true label| Loss[suffer loss]
+  Loss -->|update immediately| Model((adapted model))
+```
+
 ### Quick Takeaways
 
 - The model updates after each sample instead of waiting for a full pass over all data
@@ -45,7 +52,21 @@ A weather forecaster who reads the full year of data and builds one prediction m
 
 **Good:** A spam filter processes each incoming email, predicts spam or not, then updates its weights using the true label from the user. After a few thousand emails it matches a batch-trained model, and it keeps adapting as spammers change tactics. No retraining pipeline is needed. The model stays current without ever seeing the full dataset at once.
 
+```mermaid
+flowchart LR
+  Email[each incoming email] -->|predict spam or not| Guess[prediction]
+  Guess -->|user label updates weights| Adapt[adapt to new tactics]
+  Adapt --> Good((stays current, no retraining))
+```
+
 **Bad:** Running a single stochastic gradient descent step on each sample with a fixed high learning rate and no decay. The model oscillates wildly because recent samples overwrite what was learned before. Online learning still needs a decaying learning rate or adaptive optimizer to converge. Without decay the model chases the last example and forgets the pattern.
+
+```mermaid
+flowchart LR
+  Sample[each sample] -.->|fixed high learning rate| Step[large SGD step]
+  Step -.->|recent overwrites old| Chase[chase last example]
+  Chase -.-> Bad{{oscillates, forgets pattern}}
+```
 
 ## Important Points
 

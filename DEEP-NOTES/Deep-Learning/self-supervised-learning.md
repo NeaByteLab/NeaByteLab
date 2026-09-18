@@ -13,6 +13,13 @@ Self-supervised learning creates its own labels from the raw data. Instead of re
 
 This paradigm powers the foundation models behind modern NLP and computer vision. BERT learns by predicting masked tokens. GPT learns by predicting the next token. Vision models like DINO learn by matching augmented views of the same image. The key insight is that raw data contains enough structure to generate billions of training signals without a single human label.
 
+```mermaid
+flowchart LR
+  Raw[raw unlabeled data] -->|hide part of input| Pretext[pretext task]
+  Pretext -->|predict hidden part| Signal[self-generated labels]
+  Signal --> Rep((transferable representations))
+```
+
 ### Quick Takeaways
 
 - The model generates its own labels by hiding part of the input and predicting it
@@ -44,7 +51,21 @@ A detective trainee studies crime scene photos where certain clues have been bla
 
 **Good:** Pre-training BERT on billions of sentences with masked language modeling, then fine-tuning on a small labeled dataset for question answering. The pretext task teaches deep language understanding that transfers.
 
+```mermaid
+flowchart LR
+  Billions[billions of sentences] -->|masked language modeling| Understand[deep language understanding]
+  Understand -->|fine-tune small labeled set| QA[question answering]
+  QA --> Good((strong transfer))
+```
+
 **Bad:** Using masked language modeling on a dataset of 500 sentences. The pretext task needs scale to learn meaningful patterns, and a tiny corpus produces shallow representations.
+
+```mermaid
+flowchart LR
+  Tiny[500 sentences] -.->|masked language modeling| Weak[too little scale]
+  Weak -.->|few training signals| Shallow[shallow representations]
+  Shallow -.-> Bad{{no meaningful patterns learned}}
+```
 
 **Good:** Training a vision encoder with contrastive learning on millions of unlabeled images, where random crops of the same image are positive pairs. The encoder learns features that rival supervised ImageNet pre-training.
 

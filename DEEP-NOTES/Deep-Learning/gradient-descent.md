@@ -13,6 +13,13 @@ Gradient descent is the optimization algorithm that trains nearly every neural n
 
 The gradient is just the vector of partial derivatives. It points uphill, so you move in the opposite direction. The size of each step is controlled by the learning rate, which is the single most important hyperparameter in training. Too large and the parameters overshoot. Too small and training takes forever or gets stuck.
 
+```mermaid
+flowchart LR
+  Loss[loss surface] -->|compute gradient| Direction[steepest uphill]
+  Direction -->|step opposite, size = learning rate| Update[update parameters]
+  Update --> Minimum((lower loss))
+```
+
 ### Quick Takeaways
 
 - The gradient tells you the direction of steepest increase, so you go the opposite way
@@ -42,7 +49,21 @@ Imagine you are blindfolded on a hilly landscape and want to reach the lowest va
 
 **Good:** use mini-batch SGD with a learning rate of 0.01 and a batch size of 64. The gradient estimate is noisy but cheap to compute, and the noise often helps escape shallow local minima.
 
+```mermaid
+flowchart LR
+  Batch[mini-batch of 64] -->|cheap noisy gradient| Step[SGD update, lr 0.01]
+  Step -->|noise escapes shallow minima| Progress[steady descent]
+  Progress --> Good((fast convergence))
+```
+
 **Bad:** use full-batch gradient descent on a dataset of 10 million samples. Each single update requires a full pass over all data, making training painfully slow with no benefit from the noise that helps generalization.
+
+```mermaid
+flowchart LR
+  Full[10 million samples] -.->|full pass per update| Slow[one gradient step]
+  Slow -.->|no helpful noise| Stall[painfully slow]
+  Stall -.-> Bad{{training too slow to finish}}
+```
 
 **The update rule:**
 

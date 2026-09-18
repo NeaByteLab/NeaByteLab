@@ -13,6 +13,13 @@ Training a neural network means finding the set of weights that minimizes the lo
 
 No optimizer sees the full landscape. Stochastic methods estimate the gradient from a mini-batch and that noise is both a curse and a blessing, because it slows convergence but helps escape shallow local minima.
 
+```mermaid
+flowchart LR
+  Batch[mini-batch gradient] -->|direction| Step[optimizer step]
+  Step -->|momentum and adaptive rate| Walk[walk downhill]
+  Walk --> Min((minimized loss))
+```
+
 ### Quick Takeaways
 
 - SGD computes the raw gradient and steps in the opposite direction
@@ -41,6 +48,13 @@ Imagine rolling a ball down a mountain in fog. SGD is a blind hiker who checks t
 
 **Good, setting up Adam with a cosine schedule:**
 
+```mermaid
+flowchart LR
+  Adam[Adam, lr 3e-4] -->|per-parameter adaptation| Steps[training steps]
+  Steps -->|cosine schedule decays| Fine[fine steps late]
+  Fine --> Good((smooth convergence))
+```
+
 ```python
 optimizer = torch.optim.Adam(model.parameters(), lr=3e-4, weight_decay=1e-5)
 scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=100)
@@ -53,6 +67,13 @@ for epoch in range(100):
 The learning rate starts at `3e-4` and smoothly decays to near zero over 100 epochs.
 
 **Bad:** using a fixed high learning rate like `1e-1` with Adam. Adam already adapts per-parameter rates, and a large global rate on top causes the loss to oscillate or diverge.
+
+```mermaid
+flowchart LR
+  Global[fixed global rate 1e-1] -.->|on top of Adam adaptation| Double[double the step size]
+  Double -.->|steps too large| Unstable[unstable updates]
+  Unstable -.-> Bad{{loss oscillates or diverges}}
+```
 
 ## Important Points
 

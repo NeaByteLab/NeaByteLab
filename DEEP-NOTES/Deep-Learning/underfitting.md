@@ -13,6 +13,13 @@ Underfitting is the failure mode where a model cannot learn the underlying struc
 
 The core cause is always the same. The model is too constrained to fit even the real signal. This constraint can come from having too few parameters, from regularization that is too aggressive, or from stopping training too early. A model that underfits has high bias and low variance.
 
+```mermaid
+flowchart LR
+  Simple[too-simple model] -->|cannot capture signal| High[high training error]
+  High -->|same on test| Both[high error everywhere]
+  Both --> Fail((high bias, underfit))
+```
+
 ### Quick Takeaways
 
 - Underfitting means the model fails on training data, not just test data
@@ -41,6 +48,13 @@ Imagine you are trying to draw a map of a coastline, but you are only allowed to
 
 **Good:** a neural network with two hidden layers of 128 units fits a nonlinear regression task and achieves low training error.
 
+```mermaid
+flowchart LR
+  Data[nonlinear task] -->|two hidden layers, 128 units| Capacity[enough capacity]
+  Capacity -->|captures curves| Fit[fits the signal]
+  Fit --> Good((low training error))
+```
+
 ```python
 model = Sequential([
     Dense(128, activation='relu'),
@@ -50,6 +64,13 @@ model = Sequential([
 ```
 
 **Bad:** a single linear layer tries to fit the same nonlinear data and the training loss never drops below a high baseline.
+
+```mermaid
+flowchart LR
+  Data[nonlinear data] -.->|single linear layer| Straight[straight-line model]
+  Straight -.->|cannot represent curves| Miss[misses the structure]
+  Miss -.-> Bad{{training loss stays high}}
+```
 
 ```python
 model = Sequential([

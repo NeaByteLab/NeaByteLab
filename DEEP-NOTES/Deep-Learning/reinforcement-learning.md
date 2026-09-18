@@ -13,6 +13,13 @@ Reinforcement learning trains an agent that interacts with an environment step b
 
 The core tension in RL is exploration versus exploitation. The agent must try new actions to discover better strategies, but it must also use what it already knows to collect reward. Policy-based methods learn a direct mapping from states to actions. Value-based methods estimate how good each state or action is and pick the best. Modern deep RL combines neural networks with these ideas to handle high-dimensional states like images or language. RLHF applies this loop to align language models with human preferences.
 
+```mermaid
+flowchart LR
+  Agent[agent] -->|action| Env[environment]
+  Env -->|state and reward| Agent
+  Agent -->|maximize cumulative reward| Policy((learned policy))
+```
+
 ### Quick Takeaways
 
 - An agent learns by interacting with an environment and receiving reward signals
@@ -45,7 +52,21 @@ A dog learns tricks without a textbook. The owner says "sit" and the dog tries r
 
 **Good:** Training a robotic arm to stack blocks using a reward of plus one for each successfully placed block. The sparse but clear reward lets the agent discover stacking strategies through thousands of episodes.
 
+```mermaid
+flowchart LR
+  Arm[robotic arm] -->|place a block| Reward[plus one per block]
+  Reward -->|clear signal, many episodes| Strategy[discover stacking]
+  Strategy --> Good((learned stacking policy))
+```
+
 **Bad:** Giving the robotic arm a reward only when all ten blocks are perfectly stacked. The reward is too sparse and the agent almost never stumbles into success, so it cannot learn anything.
+
+```mermaid
+flowchart LR
+  Arm[robotic arm] -.->|reward only at ten stacked| Sparse[extremely sparse reward]
+  Sparse -.->|success almost never happens| NoSignal[no learning signal]
+  NoSignal -.-> Bad{{agent cannot learn}}
+```
 
 **Good:** Using RLHF to align a language model by training a reward model on human preference data and then optimizing the policy against it. The model shifts toward producing responses humans rate as helpful and safe.
 

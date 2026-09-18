@@ -13,6 +13,13 @@ Hyperparameter optimization is the search for the combination of hyperparameters
 
 The search space grows exponentially with the number of hyperparameters. Three hyperparameters with ten candidate values each produce a thousand combinations. Exhaustive search becomes impractical fast, so smarter strategies exist to find good configurations without trying every one.
 
+```mermaid
+flowchart LR
+  Space[hyperparameter search space] -->|grid, random, or Bayesian| Trials[evaluate configurations]
+  Trials -->|validation score| Pick[pick best]
+  Pick --> Best((tuned model))
+```
+
 ### Quick Takeaways
 
 - Grid search is exhaustive and expensive but guarantees coverage of the defined grid
@@ -41,6 +48,13 @@ Finding the right hyperparameters is like searching for the best restaurant in a
 
 **Good:** using random search over a wide range, then narrowing with Bayesian optimization.
 
+```mermaid
+flowchart LR
+  Wide[wide random search] -->|find promising region| Narrow[Bayesian optimization]
+  Narrow -->|informed next trial| Refine[refine configuration]
+  Refine --> Good((best hyperparameters))
+```
+
 ```python
 import optuna
 
@@ -57,6 +71,13 @@ study.optimize(objective, n_trials=100)
 ```
 
 **Bad:** running a full grid search over five hyperparameters with ten values each, producing 100,000 training runs.
+
+```mermaid
+flowchart LR
+  Grid[5 params, 10 values each] -.->|Cartesian product| Runs[100000 training runs]
+  Runs -.->|exponential blowup| Budget[compute budget exhausted]
+  Budget -.-> Bad{{impractical, never finishes}}
+```
 
 ```python
 # 10 * 10 * 10 * 10 * 10 = 100,000 runs

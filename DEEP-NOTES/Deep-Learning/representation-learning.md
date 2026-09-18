@@ -13,6 +13,13 @@ Representation learning is the family of methods where a model discovers the rep
 
 The learned representation is often called an embedding or a latent vector. It lives in a latent space where similar inputs land close together and dissimilar inputs land far apart. The quality of this space determines how well the model performs, which is why representation learning is sometimes called the core problem in deep learning.
 
+```mermaid
+flowchart LR
+  Raw[raw data] -->|learned transform| Embedding[embedding]
+  Embedding -->|similar inputs close| Latent[latent space]
+  Latent --> Task((easier downstream task))
+```
+
 ### Quick Takeaways
 
 - The model learns what to measure instead of being told
@@ -41,7 +48,21 @@ Hand-crafting features is like a librarian who sorts books by color and height. 
 
 **Good:** train a language model on a large corpus and use its internal embeddings to measure sentence similarity. The model learns that "dog" and "puppy" should be close in the latent space without anyone telling it so.
 
+```mermaid
+flowchart LR
+  Corpus[large text corpus] -->|train language model| Embed[internal embeddings]
+  Embed -->|dog near puppy| Close[semantic proximity]
+  Close --> Good((similarity without labels))
+```
+
 **Bad:** represent each word as a one-hot vector (a vector of all zeros with a single one). The representation has no notion of similarity. "Dog" and "puppy" are equally distant from each other as "dog" and "volcano."
+
+```mermaid
+flowchart LR
+  Word[each word] -.->|one-hot vector| Sparse[all zeros, single one]
+  Sparse -.->|equal distances| NoSim[no notion of similarity]
+  NoSim -.-> Bad{{dog as far from puppy as volcano}}
+```
 
 **Latent space geometry:**
 

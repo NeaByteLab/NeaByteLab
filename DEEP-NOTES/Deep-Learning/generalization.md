@@ -13,6 +13,13 @@ A model that memorizes the training set is useless. The entire point of training
 
 Generalization is not a technique. It is the goal. Every architectural choice and every regularization method and every data augmentation trick exists to serve generalization. A model with 100% training accuracy and 60% test accuracy has failed.
 
+```mermaid
+flowchart LR
+  Train[training data] -->|learn patterns| Model[trained model]
+  Model -->|apply to| Unseen[unseen test data]
+  Unseen --> Result((small generalization gap))
+```
+
 ### Quick Takeaways
 
 - The generalization gap is the difference between training error and test error
@@ -42,6 +49,13 @@ A chef who can only cook well when following the exact recipes from their cookbo
 
 **Good, tracking the generalization gap:**
 
+```mermaid
+flowchart LR
+  Epoch[each epoch] -->|measure| Gap[val loss minus train loss]
+  Gap -->|gap growing| Signal[apply regularization]
+  Signal --> Good((patterns, not memorization))
+```
+
 ```python
 for epoch in range(num_epochs):
     train_loss = train_one_epoch(model, train_loader)
@@ -55,6 +69,13 @@ for epoch in range(num_epochs):
 Monitoring the gap every epoch reveals whether the model is learning patterns or memorizing noise.
 
 **Bad:** reporting only training accuracy. A model can reach 99.9% on training data while performing at chance level on new data, and without measuring the gap you will never know.
+
+```mermaid
+flowchart LR
+  Report[report training accuracy only] -.->|99.9 percent shown| Hidden[gap never measured]
+  Hidden -.->|new data at chance level| Blind[blind to failure]
+  Blind -.-> Bad{{memorization goes undetected}}
+```
 
 ## Important Points
 

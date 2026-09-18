@@ -13,6 +13,13 @@ Overfitting happens when a model fits the training data too well. It captures no
 
 Every sufficiently complex model will overfit if given enough time and not enough data. The question is never whether overfitting can happen but how to detect it early and how to control it. The tools exist and they are well understood.
 
+```mermaid
+flowchart LR
+  Model[high-capacity model] -->|too long, too little data| Noise[fits noise]
+  Noise -->|train loss falls, val loss rises| Gap[widening gap]
+  Gap --> Fail((poor test performance))
+```
+
 ### Quick Takeaways
 
 - Overfitting shows up as a growing gap between training loss and validation loss
@@ -40,6 +47,13 @@ A student who memorizes every answer in the practice booklet word for word will 
 ## Examples
 
 **Good, applying dropout and early stopping together:**
+
+```mermaid
+flowchart LR
+  Train[training] -->|dropout zeroes neurons| Robust[redundant features]
+  Robust -->|monitor val loss| Stop[early stopping]
+  Stop --> Good((best checkpoint kept))
+```
 
 ```python
 class Classifier(nn.Module):
@@ -73,6 +87,13 @@ for epoch in range(200):
 Dropout regularizes during training and early stopping picks the best checkpoint before memorization sets in.
 
 **Bad:** training for 1000 epochs with no validation monitoring and no regularization. The model will eventually memorize every training example, including the noise, and the weights will be useless on new data.
+
+```mermaid
+flowchart LR
+  Long[1000 epochs] -.->|no regularization, no monitoring| Memorize[memorize every example]
+  Memorize -.->|noise included| Useless[useless weights]
+  Useless -.-> Bad{{fails on new data}}
+```
 
 ## Important Points
 

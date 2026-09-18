@@ -13,6 +13,13 @@ Feature learning is the process where a model automatically discovers the featur
 
 Deep networks are the most successful feature learners. A convolutional network trained on images learns edge detectors in the first layer, texture patterns in the second, object parts in the third, and full object shapes near the top. No human told the network what an edge is. The training signal and the architecture together force the network to invent features that make the final task easier.
 
+```mermaid
+flowchart LR
+  Raw[raw pixels] -->|first layers| Low[edges, textures]
+  Low -->|deeper layers| High[object parts, shapes]
+  High --> Learned((task-ready features))
+```
+
 ### Quick Takeaways
 
 - Feature engineering is manual and feature learning is automatic
@@ -41,7 +48,21 @@ Feature engineering is like a chef who preps every ingredient by hand before coo
 
 **Good:** train a deep convolutional network on ImageNet. Visualize the first-layer filters and find oriented edge detectors, color blobs, and frequency patterns. These features emerged from data without being programmed.
 
+```mermaid
+flowchart LR
+  Data[ImageNet images] -->|train CNN| Filters[first-layer filters]
+  Filters -->|emerge from data| Detectors[edges, color blobs]
+  Detectors --> Good((features found automatically))
+```
+
 **Bad:** hand-compute Histogram of Oriented Gradients (HOG) for every image and feed the fixed feature vector to a linear classifier. This works for pedestrian detection but fails to generalize to new object categories because the features are frozen.
+
+```mermaid
+flowchart LR
+  Image[every image] -.->|hand-compute HOG| Fixed[frozen feature vector]
+  Fixed -.->|new object categories| Classifier[linear classifier]
+  Classifier -.-> Bad{{fails to generalize}}
+```
 
 **Hierarchical feature structure in a CNN:**
 

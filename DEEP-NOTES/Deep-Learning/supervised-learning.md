@@ -13,6 +13,13 @@ Supervised learning trains a model on labeled data where every input has a known
 
 The training loop is straightforward. Feed a batch of labeled examples through the network, compute a loss that measures how wrong the predictions are, backpropagate the gradients, and update the weights. Repeat until the validation loss stops improving. The two main flavors are classification, where the output is a discrete category, and regression, where the output is a continuous value.
 
+```mermaid
+flowchart LR
+  Labeled[labeled input-output pairs] -->|forward pass| Pred[prediction]
+  Pred -->|loss vs true label| Update[backprop and update]
+  Update --> Generalize((predict on unseen data))
+```
+
 ### Quick Takeaways
 
 - Every training example carries a label that tells the model what the right answer is
@@ -44,7 +51,21 @@ A student studies a textbook where every problem has an answer key in the back. 
 
 **Good:** Training an image classifier on ImageNet where every image has a human-verified label. The model gets a clear gradient signal from millions of labeled samples and converges to high accuracy.
 
+```mermaid
+flowchart LR
+  Images[ImageNet, verified labels] -->|clear gradient signal| Train[train classifier]
+  Train -->|millions of samples| Converge[high accuracy]
+  Converge --> Good((accurate classifier))
+```
+
 **Bad:** Feeding the model unlabeled images and hoping it learns to classify them. Without labels the loss function has nothing to compare against, so the supervised training loop cannot run.
+
+```mermaid
+flowchart LR
+  Unlabeled[unlabeled images] -.->|no target to compare| Loss[loss has nothing]
+  Loss -.->|no gradient signal| Stuck[training loop cannot run]
+  Stuck -.-> Bad{{supervised learning impossible}}
+```
 
 **Good:** Predicting house prices using a dataset of past sales with known prices. The regression loss gives a direct measure of how far each prediction is from reality.
 

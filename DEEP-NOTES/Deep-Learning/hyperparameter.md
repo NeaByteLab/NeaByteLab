@@ -13,6 +13,13 @@ A hyperparameter is any value that you set before training begins. It is not lea
 
 Hyperparameters govern the structure of the model and the dynamics of training. Some define the architecture, like the number of layers or units per layer. Others define the optimization, like the learning rate or batch size. Getting them wrong means the model either cannot learn or learns the wrong thing.
 
+```mermaid
+flowchart LR
+  Engineer[engineer sets before training] -->|learning rate, layers, batch size| Config[fixed hyperparameters]
+  Config -->|controls optimizer| Training[training dynamics]
+  Training --> Params((learned weights))
+```
+
 ### Quick Takeaways
 
 - Hyperparameters are set before training and never updated by the optimizer
@@ -42,12 +49,26 @@ Training a model is like tuning a guitar. The strings are the parameters, and yo
 
 **Good:** setting a moderate learning rate with a scheduler that decays it over time.
 
+```mermaid
+flowchart LR
+  Rate[moderate learning rate] -->|cosine scheduler| Decay[decay over time]
+  Decay -->|large steps early, fine steps late| Converge[stable convergence]
+  Converge --> Good((well-tuned training))
+```
+
 ```python
 optimizer = Adam(lr=3e-4)
 scheduler = CosineAnnealingLR(optimizer, T_max=100)
 ```
 
 **Bad:** using a learning rate of 1.0 with no scheduler, causing the loss to explode on the first few steps.
+
+```mermaid
+flowchart LR
+  High[learning rate 1.0] -.->|no scheduler| Overshoot[parameters overshoot]
+  Overshoot -.->|first few steps| Diverge[loss grows unbounded]
+  Diverge -.-> Bad{{loss explodes}}
+```
 
 ```python
 optimizer = SGD(lr=1.0)  # far too high for most tasks

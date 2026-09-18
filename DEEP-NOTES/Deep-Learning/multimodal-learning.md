@@ -15,6 +15,13 @@ The core design decision is how and when to fuse the modalities. Early fusion co
 
 The field has accelerated since contrastive pretraining showed that aligned embeddings across modalities enable zero-shot transfer. Models like CLIP and its successors proved that you can build strong vision-language representations without task-specific labels.
 
+```mermaid
+flowchart LR
+  Image[image encoder] -->|embedding| Fusion[shared space]
+  Text[text encoder] -->|embedding| Fusion
+  Fusion --> Joint((aligned representation))
+```
+
 ### Quick Takeaways
 
 - Each modality has its own encoder before any fusion happens
@@ -45,7 +52,21 @@ A detective investigates a crime scene using photographs, witness statements, an
 
 **Good:** CLIP trains an image encoder and a text encoder separately, then aligns their outputs with a contrastive loss on 400 million image-text pairs. At inference, you compare a text embedding against image embeddings without any fine-tuning. The alignment is tight enough for zero-shot image classification across hundreds of categories the model never explicitly trained on.
 
+```mermaid
+flowchart LR
+  Pairs[400M image-text pairs] -->|separate encoders| Encoders[image and text embeddings]
+  Encoders -->|contrastive loss| Aligned[tight alignment]
+  Aligned --> Good((zero-shot classification))
+```
+
 **Bad:** Concatenating raw pixel values and word embeddings into a single vector and feeding it into a feedforward network. The dimensions are incompatible, the scales are mismatched, and the network cannot learn meaningful cross-modal features. Each modality needs its own encoder to extract meaningful features before any fusion happens.
+
+```mermaid
+flowchart LR
+  Raw[raw pixels plus word embeddings] -.->|concatenate directly| Vector[mismatched vector]
+  Vector -.->|incompatible scales| Net[feedforward network]
+  Net -.-> Bad{{no cross-modal features learned}}
+```
 
 ## Important Points
 

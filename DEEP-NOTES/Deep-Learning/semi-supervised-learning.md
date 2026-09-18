@@ -13,6 +13,13 @@ Semi-supervised learning uses a small set of labeled examples together with a mu
 
 Two dominant strategies make this work. Pseudo-labeling uses the model's own confident predictions on unlabeled data as if they were true labels, then retrains on the expanded dataset. Consistency regularization forces the model to produce the same prediction for an input regardless of how it is perturbed, which smooths the decision boundary using unlabeled examples. Modern methods like FixMatch combine both ideas in a single framework.
 
+```mermaid
+flowchart LR
+  Labeled[few labeled examples] -->|supervision signal| Model[model]
+  Unlabeled[many unlabeled examples] -->|structure of distribution| Model
+  Model --> Boundary((sharper decision boundary))
+```
+
 ### Quick Takeaways
 
 - A few labeled examples and many unlabeled examples train together
@@ -44,7 +51,21 @@ A language teacher gives ten students graded essays with feedback. Then the teac
 
 **Good:** Training a skin lesion classifier with 200 labeled dermatologist-annotated images and 50,000 unlabeled clinic photos. Pseudo-labeling on high-confidence predictions from the unlabeled pool pushes accuracy well above the labeled-only baseline.
 
+```mermaid
+flowchart LR
+  Labeled[200 labeled images] -->|train baseline| Model[classifier]
+  Model -->|high-confidence pseudo-labels| Expand[50000 photos added]
+  Expand --> Good((accuracy above baseline))
+```
+
 **Bad:** Using pseudo-labels with a low confidence threshold on noisy data. The model generates incorrect labels, trains on them as truth, and spirals into worse performance. This is called confirmation bias.
+
+```mermaid
+flowchart LR
+  Noisy[noisy unlabeled data] -.->|low confidence threshold| Wrong[incorrect pseudo-labels]
+  Wrong -.->|train on them as truth| Spiral[reinforce own errors]
+  Spiral -.-> Bad{{confirmation bias, worse accuracy}}
+```
 
 **Good:** Applying FixMatch to a text classification task where you have 50 labeled reviews and 10,000 unlabeled ones. The model learns robust features by matching predictions across weak and strong augmentations.
 

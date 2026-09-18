@@ -13,6 +13,13 @@ An artificial neural network is a computational model built from simple units ca
 
 The idea comes from biological neurons, but the resemblance is loose. A biological neuron fires or stays silent. An artificial neuron outputs a continuous number. The real power is not in any one neuron but in the collective behavior of thousands of them wired together through learned weights.
 
+```mermaid
+flowchart LR
+  Input[input layer] -->|weighted edges| Hidden[hidden layers]
+  Hidden -->|activation| Output[output layer]
+  Output --> Result((prediction))
+```
+
 ### Quick Takeaways
 
 - A neural network is layers of neurons connected by weighted edges
@@ -42,7 +49,20 @@ Think of a neural network as an assembly line in a factory. Raw material enters 
 
 **Good:** use a neural network to classify handwritten digits when you have 60,000 labeled images. The network learns edge detectors in early layers and digit shapes in later layers.
 
+```mermaid
+flowchart LR
+  Pixels[60000 labeled images] -->|early layers| Edges[edge detectors]
+  Edges -->|later layers| Shapes[digit shapes]
+  Shapes --> Good((correct digit label))
+```
+
 **Bad:** use a neural network to sort a list of 10 numbers. A simple algorithm like quicksort is exact, fast, and needs no training data.
+
+```mermaid
+flowchart LR
+  Nums[10 numbers] -.->|no training data| Net[untrained network]
+  Net -.-> Bad{{slow, inexact ordering}}
+```
 
 **A single neuron in math:**
 

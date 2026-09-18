@@ -13,6 +13,13 @@ A model learns from training data, tunes its hyperparameters on validation data,
 
 The core principle is simple. The data that guides a decision must be separate from the data that evaluates that decision. Violating this causes data leakage and the reported performance becomes a lie.
 
+```mermaid
+flowchart LR
+  Train[training set] -->|fit weights| Val[validation set]
+  Val -->|pick hyperparameters| Test[test set]
+  Test --> Honest((final performance))
+```
+
 ### Quick Takeaways
 
 - Training data fits the weights, validation data picks the hyperparameters, test data measures final performance
@@ -42,6 +49,13 @@ A student studies from a textbook, practices with past exams, and then sits the 
 
 **Good, clean split with stratification:**
 
+```mermaid
+flowchart LR
+  Data[full dataset] -->|split test first| Sealed[sealed test set]
+  Data -->|stratified remainder| TrainVal[train and validation]
+  TrainVal --> Good((leak-free evaluation))
+```
+
 ```python
 from sklearn.model_selection import train_test_split
 
@@ -56,6 +70,13 @@ train, val = train_test_split(train_val, test_size=0.111, stratify=train_val['la
 The test set is created first and never touched again. Stratification preserves class balance.
 
 **Bad:** fitting a scaler on the entire dataset before splitting. The scaler learns the mean and variance from test examples, which leaks statistical information into training.
+
+```mermaid
+flowchart LR
+  All[fit scaler on all data] -.->|learns test mean and variance| Leak[test stats leak in]
+  Leak -.->|then split| Train[training set contaminated]
+  Train -.-> Bad{{inflated, dishonest metrics}}
+```
 
 ## Important Points
 

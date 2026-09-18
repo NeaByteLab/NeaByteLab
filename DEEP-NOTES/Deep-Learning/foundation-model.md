@@ -13,6 +13,13 @@ A foundation model is a model trained on a massive and diverse dataset at scale,
 
 This changes the economics of machine learning. Instead of training a separate model for each task from scratch, you start from a foundation model and adapt it. The foundation captures general knowledge. The adaptation injects task-specific knowledge. This is why a single GPT model can be fine-tuned for summarization, translation, code generation, and medical diagnosis.
 
+```mermaid
+flowchart LR
+  Broad[broad data at scale] -->|expensive pretraining| Base[foundation model]
+  Base -->|cheap adaptation| Tasks[many downstream tasks]
+  Tasks --> Ready((specialized models))
+```
+
 ### Quick Takeaways
 
 - Foundation models are pretrained once on broad data and adapted many times for specific tasks
@@ -42,6 +49,13 @@ A foundation model is like a university education. The university teaches you br
 
 **Good:** fine-tuning a foundation model on a small labeled dataset for a specific task.
 
+```mermaid
+flowchart LR
+  BERT[pretrained BERT] -->|small labeled set| Finetune[fine-tune classifier head]
+  Finetune -->|reuse general knowledge| Task[classification task]
+  Task --> Good((accurate specialized model))
+```
+
 ```python
 from transformers import AutoModelForSequenceClassification, Trainer
 
@@ -54,6 +68,13 @@ trainer.train()  # adapts BERT to your classification task
 ```
 
 **Bad:** training a transformer from random initialization on 5,000 labeled examples, ignoring available foundation models.
+
+```mermaid
+flowchart LR
+  Random[random initialization] -.->|5000 examples only| Scratch[train from scratch]
+  Scratch -.->|too little data| Learn[learn language from nothing]
+  Learn -.-> Bad{{underfit, wasted compute}}
+```
 
 ```python
 model = TransformerFromScratch(vocab_size=30000, layers=12)

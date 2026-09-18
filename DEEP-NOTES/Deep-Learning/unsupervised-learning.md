@@ -13,6 +13,13 @@ Unsupervised learning works with raw data that carries no labels. The model look
 
 This paradigm is valuable when labels are expensive or impossible to obtain. Clustering organizes data into natural groups. Dimensionality reduction compresses high-dimensional data into fewer meaningful dimensions. Autoencoders learn compact internal representations by reconstructing their own input. Generative models like GANs and VAEs learn the data distribution well enough to produce new samples from it.
 
+```mermaid
+flowchart LR
+  Raw[unlabeled data] -->|no labels given| Discover[find structure]
+  Discover -->|cluster, compress, reconstruct| Pattern[natural groups and factors]
+  Pattern --> Structure((discovered structure))
+```
+
 ### Quick Takeaways
 
 - No labels exist, so the model finds structure by itself
@@ -44,7 +51,21 @@ A child dumps a box of mixed buttons onto a table with no instructions. Nobody s
 
 **Good:** Running k-means on customer purchase histories to discover natural spending segments. The algorithm finds clusters that marketing never defined but that reflect real behavior patterns.
 
+```mermaid
+flowchart LR
+  Purchases[customer purchase histories] -->|k-means| Cluster[group similar behavior]
+  Cluster -->|no predefined segments| Segments[natural spending groups]
+  Segments --> Good((actionable segments))
+```
+
 **Bad:** Using k-means when you already know the exact categories and have labels for them. Supervised classification would give better accuracy because it uses the label signal directly.
+
+```mermaid
+flowchart LR
+  Known[known categories with labels] -.->|ignore the labels| Kmeans[k-means clustering]
+  Kmeans -.->|discards label signal| Weaker[weaker groupings]
+  Weaker -.-> Bad{{worse than supervised classifier}}
+```
 
 **Good:** Training a variational autoencoder on face images to learn a smooth latent space, then interpolating between faces to generate new ones.
 

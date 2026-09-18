@@ -13,6 +13,13 @@ Backpropagation is the algorithm that computes the gradient of the loss function
 
 The forward pass computes the output. The backward pass computes how much each weight contributed to the error. Every modern deep learning framework (PyTorch, TensorFlow, JAX) builds a computational graph during the forward pass and then walks it in reverse to compute gradients automatically. You rarely implement backpropagation by hand, but understanding it is essential for debugging training failures.
 
+```mermaid
+flowchart LR
+  Loss[loss at output] -->|chain rule| Layer2[layer 2 gradient]
+  Layer2 -->|chain rule| Layer1[layer 1 gradient]
+  Layer1 --> Update((updated weights))
+```
+
 ### Quick Takeaways
 
 - Backpropagation is the chain rule applied systematically to a computational graph
@@ -43,7 +50,21 @@ Imagine a row of dominoes standing on a table. You push the first one (the input
 
 **Good:** build a 10-layer network with ReLU activations, batch normalization, and residual connections. Gradients flow smoothly from the loss to the first layer, and all layers learn at a reasonable pace.
 
+```mermaid
+flowchart LR
+  Loss[loss] -->|ReLU, batchnorm| Deep[layer 10]
+  Deep -->|residual connections| Early[layer 1]
+  Early --> Good((all layers learn))
+```
+
 **Bad:** build a 50-layer network with sigmoid activations and no skip connections. The gradient at layer 1 is the product of 50 derivatives, each less than 0.25 (sigmoid's max derivative). The gradient shrinks to effectively zero, and the early layers never update.
+
+```mermaid
+flowchart LR
+  Loss[loss] -.->|50 sigmoid derivatives| Product[product below 0.25 each]
+  Product -.->|shrinks toward zero| Early[layer 1]
+  Early -.-> Bad{{vanishing gradient, no learning}}
+```
 
 **Chain rule through two layers:**
 

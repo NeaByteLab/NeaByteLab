@@ -13,6 +13,13 @@ A large language model is a neural network, almost always based on the transform
 
 LLMs work by learning statistical patterns in language. During training, the model sees a sequence of tokens and learns to predict what comes next. At inference time, it generates text one token at a time by sampling from the predicted probability distribution. This autoregressive process is simple in principle but produces remarkably coherent and useful output at sufficient scale.
 
+```mermaid
+flowchart LR
+  Tokens[token sequence] -->|transformer self-attention| Predict[next-token distribution]
+  Predict -->|sample one token| Append[append and repeat]
+  Append --> Text((generated text))
+```
+
 ### Quick Takeaways
 
 - LLMs are transformer-based models trained to predict the next token in a sequence
@@ -42,6 +49,13 @@ An LLM is like an extremely well-read author who has read every book, article, a
 
 **Good:** using an LLM for autoregressive generation with proper temperature control.
 
+```mermaid
+flowchart LR
+  Prompt[input prompt] -->|temperature 0.7, top-p 0.9| Sample[controlled sampling]
+  Sample -->|token by token| Generate[coherent continuation]
+  Generate --> Good((useful output))
+```
+
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -59,6 +73,13 @@ print(tokenizer.decode(outputs[0]))
 ```
 
 **Bad:** treating an LLM as a database that stores and retrieves exact facts, then trusting its output without verification.
+
+```mermaid
+flowchart LR
+  Query[fact query] -.->|expect exact retrieval| Guess[plausible generated text]
+  Guess -.->|no verification| Store[save as truth]
+  Store -.-> Bad{{confident hallucination}}
+```
 
 ```python
 # LLMs generate plausible text, not verified facts

@@ -15,6 +15,14 @@ The payoff depends on task relatedness. When tasks share underlying structure, t
 
 Multitask learning is different from transfer learning. Transfer learning trains on one task first and adapts to another. Multitask learning trains on all tasks simultaneously. The shared representation is shaped by all tasks from the start, not inherited from one and adapted to another.
 
+```mermaid
+flowchart LR
+  Input[input] -->|shared layers| Shared[shared representation]
+  Shared -->|head A| TaskA[task A output]
+  Shared -->|head B| TaskB[task B output]
+  Shared --> Better((richer features))
+```
+
 ### Quick Takeaways
 
 - Shared layers act as an implicit regularizer across related tasks
@@ -46,7 +54,22 @@ A student prepares for three exams at once: math, physics, and chemistry. The al
 
 **Good:** A single encoder processes images and feeds into three heads for object detection, lane segmentation, and depth estimation. The detection head benefits from depth cues and the depth head benefits from object boundaries. All three tasks improve over their single-task baselines because the shared features capture spatial structure that every head needs.
 
+```mermaid
+flowchart LR
+  Image[shared image encoder] -->|spatial features| Heads[detection, segmentation, depth]
+  Heads -->|mutual cues| Reinforce[tasks reinforce each other]
+  Reinforce --> Good((all beat single-task baselines))
+```
+
 **Bad:** Jointly training sentiment analysis and machine translation in the same model. The two tasks need very different representations. Sentiment needs local phrase-level features while translation needs long-range sequential alignment. The shared encoder cannot satisfy both and both tasks underperform their single-task counterparts. The gradient conflicts between these tasks make the shared layers worse at both.
+
+```mermaid
+flowchart LR
+  Shared[shared encoder] -.->|local phrase features| Sentiment[sentiment analysis]
+  Shared -.->|long-range alignment| Translation[machine translation]
+  Sentiment -.->|gradient conflict| Bad{{both tasks underperform}}
+  Translation -.-> Bad
+```
 
 ## Important Points
 

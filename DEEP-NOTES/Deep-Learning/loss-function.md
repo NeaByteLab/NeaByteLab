@@ -13,6 +13,13 @@ A loss function takes a prediction and a ground truth and returns a single numbe
 
 The loss function is the only feedback the model receives. If the loss is poorly chosen the model will optimize for the wrong thing, so the choice of loss shapes everything downstream.
 
+```mermaid
+flowchart LR
+  Pred[prediction] -->|compare to target| Loss[loss function]
+  Loss -->|single error number| Gradient[gradient signal]
+  Gradient --> Smaller((lower loss next step))
+```
+
 ### Quick Takeaways
 
 - Loss is computed per sample, cost is the average loss over a batch or dataset
@@ -41,6 +48,14 @@ A loss function is like a coach watching a basketball player shoot free throws. 
 
 **Good, matching loss to task:**
 
+```mermaid
+flowchart LR
+  Task[task type] -->|continuous values| MSE[MSE loss]
+  Task -->|class probabilities| CE[cross-entropy loss]
+  MSE --> Good((meaningful gradient))
+  CE --> Good
+```
+
 ```python
 # Regression task: predict house prices
 loss_fn = nn.MSELoss()
@@ -52,6 +67,13 @@ loss_fn = nn.CrossEntropyLoss()
 The loss aligns with what the model must predict. MSE for continuous values and cross-entropy for class probabilities.
 
 **Bad:** using MSE for a classification problem. The model will try to minimize squared distance between class indices, which has no meaningful geometric interpretation for categories.
+
+```mermaid
+flowchart LR
+  Classify[classification task] -.->|apply MSE| Distance[squared distance on class indices]
+  Distance -.->|no geometric meaning| Confused[misguided optimization]
+  Confused -.-> Bad{{model optimizes wrong goal}}
+```
 
 ## Important Points
 
