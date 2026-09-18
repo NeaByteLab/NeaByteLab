@@ -15,6 +15,12 @@ tags:
 
 This note covers **O(n) linear time**: the complexity class where the number of operations is proportional to the input size _n_. Double the input, roughly double the work. A single pass over _n_ items is the typical pattern. Linear time is often the baseline for "we have to look at every element at least once," and it's usually acceptable for most problem sizes if you can't do better. **Goal:** recognize "one pass" as the fair baseline when the problem requires touching every element; avoid accidentally doing O(n²) with nested loops.
 
+```mermaid
+flowchart LR
+  Input[n elements] -->|one pass| Visit[touch each once]
+  Visit -->|double n, double work| Result((linear cost))
+```
+
 ## Definition
 
 **O(n)** means the running time is bounded above by a linear function of _n_: there exists a constant _c_ such that the number of steps is at most _c_·_n_ for large _n_. So we say "linear in _n_."
@@ -56,6 +62,12 @@ function sum(arr: number[]): number {
 }
 ```
 
+```mermaid
+flowchart LR
+  Arr[array of n] -->|for each x| Add[total plus x]
+  Add -->|n additions, one pass| Total((sum))
+```
+
 **Good: find index (worst case)**
 
 ```typescript
@@ -95,6 +107,12 @@ function hasDuplicateQuadratic(arr: number[]): boolean {
   }
   return false
 }
+```
+
+```mermaid
+flowchart LR
+  Arr[array of n] -.->|outer loop i| Inner[inner loop j]
+  Inner -.->|about n squared over 2 pairs| Blow{{quadratic, no longer one pass}}
 ```
 
 ## Important Points

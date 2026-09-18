@@ -15,6 +15,13 @@ tags:
 
 This note covers **O(n³) cubic time**: the complexity class where the number of operations is proportional to *n*³. Triple the input size, and the work goes up by about 27 times (for example n = 100 → 1 million iterations; n = 1,000 → 1 billion). The typical pattern is three nested loops over input of size _n_. Naive matrix multiplication and some "all triples" algorithms land here. **Goal:** recognize three nested loops and when to look for another algorithm (for example Strassen for matrices) or cap _n_; for large _n_, O(n³) is rarely sustainable.
 
+```mermaid
+flowchart LR
+  Input[n elements] -->|loop i| L2[loop j]
+  L2 -->|loop k| Triples[every triple i, j, k]
+  Triples -->|n times n times n| Grow((cubic cost))
+```
+
 ## Definition
 
 **O(n³)** means the running time is bounded by a constant times *n*³. So the number of steps grows with the cube of the input size.
@@ -65,6 +72,13 @@ function matrixMultiply(A: number[][], B: number[][]): number[][] {
 }
 ```
 
+```mermaid
+flowchart LR
+  Rows[rows i] -->|for each column j| Cols[columns j]
+  Cols -->|sum over k| Dot[dot product]
+  Dot -->|n cubed multiply-adds| Product((result matrix))
+```
+
 **Good example: Floyd–Warshall (all-pairs shortest paths).** Three nested loops over vertices, O(n³).
 
 ```typescript
@@ -105,6 +119,12 @@ function pairsOnly(A: number[][], B: number[][]): number {
   }
   return total
 }
+```
+
+```mermaid
+flowchart LR
+  Grid[n by n cells] -.->|only loop i and j| Two[two nested loops]
+  Two -.->|no third loop| Mismatch{{this is O(n squared), not cubic}}
 ```
 
 ## Important Points

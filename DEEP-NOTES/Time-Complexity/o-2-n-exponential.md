@@ -15,6 +15,13 @@ tags:
 
 This note covers **O(2ⁿ) exponential time**: the complexity class where the number of operations grows exponentially with _n_, for example doubling each time _n_ increases by 1. Typical pattern: exploring **all subsets** of _n_ elements (each item: in or out → 2ⁿ outcomes). Unlike O(n!): 2ⁿ = all subsets; n! = all orderings. Exponential algorithms become impractical very quickly; even for moderate _n_ (e.g. 30–50), 2ⁿ is huge. **Goal:** avoid enumerating all subsets or binary combinations unless _n_ is very small; recognize the "two choices per step, n steps" pattern and consider pruning, memoization, or DP.
 
+```mermaid
+flowchart LR
+  Item[each of n items] -->|in or out| Branch[two choices per step]
+  Branch -->|tree doubles each level| Tree[2 to the n paths]
+  Tree -->|blows up past n around 30| Explode((exponential blowup))
+```
+
 ## Definition
 
 **O(2ⁿ)** means the running time is bounded by a constant times 2ⁿ (or more generally, cⁿ for some constant c > 1). So each time you add one to _n_, the worst-case work multiplies by a fixed factor (for example 2).
@@ -63,6 +70,14 @@ function powerSet<T>(arr: T[]): T[][] {
 }
 ```
 
+```mermaid
+flowchart LR
+  Item[element i] -->|exclude branch| Skip[recurse without it]
+  Item -->|include branch| Take[recurse with it]
+  Skip --> Subsets((2 to the n subsets))
+  Take --> Subsets
+```
+
 **Good example: naive recursive Fibonacci (exponential calls)**
 
 ```typescript
@@ -96,6 +111,12 @@ function sumArray(arr: number[]): number {
   }
   return sum
 }
+```
+
+```mermaid
+flowchart LR
+  Arr[array of n] -.->|single loop, no branching| Add[sum each element]
+  Add -.->|only n steps| Mismatch{{this is O(n), not 2 to the n}}
 ```
 
 ## Important Points

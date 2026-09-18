@@ -17,6 +17,13 @@ tags:
 
 This note covers **O(n log n) linearithmic time**: the complexity class that shows up in efficient comparison-based sorting and many divide-and-conquer algorithms. "Linearithmic" = linear × logarithmic: you do about "n times log n" work (for example log n levels, each level touching all n elements). Merge sort is the standard example: split, sort halves recursively, then merge. It's the bar for "good" general-purpose sorting. **Goal:** recognize this as the right complexity for sorting or divide-and-conquer with linear-time merge; if your sort is worse than this, there's usually a better algorithm.
 
+```mermaid
+flowchart LR
+  Full[n items] -->|split into halves| Levels[about log n levels]
+  Levels -->|n work per level| Combine[merge each level]
+  Combine -->|n times log n| Sorted((sorted output))
+```
+
 ## Definition
 
 **O(n log n)** means the running time is bounded by a constant times _n_·log(_n_). So it sits between linear O(n) and quadratic O(n²). The name "linearithmic" is a blend of linear and logarithmic. You have both an _n_ and a log _n_ factor.
@@ -91,6 +98,13 @@ function mergeSort(arr: number[]): number[] {
 }
 ```
 
+```mermaid
+flowchart LR
+  Arr[unsorted array] -->|recurse on halves| Sort[sort each half]
+  Sort -->|merge in linear time| Merge[combine sorted halves]
+  Merge -->|log n levels, n per level| Done((sorted array))
+```
+
 **Good: heapsort.** Build heap O(n), then n extract-max operations each O(log n), so O(n log n).
 
 **Bad: bubble sort (O(n²))**
@@ -110,6 +124,12 @@ function bubbleSort(arr: number[]): void {
     }
   }
 }
+```
+
+```mermaid
+flowchart LR
+  Arr[array of n] -.->|nested passes| Pairs[compare adjacent pairs]
+  Pairs -.->|about n squared swaps| Slow{{quadratic sort, worse than n log n}}
 ```
 
 ## Important Points

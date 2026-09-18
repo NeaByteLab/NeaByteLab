@@ -16,6 +16,13 @@ tags:
 
 This note covers **O(n!) factorial time**: the complexity class where the number of operations is proportional to _n_! = n×(n−1)×(n−2)×…×1. It shows up when you need to consider **every ordering** (permutation) of _n_ elements, e.g. "try every route through n cities" or "generate all permutations." Unlike O(2ⁿ): 2ⁿ = all subsets (in/out); n! = all orderings (every arrangement). Factorial grows even faster than exponential; for n=20, n! is already enormous. **Goal:** recognize "all orderings" vs "all subsets"; use only for very small _n_ or when the problem really requires trying every ordering (e.g. TSP brute-force).
 
+```mermaid
+flowchart LR
+  Seats[n positions] -->|n choices for first| Fan[n-1 for next, and so on]
+  Fan -->|multiply choices| Orderings[n times n-1 times ... times 1]
+  Orderings -->|worse than 2 to the n| Explode((n! blowup))
+```
+
 ## Definition
 
 **O(n!)** means the running time is bounded by a constant times _n_!. So the number of steps grows with the factorial of the input size.
@@ -66,6 +73,13 @@ function permutations<T>(arr: T[]): T[][] {
 }
 ```
 
+```mermaid
+flowchart LR
+  Rest[remaining items] -->|pick each as next| Choose[fix one position]
+  Choose -->|recurse on the rest| Build[build every arrangement]
+  Build -->|n! leaves| Perms((all permutations))
+```
+
 **Good example: naive TSP.** Try every ordering of n cities: (n−1)!/2 tours if symmetric. Same “all orderings” idea as above.
 
 **Bad (not factorial):** all subsets are 2ⁿ (each element in or out), not n! orderings.
@@ -90,6 +104,12 @@ function powerSet<T>(arr: T[]): T[][] {
   go(0, [])
   return result
 }
+```
+
+```mermaid
+flowchart LR
+  Item[element i] -.->|in or out per item| Choice[two choices each]
+  Choice -.->|2 to the n outcomes| Mismatch{{this is O(2 to the n) subsets, not n! orderings}}
 ```
 
 ## Important Points

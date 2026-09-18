@@ -15,6 +15,12 @@ tags:
 
 This note covers **O(1) constant time**: the complexity class where the number of operations does not depend on the size of the input. Runtime is effectively the same whether you have 10 items or 10 million. It's the best scaling behavior in Big O terms, and the one you want for hot paths when you can get it. **Goal:** recognize operations that are safe to call repeatedly without worrying about data size growing.
 
+```mermaid
+flowchart LR
+  Input[input size n] -->|no dependency| Steps[fixed step count]
+  Steps -->|same cost at 10 or 10M| Flat((flat runtime))
+```
+
 ## Definition
 
 **O(1)** means the algorithm's running time is bounded by a constant, independent of the input size _n_. Formally: there exists some constant _c_ such that for large enough _n_, the number of steps is at most _c_. So we say "constant time."
@@ -53,6 +59,12 @@ function getFirst<T>(arr: T[]): T | undefined {
 }
 ```
 
+```mermaid
+flowchart LR
+  Arr[array] -->|arr at index 0| Addr[compute address]
+  Addr -->|one memory read| Elem((first element))
+```
+
 **Good: hash lookup (average case)**
 
 ```typescript
@@ -74,6 +86,12 @@ const user = userById.get(id)
 function getFirstByScan<T>(arr: T[], predicate: (x: T) => boolean): T | undefined {
   return arr.find(predicate)
 }
+```
+
+```mermaid
+flowchart LR
+  Arr[array of n] -.->|find scans element by element| Loop[check each]
+  Loop -.->|cost grows with n| Bad{{no longer constant time}}
 ```
 
 ## Important Points

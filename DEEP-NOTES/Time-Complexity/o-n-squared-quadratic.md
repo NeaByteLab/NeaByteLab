@@ -15,6 +15,13 @@ tags:
 
 This note covers **O(n²) quadratic time**: the complexity class where the number of operations is proportional to *n*². Double the input, and the work goes up by about four times. The classic pattern is two nested loops over the same (or proportional) input size, e.g. comparing every pair. It's acceptable for small _n_, but it scales poorly. Once _n_ gets into the thousands or more, you feel it. **Goal:** recognize the "every pair" pattern (two nested loops) and when to switch to hash, sort, or one pass so it doesn't blow up on large data.
 
+```mermaid
+flowchart LR
+  Input[n elements] -->|outer loop| Pairs[every pair i, j]
+  Pairs -->|n times n| Count[about n squared over 2]
+  Count -->|double n, quadruple work| Grow((quadratic cost))
+```
+
 ## Definition
 
 **O(n²)** means the running time is bounded by a constant times *n*². So the number of steps grows with the square of the input size.
@@ -60,6 +67,13 @@ function hasDuplicate(arr: number[]): boolean {
 }
 ```
 
+```mermaid
+flowchart LR
+  Arr[array of n] -.->|outer loop i| Inner[inner loop j over rest]
+  Inner -.->|compare all pairs| Cost[n times n minus 1 over 2]
+  Cost -.->|explodes at large n| Slow{{quadratic scan, slow at scale}}
+```
+
 **Good to know: bubble sort (worst case).** Nested loops, up to n² comparisons (see O(n log n) note for snippet).
 
 **Better: one pass with a Set (O(n))**
@@ -81,6 +95,12 @@ function hasDuplicateLinear(arr: number[]): boolean {
   }
   return false
 }
+```
+
+```mermaid
+flowchart LR
+  Arr[array of n] -->|one pass| Check[Set has x in O(1)]
+  Check -->|add x, no pairs| Linear((linear duplicate check))
 ```
 
 ## Important Points

@@ -16,6 +16,13 @@ tags:
 
 This note covers **O(log n) logarithmic time**: the complexity class where each step cuts the problem size by a constant factor (often half). The number of steps grows very slowly as _n_ increases, doubling _n_ adds roughly one more step (for example n = 1,000,000, about 20 steps). Binary search is the canonical example, it's why "look up in a sorted list" can be so much cheaper than scanning. **Goal:** when data is sorted or tree-shaped, search without reading every element.
 
+```mermaid
+flowchart LR
+  Full[n items] -->|halve| Half[n/2]
+  Half -->|halve| Quarter[n/4]
+  Quarter -->|about log2 n splits| One((down to 1))
+```
+
 ## Definition
 
 **O(log n)** means the number of operations grows proportionally to the logarithm of the input size. Usually we mean log₂(n) in algorithm analysis (base 2), but Big O ignores the base: log₂(n), log₁₀(n), and ln(n) differ only by a constant factor.
@@ -79,6 +86,13 @@ function binarySearch(arr: number[], target: number): number {
 }
 ```
 
+```mermaid
+flowchart LR
+  Sorted[sorted array] -->|compare to middle| Pick[keep one half]
+  Pick -->|discard other half, repeat| Narrow[shrinking range]
+  Narrow -->|log2 n comparisons| Found((target index))
+```
+
 **Good: balanced BST lookup.** Same idea: each step goes left or right, so you follow one path of length O(log n).
 
 ```typescript
@@ -118,6 +132,12 @@ function linearSearchSorted(arr: number[], target: number): number {
   }
   return -1
 }
+```
+
+```mermaid
+flowchart LR
+  Sorted[sorted array] -.->|ignore the order| Scan[check each element]
+  Scan -.->|touch up to n items| Slow{{wasted structure, O(n) scan}}
 ```
 
 ## Important Points
