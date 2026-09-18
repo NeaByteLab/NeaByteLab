@@ -9,12 +9,17 @@ tags: ['google', 'authentication', 'oauth', 'google-api']
 
 ## Overview
 
-Many people collapse these into one idea. They are related, but not the same thing. **Google
-Identity** is about proving who the user is. **Google API access** is about asking permission to
-use Google's services on that user's behalf.
+Many people collapse these into one idea. They are related, but not the same thing. **Google Identity** is about proving who the user is. **Google API access** is about asking permission to use Google's services on that user's behalf.
 
-The practical difference matters. If you only need login, adding API authorization too early adds
-scope management, consent complexity, and more failure cases.
+The practical difference matters. If you only need login, adding API authorization too early adds scope management, consent complexity, and more failure cases.
+
+```mermaid
+flowchart LR
+    A["User"] -->|who are you| B["Google Identity"]
+    A -->|use my data| C["Google API access"]
+    B -->|proves| D["who the user is"]
+    C -->|grants| E["scoped permission"]
+```
 
 ## Definition
 

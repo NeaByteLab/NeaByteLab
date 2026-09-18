@@ -9,12 +9,17 @@ tags: ['google', 'authentication', 'oauth', 'openid-connect', 'token']
 
 ## Overview
 
-This is the split that removes most Google auth confusion. An **ID token** tells your app who the
-user is. An **access token** tells a Google API what the app is allowed to access on the user's
-behalf.
+This is the split that removes most Google auth confusion. An **ID token** tells your app who the user is. An **access token** tells a Google API what the app is allowed to access on the user's behalf.
 
-If you mix these two roles, the implementation becomes fragile. You can end up using the wrong
-token in the wrong place and misunderstand what the user has actually granted.
+If you mix these two roles, the implementation becomes fragile. You can end up using the wrong token in the wrong place and misunderstand what the user has actually granted.
+
+```mermaid
+flowchart LR
+    A["Google auth flow"] -->|who is this user| B["ID token"]
+    A -->|what can the app access| C["access token"]
+    B -->|verified| D["local session"]
+    C -->|approved scopes| E["Google API call"]
+```
 
 ## Definition
 

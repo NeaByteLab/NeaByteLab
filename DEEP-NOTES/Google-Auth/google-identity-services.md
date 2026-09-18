@@ -9,18 +9,21 @@ tags: ['google', 'authentication', 'google-identity-services']
 
 ## Overview
 
-Google Identity Services, or **GIS**, is Google's modern sign-in system for getting a user's Google
-identity into your app. It is designed for authentication. It is not the main tool for calling
-Google APIs like Drive or Calendar.
+Google Identity Services, or **GIS**, is Google's modern sign-in system for getting a user's Google identity into your app. It is designed for authentication. It is not the main tool for calling Google APIs like Drive or Calendar.
 
-If your app only needs to know who the user is, GIS is usually the simplest path. It reduces auth
-surface area and keeps the flow focused on identity first.
+If your app only needs to know who the user is, GIS is usually the simplest path. It reduces auth surface area and keeps the flow focused on identity first.
+
+```mermaid
+flowchart LR
+    A["User"] -->|sign in with Google| B["Google Identity Services"]
+    B -->|OpenID Connect| C["ID token"]
+    C -->|identity claims| D["your app"]
+    D -->|not this| E{{no Drive or Calendar access}}
+```
 
 ## Definition
 
-Google Identity Services is a client-side sign-in library and flow built on top of Google identity
-standards such as **OpenID Connect**. Its job is to help users sign in with Google and return
-identity information in a secure format, typically through an **ID token**.
+Google Identity Services is a client-side sign-in library and flow built on top of Google identity standards such as **OpenID Connect**. Its job is to help users sign in with Google and return identity information in a secure format, typically through an **ID token**.
 
 ## The Analogy
 

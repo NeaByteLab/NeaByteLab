@@ -9,17 +9,21 @@ tags: ['google', 'authentication', 'profile', 'google-identity-services']
 
 ## Overview
 
-If your app only needs `email`, `full name`, and a stable Google account ID, keep the design
-small. Sign the user in with Google, verify the returned identity token on the backend, then store
-the claims you trust.
+If your app only needs `email`, `full name`, and a stable Google account ID, keep the design small. Sign the user in with Google, verify the returned identity token on the backend, then store the claims you trust.
 
-This is the sweet spot for many internal tools, SaaS dashboards, and consumer apps that want easy
-account creation without password management.
+This is the sweet spot for many internal tools, SaaS dashboards, and consumer apps that want easy account creation without password management.
+
+```mermaid
+flowchart LR
+    A["User signs in with Google"] -->|returns| B["ID token"]
+    B -->|backend verifies| C["trusted claims"]
+    C -->|sub, email, name| D["local user record"]
+    D --> E((account ready))
+```
 
 ## Definition
 
-Basic-profile sign-in means using Google as an identity provider for your app without asking for
-extra Google service permissions. The core data usually comes from the verified ID token:
+Basic-profile sign-in means using Google as an identity provider for your app without asking for extra Google service permissions. The core data usually comes from the verified ID token:
 
 - `sub` as the stable Google user ID
 - `email`
@@ -69,6 +73,17 @@ flowchart TD
     C --> D["Backend reads sub, email, name"]
     D --> E["Create or update local user"]
     E --> F["Create local session"]
+```
+
+**Bad Snippet (Trusting Frontend Data):**
+
+Flow: Skipping backend verification lets forged profile data through
+
+```mermaid
+flowchart TD
+    A["User clicks Continue with Google"] -.-> B["Frontend reads raw profile data"]
+    B -.-> C["Backend trusts it without verifying"]
+    C -.-> D{{forged identity accepted}}
 ```
 
 ## Important Points
