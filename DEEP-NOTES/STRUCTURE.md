@@ -129,7 +129,7 @@ tags: ['tag1', 'tag2']
 
 ## 7. Mermaid Diagrams
 
-Every Pattern B note has three mermaid diagrams. One in the Overview, two in Examples. Each one shows the shape of the idea before the text explains it.
+Series index files may include one Mermaid diagram to show relationships between notes. Every Pattern B note has three mermaid diagrams. One in the Overview, two in Examples. Each one shows the shape of the idea before the text explains it.
 
 **Where they go:**
 

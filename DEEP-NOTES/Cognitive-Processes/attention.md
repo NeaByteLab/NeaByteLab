@@ -1,7 +1,7 @@
 ---
 title: 'Attention'
 source: 'https://en.wikipedia.org/wiki/Attention'
-description: 'Selective focus on relevant stimuli while filtering out noise, the brain's mechanism for allocating limited processing resources.'
+description: "Selective focus on relevant stimuli while filtering out noise, the brain's mechanism for allocating limited processing resources."
 tags: ['cognitive-processes', 'attention', 'selective-attention', 'divided-attention']
 ---
 
@@ -15,11 +15,11 @@ Attention can be bottom-up, captured automatically by salient stimuli like a lou
 
 ```mermaid
 flowchart LR
-  Stimuli[stimuli flood] -->|bottom-up salience| Filter[attentional filter]
-  Goals[goals and expectations] -->|top-down direction| Filter
-  Filter -->|relevant| Process[deep processing]
-  Filter -->|irrelevant| Suppress{{suppressed and lost}}
-  Process --> Response((conscious awareness))
+  Stimuli["stimuli flood"] -->|bottom-up salience| Filter["attentional filter"]
+  Goals["goals and expectations"] -->|top-down direction| Filter
+  Filter -->|relevant| Process["deep processing"]
+  Filter -->|irrelevant| Suppress{"suppressed and lost"}
+  Process --> Response(("conscious awareness"))
 ```
 
 ### Quick Takeaways
@@ -56,18 +56,18 @@ Picture a crowded party. Dozens of conversations hum at once, but you tune into 
 
 ```mermaid
 flowchart LR
-  Image[X-ray image] -->|top-down focus| Expert[expert radiologist]
-  Expert -->|scans critical regions| Detect[fracture detected]
-  Detect --> Outcome((accurate diagnosis))
+  Image["X-ray image"] -->|top-down focus| Expert["expert radiologist"]
+  Expert -->|scans critical regions| Detect["fracture detected"]
+  Detect --> Outcome(("accurate diagnosis"))
 ```
 
 **Bad:** A novice driver texting while navigating a busy intersection. Divided attention splits resources between the screen and the road. Reaction time doubles and critical cues like brake lights or pedestrians go unregistered.
 
 ```mermaid
 flowchart LR
-  Road[traffic cues] -.->|divided attention| Novice[distracted driver]
-  Text[phone screen] -.->|competes for focus| Novice
-  Novice -.->|misses danger| Crash{{delayed reaction, collision risk}}
+  Road["traffic cues"] -.->|divided attention| Novice["distracted driver"]
+  Text["phone screen"] -.->|competes for focus| Novice
+  Novice -.->|misses danger| Crash{"delayed reaction, collision risk"}
 ```
 
 **Good:** A pianist performing a piece by memory. Years of practice automate the motor patterns, freeing attention to focus on expression, dynamics, and audience connection.
