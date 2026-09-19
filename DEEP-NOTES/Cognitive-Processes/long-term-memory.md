@@ -2,7 +2,8 @@
 title: 'Long-Term Memory'
 source: 'https://en.wikipedia.org/wiki/Long-term_memory'
 description: 'Durable storage of knowledge, skills, and experiences that persists beyond the immediate present, from minutes to a lifetime.'
-tags: ['cognitive-processes', 'memory', 'long-term-memory', 'declarative-memory', 'procedural-memory']
+tags:
+  ['cognitive-processes', 'memory', 'long-term-memory', 'declarative-memory', 'procedural-memory']
 ---
 
 # Long-Term Memory
