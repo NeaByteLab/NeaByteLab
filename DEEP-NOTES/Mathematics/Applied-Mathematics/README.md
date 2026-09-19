@@ -1,6 +1,6 @@
-# Applied Mathematics Deep Notes
+# Applied Mathematics
 
-_One file per applied mathematics concept. From modeling and optimization to probability, finance, and information theory. Structured, practical, reusable._
+_From modeling and optimization to probability, finance, and information theory._
 
 ## Contents
 

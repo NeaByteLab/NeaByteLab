@@ -1,4 +1,4 @@
-# Deep Notes Structure
+# Structure
 
 > Reference: [kyong0612 learning-notes](https://github.com/kyong0612/learning-notes/tree/main/articles) (example: [Claude Code CLAUDE.md](https://github.com/kyong0612/learning-notes/blob/main/articles/Claude%20Code%20%E3%81%AE%20CLAUDE.md%E3%81%AF%E8%A8%AD%E5%AE%9A%E3%81%97%E3%81%9F%E6%96%B9%E3%81%8C%E3%81%84%E3%81%84/note.md))
 

@@ -1,6 +1,6 @@
-# Deep Learning Deep Notes
+# Deep Learning
 
-_One file per deep learning concept. Foundations, training paradigms, and learning strategies. Structured, practical, reusable._
+_Foundations, training paradigms, and learning strategies for artificial neural networks._
 
 ## Contents
 

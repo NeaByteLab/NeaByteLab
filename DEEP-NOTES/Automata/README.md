@@ -1,6 +1,6 @@
-# Automata Deep Notes
+# Automata
 
-_One file per automaton model. Climbing the computation hierarchy: finite states, a stack, then an unbounded tape. Structured, practical, reusable._
+_Climbing the computation hierarchy through finite states, a stack, and unbounded tape._
 
 ## Contents
 

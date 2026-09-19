@@ -1,6 +1,6 @@
-# Number Theory Deep Notes
+# Number Theory
 
-_One file per number theory concept. From the integers and arithmetic up through primes, number systems, and the algebraic and analytic branches. Structured, first-principles, reusable._
+_From integers and arithmetic through primes, number systems, and algebraic branches._
 
 ## Contents
 

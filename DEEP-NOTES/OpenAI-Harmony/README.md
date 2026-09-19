@@ -1,6 +1,6 @@
-# OpenAI Harmony Deep Notes
+# OpenAI Harmony
 
-_One file per Harmony concept. The response format that gpt-oss was trained on. Structured, practical, reusable._
+_Harmony response format for gpt-oss covering roles, channels, tokens, and tool calls._
 
 ## Contents
 

@@ -1,6 +1,6 @@
-# Algebra Deep Notes
+# Algebra
 
-_One file per algebra concept. From elementary equations to abstract structures and their representations. Structured, first-principles, reusable._
+_From elementary equations to abstract structures, symmetry, and representation theory._
 
 ## Contents
 

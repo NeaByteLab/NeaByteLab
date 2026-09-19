@@ -1,6 +1,6 @@
-# Discrete Mathematics Deep Notes
+# Discrete Mathematics
 
-_One file per topic across the discrete side of mathematics and computing: counting, structure, order, signals, and the limits of computation._
+_Countable structures covering counting, graphs, order, signals, and limits of computation._
 
 ## Contents
 

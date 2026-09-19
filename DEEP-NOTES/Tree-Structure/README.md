@@ -1,6 +1,6 @@
-# Tree Structure Deep Notes
+# Tree Structure
 
-_One file per tree topic. Representations, visualizations, and structural variants of hierarchy. Structured, practical, reusable. Examples include mermaid diagrams._
+_Representations, visualizations, and structural variants of trees and hierarchical data._
 
 ## Contents
 

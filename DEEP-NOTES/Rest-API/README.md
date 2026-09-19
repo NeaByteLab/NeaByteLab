@@ -1,6 +1,6 @@
-# REST API Deep Notes
+# REST API
 
-_One file per REST API concept. Structured, practical, reusable._
+_REST API foundations, HTTP semantics, URI design, status, and validation._
 
 ## Contents
 

@@ -1,6 +1,6 @@
-# Geometry and Topology Deep Notes
+# Geometry and Topology
 
-_One file per topic, walking from classical shape and measurement up through curved spaces, symmetry, and the many faces of topology._
+_From classical shape and measurement to curved spaces, symmetry, and topology._
 
 ## Contents
 

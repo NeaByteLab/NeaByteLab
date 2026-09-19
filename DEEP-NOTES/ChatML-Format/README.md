@@ -1,6 +1,6 @@
-# ChatML Deep Notes
+# ChatML Format
 
-_One file per ChatML concept. The chat markup format that turns a message list into a single prompt. Structured, practical, reusable._
+_The chat markup format that turns a message list into a single prompt._
 
 ## Contents
 

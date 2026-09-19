@@ -1,6 +1,6 @@
-# Markov Model Deep Notes
+# Markov Model
 
-_One file per Markov model concept. From the plain Markov chain to decision processes, graphical fields, and forecasting. Structured, practical, reusable._
+_From the plain Markov chain to decision processes, random fields, and forecasting._
 
 ## Contents
 

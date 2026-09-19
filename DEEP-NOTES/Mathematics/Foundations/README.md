@@ -1,6 +1,6 @@
-# Foundations Deep Notes
+# Foundations
 
-_One file per foundational topic. From the base of mathematics up through logic, set theory, and the categorical view of structure._
+_From the base of mathematics through logic, set theory, and category theory._
 
 ## Contents
 

@@ -1,6 +1,6 @@
-# Time Complexity Deep Notes
+# Time Complexity
 
-_One file per complexity class. Structured, referenced, readable._
+_Big O from constant to factorial with definition, analogy, and code examples._
 
 ## Contents
 
