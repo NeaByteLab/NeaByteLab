@@ -1,6 +1,6 @@
-# Diagram Notations Deep Notes
+# Diagram Notations
 
-_One file per OMG modeling notation and specification. From process and decision notations to systems modeling, metamodeling, and assurance. Structured, practical, reusable. Every note follows Pattern B with mermaid diagrams._
+_OMG modeling notations from business processes to systems engineering and constraints._
 
 ## Contents
 
@@ -18,7 +18,3 @@ _One file per OMG modeling notation and specification. From process and decision
 | [reqif.md](./reqif.md)                           | Requirements Interchange Format       | XML format for exchanging requirements across tools           |
 | [raaml.md](./raaml.md)                           | Risk Analysis and Assessment Modeling | SysML-based language for safety and risk analysis             |
 | [sacm.md](./sacm.md)                             | Structured Assurance Case Metamodel   | Metamodel for structured assurance and safety cases           |
-
----
-
-_All notes cover OMG specifications. File names use the short acronym in lowercase. Each note is Pattern B with a mermaid diagram in Overview and one on the first Good and Bad example._

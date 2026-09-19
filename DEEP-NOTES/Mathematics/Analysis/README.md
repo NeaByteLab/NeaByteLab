@@ -1,6 +1,8 @@
-# Analysis Deep Notes
+# Analysis
 
-_One file per topic in mathematical analysis and calculus. From limits and derivatives up through measure theory, functional analysis, and operators. Structured, first-principles, reusable._
+_From limits to measure theory, functional analysis, and operator theory._
+
+## Contents
 
 | File                                                                           | Topic                             | One-line                                                                 |
 | ------------------------------------------------------------------------------ | --------------------------------- | ------------------------------------------------------------------------ |
